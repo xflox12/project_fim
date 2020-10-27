@@ -8,4 +8,5 @@ class User(models.Model):
     email = models.TextField()
     email2 = models.TextField()
     info = models.TextField(default="this is a default info")
+    age = models.TextField()
 
