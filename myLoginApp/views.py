@@ -11,6 +11,7 @@ def home_view(*args, **kwargs):
 def home_view_temp(httprequest, *args):             #view with template
     my_dict = {
         "name": "Flo",
+
     }
     return render(httprequest, "home.html", my_dict)
 
