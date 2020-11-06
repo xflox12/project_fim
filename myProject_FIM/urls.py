@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+#Import of the view functions/classes from the view.py file
+from myLoginApp.views import home_view
+from myLoginApp.views import HomeViewC
+from myLoginApp.views import home_view_temp
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('welcome/', home_view),
+    path('class/', HomeViewC.as_view()),
+    path('welcome2/', home_view_temp),
 ]

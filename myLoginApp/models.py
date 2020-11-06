@@ -10,3 +10,6 @@ class User(models.Model):
     info = models.TextField(default="this is a default info")
     age = models.TextField()
 
+class Favourites(models.Model):
+    receipe_id = models.TextField()
+    user_id = models.TextField()
