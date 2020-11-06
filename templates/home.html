@@ -1,0 +1,50 @@
+
+{% extends 'base.html' %}
+
+    {% block mainContent %}
+
+            <p>This is our page</p>
+          {{ name }}
+          <br>
+          {{ lastname }}
+          <br>
+          {%  for item in myList %}
+            {{ item }} <br>
+          {% endfor %}
+
+
+
+        <!--Picture/Bild height="300" width="500"-->
+        <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
+        {% load static %}
+        <img src="{% static "images/Lernmittel.png" %}" width= 350vw alt="Bild_Lernmittel" />
+
+        <p>Das Lehrmittelreferat bietet dir an <mark>jedem Campus</mark> der Hochschule viele Lehrmittel zu <br> <b>Studierendenpreisen</b> an.
+        <br>Wir bieten beispielsweise:</p>
+
+        <ul>
+            <li> Zirkel</li>
+            <li>Lineale</li>
+                    <ul>
+                        <li>Geodreieck groß</li>
+                        <li>Geodreieck klein</li>
+                        <li>Lineal 30 cm</li>
+                        <li>Lineal 15 cm</li>
+                    </ul>
+            <li>Bleistifte</li>
+        </ul>
+
+    {% endblock %}
+
+    {% block sideContent %}
+
+
+        <p>Neben den Lehrmitteln bieten wir dir auch nützliche Dienstleistungen an, z.B. das Binden von <br> Dokumenten.</p>
+        <p>Du hast zwei Möglichkeiten, Lehrmittel zu kaufen:</p>
+
+        <ol>
+            <li>Du besuchst unseren <a href="webshop.html" >Web-Shop</a> </li>
+            <li>Du kommst zu unseren <a href="oeffnungszeiten.html">Öffnungszeiten</a> ins Gebäude 3.</li>
+        </ol>
+
+    {% endblock %}

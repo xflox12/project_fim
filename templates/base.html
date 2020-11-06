@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIM's Cookbook</title>
+  </head>
+  <body>
+
+  {% load static %}
+        <img src="{% static "images/logo_cookbook.jpg" %}" width= 50vw alt="Logo CookBook" />
+  <h1> Welcome to our cookbook!</h1>
+  <h2> Take a look on the delicious receipes</h2>
+  <hr>  <!-- just a section line to seperate-->
+  Here is our Navigation
+  {%  include 'nav_bar.html'%}
+  <hr>  <!-- just a section line to seperate-->
+
+  <!-- In this block the main content will be inserted-->
+  {% block mainContent %}
+    will be replaced
+  {% endblock %}
+
+  <hr>
+
+  <!-- In this block some additional content will b e added-->
+  {% block sideContent %}
+    will be replaced
+  {% endblock %}
+
+
+  </body>
+</html>
