@@ -8,4 +8,9 @@ class User(models.Model):
     email = models.TextField()
     email2 = models.TextField()
     info = models.TextField(default="this is a default info")
-    phone = models.TextField()
+    age = models.TextField()
+
+class Favourites(models.Model):
+    receipe_id = models.TextField()
+    user_id = models.TextField()
+
