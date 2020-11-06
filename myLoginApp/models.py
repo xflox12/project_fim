@@ -1,7 +1,8 @@
 import django.db
 
 # Create your models here.
-from django.forms import models
+from django.db import models
+#from django.contrib.admin import models
 
 
 
