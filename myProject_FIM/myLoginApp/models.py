@@ -9,4 +9,3 @@ class User(models.Model):
     email2 = models.TextField()
     info = models.TextField(default="this is a default info")
     phone = models.TextField()
-    
