@@ -13,6 +13,7 @@ class User2(models.Model):
     email2 = models.TextField()
     info = models.TextField(default="this is a default info")
     age = models.TextField()
+    age2 = models.TextField()
 
 
 class Favourites(models.Model):
