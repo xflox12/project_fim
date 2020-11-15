@@ -7,22 +7,6 @@ from django.db import models
 # from django.contrib.admin import models
 
 
-class User2(models.Model):
-    user_id = models.AutoField
-    name = models.TextField()
-    surname = models.TextField()
-    email = models.TextField()
-    email2 = models.TextField()
-    info = models.TextField(default="this is a default info")
-    age = models.TextField()
-    age2 = models.TextField()
-
-
-class Favourites(models.Model):
-    recipe_id = models.TextField()
-    user_id = models.TextField()
-
-
 # Create your models here.
 class User(models.Model):
     ACTIVE = 'ACT'
@@ -91,6 +75,47 @@ class User(models.Model):
                                                   )
 
 
+class Unit(models.Model):
+    # primary key
+    UnitId = models.BigAutoField(primary_key=True,
+                                 verbose_name="Unique UnitId"
+                                 )
+
+    Name = models.CharField(verbose_name="Name",
+                            max_length=200
+                            )
+
+    Abbreviation = models.CharField(verbose_name="Abbreviation",
+                                    max_length=3
+                                    )
+
+    # Conversion =
+
+
+class FoodItem(models.Model):
+    # primary key
+    FoodItemId = models.BigAutoField(primary_key=True,
+                                     verbose_name="Unique FoodItemId"
+                                     )
+
+    # Name of the Food Item
+    Name = models.CharField(verbose_name="Name",
+                            max_length=200
+                            )
+
+
+class Category(models.Model):
+    # primary key
+    CategoryId = models.BigAutoField(primary_key=True,
+                                     verbose_name="Unique CategoryId"
+                                     )
+
+    # Name of the category
+    Name = models.CharField(verbose_name="Name",
+                            max_length=200
+                            )
+
+
 class Recipe(models.Model):
     # primary key
     RecipeId = models.BigAutoField(primary_key=True,
@@ -112,11 +137,17 @@ class Recipe(models.Model):
                                on_delete=models.PROTECT
                                )
 
-    # total calories
+    # total calories of given quantities
     Calories = models.PositiveIntegerField(verbose_name="Calories")
 
     # number of people suitable for the quantities in the recipe
     NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People")
+
+    #
+    UnitId = models.ForeignKey(Unit,
+                               verbose_name="Unit",
+                               on_delete=models.CASCADE
+                               )
 
 
 class Rating(models.Model):
@@ -131,7 +162,7 @@ class Rating(models.Model):
                                on_delete=models.CASCADE
                                )
 
-    # Comment can be added if wanted
+    # Comment can be added voluntarily
     Comment = models.TextField(verbose_name="Comment",
                                blank="true")
 
@@ -155,15 +186,15 @@ class RecipeSteps(models.Model):
                                    verbose_name="Unique RecipeStepId"
                                    )
 
-    # Author is the user who created the comment and rating (UserID)
+    # Recipe the Recipe Steps are referring to (RecipeId)
     RecipeId = models.ForeignKey(Recipe,
                                  verbose_name="Recipe",
                                  on_delete=models.PROTECT
                                  )
 
-    # total amount of time required to cook recipe
+    # total amount of time required to cook recipe (not broken down to single steps)
     # how can we show it in minutes?
-    Duration = models.PositiveSmallIntegerField(verbose_name="Duration")
+    Duration = models.PositiveSmallIntegerField(verbose_name="Duration in Minutes")
 
     # order of steps
     StepNo = models.PositiveSmallIntegerField(verbose_name="Step Number")
@@ -181,14 +212,15 @@ class Folder(models.Model):
                                    verbose_name="Unique FolderId"
                                    )
 
-    #
+    # Name of the folder
     Name = models.CharField(verbose_name="Name",
                             max_length=200
                             )
 
-    # necessary to sort favourites
+    # The Position is necessary to sort favourites
     Position = models.PositiveSmallIntegerField(verbose_name="Position")
 
+    # Parent Folder (Path)
     FolderIdParent = models.ForeignKey('self',
                                        verbose_name="Parent Folder",
                                        on_delete=models.CASCADE
@@ -201,19 +233,19 @@ class Favourite(models.Model):
                                       verbose_name="Unique FavouriteId"
                                       )
 
-    #
+    # Author is the user who created the comment and rating (UserID)
     UserId = models.ForeignKey(User,
                                verbose_name="Author",
                                on_delete=models.PROTECT
                                )
 
-    #
+    # Recipe behind the favourite
     RecipeId = models.ForeignKey(Recipe,
                                  verbose_name="Recipe",
                                  on_delete=models.CASCADE
                                  )
 
-    # FK Folder ist still missing!
+    #
     FolderId = models.ForeignKey(Folder,
                                  verbose_name="Folder",
                                  on_delete=models.CASCADE
@@ -228,3 +260,58 @@ class Favourite(models.Model):
     # necessary to sort favourites
     Position = models.PositiveSmallIntegerField(verbose_name="Position")
 
+
+class RecipeCategory(models.Model):
+    # primary key
+    RecipeCategoryId = models.BigAutoField(primary_key=True,
+                                           verbose_name="Unique RecipeCategoryId"
+                                           )
+
+    # Name of the Recipe Category
+    Name = models.CharField(verbose_name="Name",
+                            max_length=200
+                            )
+
+    # Author is the user who created the comment and rating (UserID)
+    UserId = models.ForeignKey(User,
+                               verbose_name="Author",
+                               on_delete=models.PROTECT
+                               )
+
+    # Recipe behind the favourite
+    RecipeId = models.ForeignKey(Recipe,
+                                 verbose_name="Recipe",
+                                 on_delete=models.CASCADE
+                                 )
+
+    # Recipe behind the favourite
+    CategoryId = models.ForeignKey(Category,
+                                   verbose_name="Category",
+                                   on_delete=models.CASCADE
+                                   )
+
+
+class Ingredient(models.Model):
+    # primary key
+    IngredientId = models.BigAutoField(primary_key=True,
+                                       verbose_name="Unique UnitId"
+                                       )
+
+    Name = models.CharField(verbose_name="Name",
+                            max_length=200
+                            )
+
+    Quantity = models.DecimalField(verbose_name="Quantity",
+                                   max_digits=None,
+                                   decimal_places=2
+                                   )
+
+    UnitId = models.ForeignKey(Unit,
+                               verbose_name="Unit",
+                               on_delete=models.CASCADE
+                               )
+
+    FoodItemId = models.ForeignKey(FoodItem,
+                                   verbose_name="Food Item",
+                                   on_delete=models.CASCADE
+                                   )
