@@ -21,9 +21,9 @@ class User(models.Model):
     ]
 
     # PrimaryKey
-    User_ID = models.BigAutoField(primary_key=True,
-                                  verbose_name="Unique UserId"
-                                  )
+    UserId = models.BigAutoField(primary_key=True,
+                                 verbose_name="Unique UserId"
+                                 )
 
     # First Name with max 100 Characters
     Firstname = models.CharField(verbose_name="Firstname",
@@ -50,6 +50,11 @@ class User(models.Model):
     Email = models.EmailField(verbose_name="EMail-Address",
                               max_length=300
                               )
+
+    # How can we set constraints for the password?
+    Password = models.CharField(verbose_name="Password",
+                                max_length=50
+                                )
 
     # picture is shown on recipes and comments/ratings (maybe it is necessary to add a very small size of the picture)
     Picture = models.ImageField(verbose_name="UserPicture"
@@ -81,14 +86,18 @@ class Unit(models.Model):
                                  verbose_name="Unique UnitId"
                                  )
 
+    # Name of the Unit e.g. Kilogram
     Name = models.CharField(verbose_name="Name",
                             max_length=200
                             )
 
+    # Unit abbreviation e.g. kg
+    # open: has to be unique!
     Abbreviation = models.CharField(verbose_name="Abbreviation",
                                     max_length=3
                                     )
 
+    #
     # Conversion =
 
 
@@ -98,7 +107,7 @@ class FoodItem(models.Model):
                                      verbose_name="Unique FoodItemId"
                                      )
 
-    # Name of the Food Item
+    # Name of the Food Item e.g. Milk
     Name = models.CharField(verbose_name="Name",
                             max_length=200
                             )
@@ -110,7 +119,7 @@ class Category(models.Model):
                                      verbose_name="Unique CategoryId"
                                      )
 
-    # Name of the category
+    # Name of the category e.g. Dessert
     Name = models.CharField(verbose_name="Name",
                             max_length=200
                             )
@@ -132,22 +141,23 @@ class Recipe(models.Model):
                                 )
 
     # Author is the user who created the recipe (UserID)
+    # open: should it be possible to set user Null after deleting or default user (better?)?; hint: DSGVO
     UserId = models.ForeignKey(User,
                                verbose_name="Author",
                                on_delete=models.PROTECT
                                )
 
-    # total calories of given quantities
-    Calories = models.PositiveIntegerField(verbose_name="Calories")
+    # total energy of given quantities
+    Energy = models.PositiveIntegerField(verbose_name="Calories")
+
+    # Unit for energy e.g. calories
+    UnitId = models.ForeignKey(Unit,
+                               verbose_name="Unit of Energy",
+                               on_delete=models.PROTECT
+                               )
 
     # number of people suitable for the quantities in the recipe
     NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People")
-
-    #
-    UnitId = models.ForeignKey(Unit,
-                               verbose_name="Unit",
-                               on_delete=models.CASCADE
-                               )
 
 
 class Rating(models.Model):
@@ -164,20 +174,22 @@ class Rating(models.Model):
 
     # Comment can be added voluntarily
     Comment = models.TextField(verbose_name="Comment",
-                               blank="true")
+                               blank=True)
 
-    # 5Stars rating, 0.5 Stars possible (10 steps in total)
-    # Do we have to set a max value? How can we do that?
+    # 5-Stars rating (10 steps in total)
+    # blank is no rating, 0 = 0 Stars rating, 1 = 0.5 Stars rating
+    # open: Do we have to set a max value? How can we do that?
     Scale = models.PositiveSmallIntegerField(verbose_name="Star Rating",
-                                             default=0)
+                                             blank=True
+                                             )
 
     # Date and Time the rating was created or modified
     DateTime = models.DateTimeField(verbose_name="Creation Date",
-                                    auto_now="true")
+                                    auto_now=True)
 
     # Option to set comments invisible in case they are inappropriate or should not be visible for other reasons
     Visible = models.BooleanField(verbose_name="Visible",
-                                  default="true")
+                                  default=True)
 
 
 class RecipeSteps(models.Model):
@@ -189,12 +201,14 @@ class RecipeSteps(models.Model):
     # Recipe the Recipe Steps are referring to (RecipeId)
     RecipeId = models.ForeignKey(Recipe,
                                  verbose_name="Recipe",
-                                 on_delete=models.PROTECT
+                                 on_delete=models.CASCADE
                                  )
 
     # total amount of time required to cook recipe (not broken down to single steps)
     # how can we show it in minutes?
-    Duration = models.PositiveSmallIntegerField(verbose_name="Duration in Minutes")
+    Duration = models.PositiveSmallIntegerField(verbose_name="Duration in Minutes",
+                                                default=0
+                                                )
 
     # order of steps
     StepNo = models.PositiveSmallIntegerField(verbose_name="Step Number")
@@ -203,7 +217,9 @@ class RecipeSteps(models.Model):
     Description = models.TextField(verbose_name="Description")
 
     # If necessary, Tips can be added to the steps
-    Tips = models.TextField(verbose_name="Tips")
+    Tips = models.TextField(verbose_name="Tips",
+                            blank=True
+                            )
 
 
 class Folder(models.Model):
@@ -233,9 +249,9 @@ class Favourite(models.Model):
                                       verbose_name="Unique FavouriteId"
                                       )
 
-    # Author is the user who created the comment and rating (UserID)
+    # Owner of the Favourite (UserID)
     UserId = models.ForeignKey(User,
-                               verbose_name="Author",
+                               verbose_name="Owner",
                                on_delete=models.PROTECT
                                )
 
@@ -248,13 +264,14 @@ class Favourite(models.Model):
     #
     FolderId = models.ForeignKey(Folder,
                                  verbose_name="Folder",
-                                 on_delete=models.CASCADE
+                                 on_delete=models.SET_NULL
                                  )
 
     # Note can be added if wanted
     Note = models.TextField(verbose_name="Note")
 
     # number of people wanted
+    # conversion to the required number of people
     NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People")
 
     # necessary to sort favourites
@@ -267,12 +284,8 @@ class RecipeCategory(models.Model):
                                            verbose_name="Unique RecipeCategoryId"
                                            )
 
-    # Name of the Recipe Category
-    Name = models.CharField(verbose_name="Name",
-                            max_length=200
-                            )
-
-    # Author is the user who created the comment and rating (UserID)
+    # Author is the user who created Relationship (UserID)
+    # open: check "protect2 -> what do we want to happen?
     UserId = models.ForeignKey(User,
                                verbose_name="Author",
                                on_delete=models.PROTECT
@@ -297,10 +310,6 @@ class Ingredient(models.Model):
                                        verbose_name="Unique UnitId"
                                        )
 
-    Name = models.CharField(verbose_name="Name",
-                            max_length=200
-                            )
-
     Quantity = models.DecimalField(verbose_name="Quantity",
                                    max_digits=None,
                                    decimal_places=2
@@ -315,3 +324,6 @@ class Ingredient(models.Model):
                                    verbose_name="Food Item",
                                    on_delete=models.CASCADE
                                    )
+
+    # Note can be added if wanted
+    Note = models.TextField(verbose_name="Note")
