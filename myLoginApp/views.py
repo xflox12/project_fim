@@ -18,6 +18,16 @@ def home_view_temp(httprequest, *args, **kwargs):             #view with templat
     return render(httprequest, "home.html", my_dict)
 
 
+def profil_view_temp(httprequest, *args, **kwargs):             #view with template
+    my_dict = {
+        "name": "Flo",
+        "lastname" : "Schietinger",
+        "myList" : ['this', 'is', 'my', 'list']
+
+    }
+    return render(httprequest, "myprofil.html", my_dict)
+
+
 class HomeViewC(View):
     def get(self, *args):
         return HttpResponse("Hello World  from the Class!")

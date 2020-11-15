@@ -20,10 +20,15 @@ from django.urls import path
 from myLoginApp.views import home_view
 from myLoginApp.views import HomeViewC
 from myLoginApp.views import home_view_temp
+from myLoginApp.views import profil_view_temp
+from myRegistrationApp.views import reg_view_temp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('welcome/', home_view),
     path('class/', HomeViewC.as_view()),
     path('welcome2/', home_view_temp),
+    path('profil/', profil_view_temp),
+    path('reg/', reg_view_temp),
+
 ]
