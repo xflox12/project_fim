@@ -1,0 +1,10 @@
+ <!-- {%  for item in myList %}
+            {{ item }} <br>
+          {% endfor %}
+
+        {% for instance in obj %}
+            {{ forloop.counter }}
+            <a href={{ instance.get_absolute_url }}>{{instance.title }}</a>)
+        {% endfor %}
+        {{ obj.decription }}
+            -->

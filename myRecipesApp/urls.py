@@ -14,18 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
 #Import of the view functions/classes from the view.py file
 
-from myStartpageApp.views import home_view_temp
-from myRegistrationApp.views import reg_view_temp
+from myRecipesApp.views import recipes_list_view_temp, recipes_create_view_temp,recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
 
+#remove recipes at the beginning -> already written in the myProject_FIM\urls.py file
+# or leave it and the url must be localhost:8080/recipes/recipes/...
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('home/', home_view_temp),
-    path('recipes/', include('myRecipesApp.urls'))
-    #path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
-    #path('reg/', reg_view_temp),
-
+    path('recipes/', recipes_list_view_temp, name='recipe-list'),
+    path('recipes/create', recipes_create_view_temp, name='recipe-list'),
+    #path('recipes/<int::my_id>', recipes_detail_view_temp, name="recipe-detail"),
+    #path('recipes/<int::my_id>/update', recipes_update_view_temp, name="recipe-update"),
+    #path('recipes/<int::my_id>/delete', recipes_delete_view_temp, name="recipe-delete"),
 ]

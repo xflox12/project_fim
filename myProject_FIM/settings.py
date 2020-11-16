@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     #own Apps
     'myLoginApp',  #'myLoginApp' should also work
     'myRegistrationApp',
+    'myProfilApp',
+    'myStartpageApp',
+    'myRecipesApp',
 ]
 
 MIDDLEWARE = [

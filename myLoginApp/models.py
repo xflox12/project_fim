@@ -7,14 +7,16 @@ from django.db import models
 
 class User2(models.Model):
     user_id = models.AutoField
-    name = models.TextField()
-    surname = models.TextField()
+    name = models.CharField(max_length=100)
+    surname = models.TextField(blank=True)
     email = models.TextField()
     email2 = models.TextField()
     info = models.TextField(default="this is a default info")
-    age = models.TextField()
+    age = models.DecimalField(max_digits=3, decimal_places=0)
     age2 = models.TextField()
 
+    def get_absolut_url(self):
+       return f"/users/{self.id}"
 
 class Favourites(models.Model):
     recipe_id = models.TextField()
