@@ -1,13 +1,6 @@
 # import django.db
 
-# Create your models here.
 from django.db import models
-# from django.contrib.admin import models
-
-
-def get_absolut_url(self):
-    return f"/users/{self.id}"
-
 # from django.contrib.admin import models
 
 
