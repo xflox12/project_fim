@@ -5,19 +5,8 @@ from django.db import models
 # from django.contrib.admin import models
 
 
-class User2(models.Model):
-    user_id = models.AutoField
-    name = models.CharField(max_length=100)
-    surname = models.TextField(blank=True)
-    email = models.TextField()
-    email2 = models.TextField()
-    info = models.TextField(default="this is a default info")
-    age = models.DecimalField(max_digits=3, decimal_places=0)
-    age2 = models.TextField()
-
-
-    def get_absolut_url(self):
-       return f"/users/{self.id}"
+def get_absolut_url(self):
+    return f"/users/{self.id}"
 
 # from django.contrib.admin import models
 
