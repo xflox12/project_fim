@@ -2,26 +2,10 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views.generic import View, TemplateView   #import for class-based-view #import for template-view
 # from django.views.generic import TemplateView #add all in one line
+
 from .forms import create_user_form
 from django.contrib.auth import authenticate,login
 # Create your views here.
-
-def home_view(*args, **kwargs):
-    return HttpResponse("<h1>Hello World! Hello Flo</h1>")
-
-def home_view_temp(httprequest, *args, **kwargs):             #view with template
-    my_dict = {
-        "Firstname": "Flo",
-        "Surname" : "Schietinger",
-        "myList" : ['this', 'is', 'my', 'list']
-
-    }
-    return render(httprequest, "home.html", my_dict)
-
-
-class HomeViewC(View):
-    def get(self, *args):
-        return HttpResponse("Hello World  from the Class!")
 
 def user_registration(httprequest, *args, **kwargs): #define the function for the registration form
     if httprequest.method == "POST":
@@ -41,3 +25,6 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
             "form": form
         }
     return render(httprequest, "registration.html", context)
+
+# Create your views here.
+

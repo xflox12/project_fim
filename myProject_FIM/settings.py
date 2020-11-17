@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #own Apps
-    'myLoginApp'  #'myLoginApp' should also work
+    'myLoginApp',  #'myLoginApp' should also work
+    'myRegistrationApp',
+    'myProfilApp',
+    'myStartpageApp',
+    'myRecipesApp',
 ]
 
 MIDDLEWARE = [
