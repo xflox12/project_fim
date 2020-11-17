@@ -16,15 +16,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     <orderEntry type="jdk" jdkName="Python 3.9 (pythonProject)" jdkType="Python SDK" />
-=======
-    <orderEntry type="jdk" jdkName="Python 3.9 (project_fim)" jdkType="Python SDK" />
->>>>>>> Stashed changes
-=======
-    <orderEntry type="jdk" jdkName="Python 3.9 (project_fim)" jdkType="Python SDK" />
->>>>>>> Stashed changes
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
