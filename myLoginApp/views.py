@@ -11,8 +11,8 @@ def home_view(*args, **kwargs):
 
 def home_view_temp(httprequest, *args, **kwargs):             #view with template
     my_dict = {
-        "name": "Flo",
-        "lastname" : "Schietinger",
+        "Firstname": "Flo",
+        "Surname" : "Schietinger",
         "myList" : ['this', 'is', 'my', 'list']
 
     }
@@ -30,7 +30,7 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
         if form.is_valid():
             form.save()
             username = form.cleaned_data['Email'] #username = email
-            password = form.cleaned_data['password1']
+            password = form.cleaned_data['Password']
             user = authenticate(username=username, password=password)
             login(httprequest, user)
             return redirect("")
