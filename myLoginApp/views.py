@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views.generic import View, TemplateView   #import for class-based-view #import for template-view
-# from django.views.generic import TemplateView #add all in one line
 
 from .forms import create_user_form
 from django.contrib.auth import authenticate,login
 # Create your views here.
+
 
 def user_registration(httprequest, *args, **kwargs): #define the function for the registration form
     if httprequest.method == "POST":
@@ -26,5 +26,4 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
         }
     return render(httprequest, "registration.html", context)
 
-# Create your views here.
 

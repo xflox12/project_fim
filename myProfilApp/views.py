@@ -10,4 +10,4 @@ def profil_view_temp(httprequest, *args, **kwargs):             #view with templ
         "myList" : ['this', 'is', 'my', 'list']
 
     }
-    return render(httprequest, "../myProfilApp/templates/myprofil.html", my_dict)
+    return render(httprequest, "myprofil.html", my_dict)
