@@ -261,7 +261,7 @@ class Favourite(models.Model):
     #
     FolderId = models.ForeignKey(Folder,
                                  verbose_name="Folder",
-                                 on_delete=models.SET(1)   #before models.SET_NULL
+                                 on_delete=models.SET(1)   # before models.SET_NULL
                                  )
 
     # Note can be added if wanted
@@ -308,7 +308,7 @@ class Ingredient(models.Model):
                                        )
 
     Quantity = models.DecimalField(verbose_name="Quantity",
-                                   max_digits=8, #before none
+                                   max_digits=8,  # before none
                                    decimal_places=2
                                    )
 
