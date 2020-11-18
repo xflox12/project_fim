@@ -22,7 +22,9 @@ media
 .idea/**/uiDesigner.xml 
 .idea/**/gradle.xml 
 .idea/**/libraries 
-*.iws /out/ 
+*.iws /out/
+.idea/misc.xml
+.idea/Project_cookbook_FIM.iml
 
 # Python # 
 *.py[cod] 
