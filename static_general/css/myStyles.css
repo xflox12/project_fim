@@ -1,0 +1,54 @@
+/* Customized Styles*/
+
+/* Settings for whole html */
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+/* Set a background image by replacing the URL below */
+body {
+  background: url('https://c.pxhere.com/photos/28/59/background_food_tasty_olives_wooden_background_cooking_plate_kitchen-1369805.jpg!d') no-repeat center center fixed;
+    /*https://source.unsplash.com/twukN12EN7c/1920x1080*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+
+#mainContent{
+  background-color: rgba(255,255,255,0.8);
+}
+
+/*Seettings for Footer*/
+.blue {
+    /*background-color: #2196f3 !important;*/
+    background-color: rgba(33,150,243,1.0) !important;
+}
+footer.page-footer {
+    bottom: 0;
+    color: #ffffff;
+
+}
+
+.font-small {
+    font-size: .9rem;
+}
+
+.pt-4, .py-4 {
+    padding-top: 1.5rem!important;
+}
+
+/*Links in Footer*/
+footer.page-footer a {
+    color: #fff;
+}
+
+/*copyright-line in footer*/
+footer.page-footer .footer-copyright {
+    overflow: hidden;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.2);
+}
