@@ -15,7 +15,7 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
             form.save()
             username = form.cleaned_data['Email'] #username = email
             password = form.cleaned_data['Password']
-            user = authenticate(username=username, password=password)
+            user = authenticate(Nickname=Nickname, Password=Password)
             login(httprequest, user)
             return redirect("")
 
