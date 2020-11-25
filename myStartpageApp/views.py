@@ -10,11 +10,12 @@ def home_view_temp(httprequest, *args, **kwargs):             #view with templat
     #obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
     obj = Testmodel.objects.all()
     my_dict = {
+        "recipeOfDay": "TestRecipe",
+        "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
         "name": "Flo",
-        "lastname" : "Schietinger",
-        "myList" : ['this', 'is', 'my', 'list'],
+        "lastname": "Schietinger",
+        "myList": ['this', 'is', 'my', 'list'],
         "obj": obj,
-
     }
 
     #import all Users from the Model User2
@@ -27,6 +28,14 @@ def home_view_temp(httprequest, *args, **kwargs):             #view with templat
     #}
     return render(httprequest, 'home.html', my_dict)
 
+
+def test_view_temp(httprequest, *args, **kwargs):
+    my_dict = {
+        "recipeOfDay": "TestRecipe",
+        "lastname": "Schietinger",
+        "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
+    }
+    return render(httprequest, 'index.html', my_dict)
 
 
 #alternative Methodes to generate a view -> just for Information

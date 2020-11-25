@@ -24,6 +24,7 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
         context = {
             "form": form
         }
+    #return render(httprequest, "registration.html", context)
     return render(httprequest, "registration.html", context)
 
 

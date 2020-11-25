@@ -1,52 +1,76 @@
-
 {% extends 'base.html' %}
 
-    {% block mainContent %}
+{% block mainContent %}
+    <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
+    <h2 class="text-center"> Take a look on the delicious recipes</h2>
+    <hr>  <!-- just a section line to seperate-->
 
-        <h1> Welcome to FIM's cookbook!</h1>
-  <h2> Take a look on the delicious recipes</h2>
-  <hr>  <!-- just a section line to seperate-->
+    <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
+    <div class="row">
+        <div class="col-sm-8">
+            <h3> Suggestions</h3>
+            <div class="row" id="suggestions-row-1">
+                <div class="col-sm-4">
+                    Some Content
+                </div>
+                <div class="col-sm-4">
+                    Some Content
+                </div>
+            </div>
+            <div class="row" id="suggestions-row-2">
+                <div class="col-sm-4">
+                    Some Content
+                </div>
+                <div class="col-sm-4">
+                    Some Content
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3> Recipe of the Day:</h3>
+            <h3> {{ title }}</h3>
+            <!--Picture/Bild height="300" width="500"-->
+            <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
+            {% load static %}
+            <img class="img-responsive img-circle" src="{% static "images/tacos.jfif" %}"
+                 alt="Picture from recipe of the day"/>
+            Some content
+        </div>
+    </div>
 
+    <br>
 
-        <h3> {{ title }}</h3>
-            <p>This is our page</p>
-          {{ name }}
-          <br>
-          {{ lastname }}
-          <br>
+    <p> Type p>lorem and press TAB to insert Lorem ipsum Text</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid consectetur earum enim est et fuga, fugiat
+        ipsam officiis optio placeat quasi repellendus rerum sit tempora unde veritatis vitae.
+        <mark>jedem Campus</mark>
+         <br> <b>some bold text</b> and now som normal text
+        <br>Text after linebreak
+    </p>
 
-
-        <!--Picture/Bild height="300" width="500"-->
-        <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
-        {% load static %}
-        <img src="{% static "images/Lernmittel.png" %}" width= 350vw alt="Bild_Lernmittel" />
-
-        <p>Das Lehrmittelreferat bietet dir an <mark>jedem Campus</mark> der Hochschule viele Lehrmittel zu <br> <b>Studierendenpreisen</b> an.
-        <br>Wir bieten beispielsweise:</p>
-
+    <ul>
+        <li>bullet point 1</li>
+        <li>bullet point 2</li>
         <ul>
-            <li> Zirkel</li>
-            <li>Lineale</li>
-                    <ul>
-                        <li>Geodreieck groß</li>
-                        <li>Geodreieck klein</li>
-                        <li>Lineal 30 cm</li>
-                        <li>Lineal 15 cm</li>
-                    </ul>
-            <li>Bleistifte</li>
+            <li>bla</li>
+            <li>bla</li>
+            <li>bla</li>
+            <li>bla</li>
         </ul>
+        <li>bla</li>
+    </ul>
+{% endblock %}
 
-    {% endblock %}
 
-    {% block sideContent %}
+{% block sideContent %}
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda cupiditate dicta doloribus enim
+        illum impedit libero minus nobis, nostrum numquam perferendis, sequi similique soluta suscipit, veritatis
+        voluptatibus! Neque, vero.</p>
+    <p>Ordered List following::</p>
 
+    <ol>
+        <li>list entry with <a href="webshop.html">link 1</a></li>
+        <li>list entry with <a href="oeffnungszeiten.html">link 2</a> to a random page</li>
+    </ol>
 
-        <p>Neben den Lehrmitteln bieten wir dir auch nützliche Dienstleistungen an, z.B. das Binden von <br> Dokumenten.</p>
-        <p>Du hast zwei Möglichkeiten, Lehrmittel zu kaufen:</p>
-
-        <ol>
-            <li>Du besuchst unseren <a href="webshop.html" >Web-Shop</a> </li>
-            <li>Du kommst zu unseren <a href="oeffnungszeiten.html">Öffnungszeiten</a> ins Gebäude 3.</li>
-        </ol>
-
-    {% endblock %}
+{% endblock %}
