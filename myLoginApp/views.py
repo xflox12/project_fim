@@ -7,13 +7,13 @@ from django.contrib.auth import authenticate,login
 # Create your views here.
 
 
-def user_registration(httprequest, *args, **kwargs): #define the function for the registration form
+def user_registration(httprequest, *args, **kwargs):  # define the function for the registration form
     if httprequest.method == "POST":
         form = create_user_form(httprequest.POST)
 
         if form.is_valid():
             form.save()
-            username = form.cleaned_data['Email'] #username = email
+            username = form.cleaned_data['Email']  # username = email
             password = form.cleaned_data['Password']
             user = authenticate(Nickname=Nickname, Password=Password)
             login(httprequest, user)
@@ -24,7 +24,7 @@ def user_registration(httprequest, *args, **kwargs): #define the function for th
         context = {
             "form": form
         }
-    #return render(httprequest, "registration.html", context)
+    # return render(httprequest, "registration.html", context)
     return render(httprequest, "registration.html", context)
 
 
