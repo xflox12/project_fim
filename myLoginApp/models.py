@@ -9,7 +9,8 @@ class User(models.Model):
     ACTIVE = 'ACT'
     NEW = 'NEW'
     LOCKED = 'LOC'
-    DELETED = 'DEL
+
+    DELETED = 'DEL'
     LIST_OF_VALUES_STATUS = [
         (ACTIVE, 'Active'),
         (NEW, 'New'),
