@@ -6,8 +6,8 @@ from django.views.generic import View, TemplateView, ListView   #import for clas
 from .models import Testmodel
 
 # Create your views here.
-def home_view_temp(httprequest, *args, **kwargs):             #view with template
-    #obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
+def home_view_temp(httprequest, *args, **kwargs):             # view with template
+    # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
     obj = Testmodel.objects.all()
     my_dict = {
         "recipeOfDay": "TestRecipe",

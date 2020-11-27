@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
-{% block mainContent %}
+{% block titleContent %}
     <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
     <h2 class="text-center"> Take a look on the delicious recipes</h2>
     <hr>  <!-- just a section line to seperate-->
+{% if user.is_authenticated %}
+            <p>You're logged in</p>
+        {% else %}
+            <p><a href="/login">Login here!</a></p>
+        {% endif %}
+{% endblock %}
+
+{% block mainContent %}
 
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
     <div class="row">

@@ -32,6 +32,7 @@ urlpatterns = [
     path('recipes/', include('myRecipesApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
+    path('', include("django.contrib.auth.urls")),
     #path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
     #path('reg/', reg_view_temp),
 
