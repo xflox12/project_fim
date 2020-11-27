@@ -2,15 +2,17 @@
 {% extends 'base.html' %}
 
     {% block mainContent %}
-        <p>Here comes the Login-formular</p>
+    <p>Please fill out the following boxes to register:</p>
         <div class="container" align="left">
             <form action="{%  url "register" %}" method="post">
                 {% csrf_token %}
-                {{ form }}
+                {{ form.as_p }}
+            <input type="submit" value="Register">
             </form>
         </div>
 
     {% endblock %}
+
 
     {% block sideContent %}
 

@@ -22,7 +22,7 @@ from myStartpageApp.views import home_view_temp, test_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
 from myRegistrationApp.views import reg_view_temp
-
+from django.contrib.auth import views
 
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('recipes/', include('myRecipesApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
+    path('login/', views.LoginView.as_view(), name="login")
     #path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
     #path('reg/', reg_view_temp),
 

@@ -19,14 +19,13 @@ def user_registration(httprequest, *args, **kwargs): # define the function for t
             Password = form.cleaned_data['Password']
             user = authenticate(Nickname=Nickname, Password=Password)
             login(httprequest, user)
-            return redirect("")
+            return redirect("") #redirect page needs to be added
 
     else:
         form = create_user_form()
         context = {
             "form": form
         }
-    # return render(httprequest, "registration.html", context)
-    return render(httprequest, "registration.html", context)
 
+    return render(httprequest, "registration.html", context)
 
