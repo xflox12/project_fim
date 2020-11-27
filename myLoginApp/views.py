@@ -9,7 +9,10 @@ from .forms import create_user_form
 
 
 def user_registration(httprequest, *args, **kwargs):  # define the function for the registration form
-    """this function consists of the creation of a user registration form and, after the user is successfully registered, it automatically logs him/her into their profile"""
+
+    """this function consists of the creation of a user registration form and,
+    after the user is successfully registered, it automatically logs him/her into their profile"""
+    
     if httprequest.method == "POST":
         form = create_user_form(httprequest.POST)
 
@@ -28,4 +31,3 @@ def user_registration(httprequest, *args, **kwargs):  # define the function for 
         }
 
     return render(httprequest, "registration.html", context)
-
