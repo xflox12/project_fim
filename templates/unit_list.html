@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
     {% block mainContent %}
-    <a href="/units/create">Create</a>
+    <a href="/unit/create">Create</a>
     <h2>Units</h2>
     <form method="GET">
         <input type="search" name="query" placeholder="Search">
         <input type="submit" value="Search">
     </form>
     <ul>
-        {% for unit in units %}
+        {% for unit in unit %}
         <a href="/unit/{{ unit.UnitId }}"><li>{{ unit.Name }} - {{ unit.Abbreviation }}</li></a>
         {% endfor %}
     </ul>

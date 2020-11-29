@@ -21,10 +21,9 @@ from django.urls import path, include
 from myStartpageApp.views import home_view_temp, test_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
-from myUnitsApp.views import create_units_view, detail_unit_view, delete_unit, create_unit_view
+from myUnitsApp.views import list_unit, show_unit, delete_unit, create_unit
 from myRegistrationApp.views import reg_view_temp
 from django.contrib.auth import views
-
 
 
 urlpatterns = [
@@ -34,10 +33,10 @@ urlpatterns = [
     path('recipes/', include('myRecipesApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
-    path('units/', create_units_view, name="hello"),
-    path('units/create', create_unit_view, name="hello"),
-    path('unit/<str:pk>/', detail_unit_view, name="hello"),
-    path('unit/<str:pk>/delete', delete_unit, name="hello"),
+    path('unit/', list_unit),
+    path('unit/create', create_unit),
+    path('unit/<str:pk>/', show_unit),
+    path('unit/<str:pk>/delete', delete_unit),
     path('', include("django.contrib.auth.urls")),
 
     # path('login/', views.LoginView.as_view(), name="login")
