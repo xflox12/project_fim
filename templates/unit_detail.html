@@ -5,6 +5,7 @@
     <div class="container" align="left">
             <form method="post">
                 {{ form }}
+                {% csrf_token %}
             <input type="submit" value="Save">
             </form>
         {% if unit is not None %}

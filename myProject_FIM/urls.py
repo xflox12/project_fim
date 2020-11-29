@@ -21,7 +21,7 @@ from django.urls import path, include
 from myStartpageApp.views import home_view_temp, test_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
-from myUnitsApp.views import list_unit, show_unit, delete_unit, create_unit
+from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
 from myRegistrationApp.views import reg_view_temp
 from django.contrib.auth import views
 
@@ -30,7 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', test_view_temp),
     path('home/', home_view_temp),
-    path('recipes/', include('myRecipesApp.urls')),
+    path('recipes/', include('myRecipeApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
     path('unit/', list_unit),

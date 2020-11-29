@@ -18,7 +18,7 @@ from django.urls import path
 
 #Import of the view functions/classes from the view.py file
 
-from myRecipesApp.views import recipes_list_view_temp, recipes_create_view_temp,recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
+from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp,recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
 
 #remove recipes at the beginning -> already written in the myProject_FIM\urls.py file
 # or leave it and the url must be localhost:8080/recipes/recipes/...

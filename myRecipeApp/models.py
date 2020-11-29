@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from myLoginApp.models import User
-from myUnitsApp.models import Unit
+from myUnitApp.models import Unit
 
 
 class FoodItem(models.Model):

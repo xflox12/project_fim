@@ -1,7 +1,7 @@
 from django.db import models
 
 from myLoginApp.models import User
-from myRecipesApp.models import Recipe
+from myRecipeApp.models import Recipe
 
 
 # Create your models here.

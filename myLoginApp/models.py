@@ -21,7 +21,6 @@ class User(models.Model):
     # PrimaryKey
     UserId = models.BigAutoField(primary_key=True,
                                  verbose_name="Unique UserId",
-                                 default=0  # only necessary because existing sets where this column cannot be null
                                  )
 
     # First Name with max 100 Characters
@@ -86,3 +85,6 @@ class User(models.Model):
     RetryLogin = models.PositiveSmallIntegerField(verbose_name="Number of Login Attempts",
                                                   default=0
                                                   )
+
+    def _str_(self):
+        return self.Nickname
