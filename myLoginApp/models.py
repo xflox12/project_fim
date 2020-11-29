@@ -20,17 +20,20 @@ class User(models.Model):
 
     # PrimaryKey
     UserId = models.BigAutoField(primary_key=True,
-                                 verbose_name="Unique UserId"
+                                 verbose_name="Unique UserId",
+                                 default=0  # only necessary because existing sets where this column cannot be null
                                  )
 
     # First Name with max 100 Characters
     Firstname = models.CharField(verbose_name="Firstname",
-                                 max_length=100
+                                 max_length=100,
+                                 default=''  # only necessary because existing sets where this column cannot be null
                                  )
 
     # Last Name with max 100 Characters
     Surname = models.CharField(verbose_name="Surname",
-                               max_length=100
+                               max_length=100,
+                               default=''  # only necessary because existing sets where this column cannot be null
                                )
 
     #    @property
@@ -41,22 +44,26 @@ class User(models.Model):
     # nickname is used to show on recipes and comments/ratings
     # not unique
     Nickname = models.CharField(verbose_name="Nickname",
-                                max_length=100
+                                unique=True,
+                                max_length=100,
+                                blank=True
                                 )
 
     # Unique user identification - used for login
-    Email = models.EmailField(verbose_name="EMail-Address",
-                              #max_length=300,
-                              default="test123@email.de"
+    Email = models.EmailField(verbose_name="Email-Address",
+                              # max_length=300,
+                              default=''  # only necessary because existing sets where this column cannot be null
                               )
 
     # How can we set constraints for the password?
     Password = models.CharField(verbose_name="Password",
-                                max_length=50
+                                max_length=50,
+                                default=''  # only necessary because existing sets where this column cannot be null
                                 )
 
     # picture is shown on recipes and comments/ratings (maybe it is necessary to add a very small size of the picture)
-    Picture = models.ImageField(verbose_name="UserPicture"
+    Picture = models.ImageField(verbose_name="Profile Picture",
+                                blank=True
                                 )
 
     # ACT ... Active
@@ -70,11 +77,12 @@ class User(models.Model):
                               )
 
     # time of the last valid login of the user
-    LastLogin = models.DateTimeField(verbose_name="Last Login Date"
+    LastLogin = models.DateTimeField(verbose_name="Last Login Date",
+                                     auto_now=True,
                                      )
 
     # how often has the user tried to login (maybe with wrong password)
     # after 3 attempts the user-status is changed to LOC
-    RetryLogin = models.PositiveSmallIntegerField(verbose_name="Number of Login Attempts"
+    RetryLogin = models.PositiveSmallIntegerField(verbose_name="Number of Login Attempts",
+                                                  default=0
                                                   )
-
