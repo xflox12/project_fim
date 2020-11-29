@@ -86,5 +86,5 @@ class User(models.Model):
                                                   default=0
                                                   )
 
-    def _str_(self):
+    def __str__(self):
         return self.Nickname
