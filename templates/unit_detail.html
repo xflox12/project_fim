@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+    {% block mainContent %}
+
+    <div class="container" align="left">
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+            <input type="submit" value="Save">
+            </form>
+        {% if unit is not None %}
+        <form method="post" action="/unit/{{unit.UnitId}}/delete">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+        {% endif %}
+
+        </div>
+
+    {% endblock %}

@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-#Import of the view functions/classes from the view.py file
+# Import of the view functions/classes from the view.py file
 
 from myStartpageApp.views import home_view_temp, test_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
+from myUnitsApp.views import create_units_view, detail_unit_view, delete_unit, create_unit_view
 from myRegistrationApp.views import reg_view_temp
 from django.contrib.auth import views
+
 
 
 urlpatterns = [
@@ -32,11 +34,15 @@ urlpatterns = [
     path('recipes/', include('myRecipesApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
+    path('units/', create_units_view, name="hello"),
+    path('units/create', create_unit_view, name="hello"),
+    path('unit/<str:pk>/', detail_unit_view, name="hello"),
+    path('unit/<str:pk>/delete', delete_unit, name="hello"),
     path('', include("django.contrib.auth.urls")),
 
     # path('login/', views.LoginView.as_view(), name="login")
 
-    #path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
-    #path('reg/', reg_view_temp),
+    # path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
+    # path('reg/', reg_view_temp),
 
 ]

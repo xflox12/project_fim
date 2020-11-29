@@ -39,15 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #external Apps
+    # external Apps
     'crispy_forms',
 
-    #own Apps
-    'myLoginApp',  #'myLoginApp' should also work
+    # own Apps
+    'myLoginApp',  # 'myLoginApp' should also work
     'myRegistrationApp',
     'myProfileApp',
     'myStartpageApp',
     'myRecipesApp',
+    'myUnitsApp',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_general"), ]
 
 
-CRISPY_TEMPLATE_PACK="bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_REDIRECT_URL ="/home"
+LOGIN_REDIRECT_URL = "/home"
