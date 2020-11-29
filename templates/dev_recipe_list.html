@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+    {% block mainContent %}
+    <a href="/recipe/create">Create</a>
+    <h2>Recipes</h2>
+    <form method="GET">
+        <input type="search" name="query" placeholder="Search">
+        <input type="submit" value="Search">
+    </form>
+    <ul>
+        {% for recipe in recipe %}
+        <a href="/recipe/{{ recipe.RecipeId }}"><li>{{ recipe.RecipeName }} - {{ recipe.Energy }} - {{ recipe.NumberPeople }} - {{ recipe.Picture }}</li></a>
+        {% endfor %}
+    </ul>
+
+    {% endblock %}
