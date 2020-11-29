@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from .forms import UnitForm
 from .models import Unit
 
@@ -14,8 +15,12 @@ def create_unit_view(httprequest):
 
 def create_units_view(httprequest):
     units = Unit.objects.all
-    if httprequest.POST:
-        print(httprequest.POST)
+    try:
+        if httprequest.GET["query"]:
+            units = Unit.objects.filter(Q(Name__icontains=httprequest.GET["query"]) | Q(Abbreviation__icontains=httprequest.GET["query"]))
+            print(httprequest.GET["query"])
+    except KeyError:
+        pass
     context = {"units": units}
     return render(httprequest, "units_list.html", context)
 
@@ -36,7 +41,7 @@ def detail_unit_view(httprequest, pk):
 
     context = {
        'form': form,
-        'unit': unit
+       'unit': unit
     }
 
     return render(httprequest, "unit_detail.html", context)
