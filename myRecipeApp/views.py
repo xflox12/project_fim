@@ -38,14 +38,17 @@ def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):             #
 
 def list_recipe(httprequest):
     recipe = Recipe.objects.all
-    try:
-        if httprequest.GET["query"]:
+
+    if "query" in httprequest.GET:
+        if "filter" in httprequest.GET:
+            if httprequest.GET["filter"] == "favourites":
+                recipe = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                                               Q(Energy__icontains=httprequest.GET["query"]) |
+                                               Q(NumberPeople__icontains=httprequest.GET["query"]))
+        else:
             recipe = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
                                            Q(Energy__icontains=httprequest.GET["query"]) |
                                            Q(NumberPeople__icontains=httprequest.GET["query"]))
-            print(httprequest.GET["query"])
-    except KeyError:
-        pass
     context = {"recipe": recipe}
     return render(httprequest, "dev_recipe_list.html", context)
 

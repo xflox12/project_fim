@@ -4,12 +4,19 @@
     <a href="/recipe/create">Create</a>
     <h2>Recipes</h2>
     <form method="GET">
+        <select name="filter">
+            <option value="all">Alle</option>
+            <option value="favourites">Favoriten</option>
+        </select>
+        <input type="submit" value="Filtern">
+    </form>
+    <form method="GET">
         <input type="search" name="query" placeholder="Search">
         <input type="submit" value="Search">
     </form>
     <ul>
         {% for recipe in recipe %}
-        <a href="/recipe/{{ recipe.RecipeId }}"><li>{{ recipe.RecipeName }} - {{ recipe.Energy }} - {{ recipe.NumberPeople }} - {{ recipe.Picture }}</li></a>
+        <a href="/recipe/{{ recipe.RecipeId }}"><li>{{ recipe.UserId.Nickname }} - {{ recipe.UnitId.Name }}  - {{ recipe.Energy }} - {{ recipe.NumberPeople }} - {{ recipe.Picture }}</li></a>
         {% endfor %}
     </ul>
 
