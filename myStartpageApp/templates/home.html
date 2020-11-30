@@ -47,20 +47,41 @@
     </div>
 
     <br>
+<!--
+   def gridSize = 3;
+   def counter = 1
 
-    {% for obj in allRecipes %}
+    { % for recipe in allRecipes %}
+
+
+   { % if counter % gridsize == 0 %}
+  <div class="row">
+  { % endif %}
+    <div class="col-sm">
+      One of three columns
+    </div>
+
+
+  { % if counter % gridsize == 0 %}
+  </div>
+  { % endif %}
+  counter++
+
+  { % endfor %}
 
 <div class="col-sm-4">
 
 
-        <a href="/recipe/{% recipe.RecipeId %}"> {% recipe.RecipeName %}
-             <img class="img-responsive img-circle" src="{% recipe.Picture %}"
+        <a href="/recipe/{ % recipe.RecipeId %}"> { % recipe.RecipeName %}
+             <img class="img-responsive img-circle" src="{ % recipe.Picture %}"
                  alt="Picture from recipe of the day"/>
         </a>
 
 
                 </div>
-    {% endfor %}
+    { % endfor %}
+
+    -->
 
     <p> Type p>lorem and press TAB to insert Lorem ipsum Text</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid consectetur earum enim est et fuga, fugiat
