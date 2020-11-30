@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+
+{% block titleContent %}
+    <h1 class="title text-center h1">Login for registered Users</h1>
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block mainContent %}
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form| crispy }}
+
+        <p>Don't have an account? Create one <a href="/reg">here</a>!</p>
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+
+{% endblock %}
+{% block sideContent %}
+    <p>After Login you're able to access your personal profile, manage your favourite recipes, write comments,
+        rate recipes and a some other cool stuff!
+        Come in and join the community!</p>
+
+     <div class="content">
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <p>
+                    <strong>{% trans "Oh snap!" %}</strong> {% trans "Please enter a correct username and password. Note that both fields are case-sensitive." %}
+                </p>
+            </div>
+        {% endif %}
+        <form action="{% url 'django.contrib.auth.views.login' %}" method="post" class="form-horizontal"
+              role="form">{% csrf_token %}
+            <legend><span class="col-sm-offset-1">{% trans 'Log in' %}</span></legend>
+            {% for field in form %}
+                {% include 'registration/form_field.html' %}
+            {% endfor %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">{% trans 'Log in' %}</button>
+                    &nbsp;<button type="reset" class="btn">{% trans 'Cancel' %}</button>
+                </div>
+            </div>
+        </form>
+        <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans "Reset my password" %}</a></p>
+        <script type="text/javascript">
+            $(function () {
+                $(".alert-message").alert();
+                $('#mainForm').submit(function () {
+                    $('#submit').button('loading');
+                })
+            });
+            document.forms[1].elements[2].focus();
+        </script>
+    </div>
+
+
+
+     <div class="content">
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <p>
+                    <strong> "Oh snap!"</strong> "Please enter a correct username and password. Note that both fields are case-sensitive."
+                </p>
+            </div>
+        {% endif %}
+        <form action="{% url 'django.contrib.auth.views.login' %}" method="post" class="form-horizontal"
+              role="form">{% csrf_token %}
+            <legend><span class="col-sm-offset-1">'Log in'</span></legend>
+            {% for field in form %}
+                {% include 'registration/form_field.html' %}
+            {% endfor %}
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">'Log in'</button>
+                    &nbsp;<button type="reset" class="btn">'Cancel'</button>
+                </div>
+            </div>
+        </form>
+        <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">"Reset my password"</a></p>
+        <script type="text/javascript">
+            $(function () {
+                $(".alert-message").alert();
+                $('#mainForm').submit(function () {
+                    $('#submit').button('loading');
+                })
+            });
+            document.forms[1].elements[2].focus();
+        </script>
+    </div>
+
+
+
+{% endblock %}

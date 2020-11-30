@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block titleContent %}
+     <h1 class="title text-center h1">Please fill out the following boxes to register</h1>
+{% endblock %}
+
+{% block mainContent %}
+
+    <div class="container" align="left">
+        <form action="{% url "register" %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+{% endblock %}
+
+
+{% block sideContent %}
+
+
+{% endblock %}

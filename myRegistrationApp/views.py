@@ -4,6 +4,3 @@ from django.views.generic import View, TemplateView   #import for class-based-vi
 
 # Create your views here.
 
-def reg_view_temp(httprequest, *args, **kwargs):             #view with template
-
-    return render(httprequest, "registration.html", {})

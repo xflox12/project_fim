@@ -23,7 +23,6 @@ from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
 from myRecipeApp.views import list_recipe
-from myRegistrationApp.views import reg_view_temp
 from django.contrib.auth import views
 
 

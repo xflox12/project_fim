@@ -22,7 +22,7 @@ def user_registration(httprequest, *args, **kwargs):  # define the function for 
             Password = form.cleaned_data['Password']
             user = authenticate(Nickname=Nickname, Password=Password)
             login(httprequest, user)
-            return redirect("")  # redirect page needs to be added
+            return redirect('/home')  # redirect page needs to be added
 
     else:
         form = create_user_form()
