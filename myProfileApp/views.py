@@ -4,10 +4,17 @@ from django.shortcuts import render
 
 
 def profile_view_temp(httprequest, *args, **kwargs):             #view with template
-    my_dict = {
+    """ my_dict = {
         "name": "Flo",
-        "lastname" : "Schietinger",
-        "myList" : ['this', 'is', 'my', 'list']
+        "lastname": "Schietinger",
+        "myList": ['this', 'is', 'my', 'list']
 
-    }
-    return render(httprequest, "myprofile.html", my_dict)
+
+    }"""
+
+    user = {
+        "UserId": "23",
+        "firstname": "Yasmin",
+        "lastname": "Jung",
+            }
+    return render(httprequest, "myprofile.html", user)
