@@ -13,7 +13,6 @@ from .models import Recipe
 # Create your views here.
 
 
-
 # Create your views here.
 def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
