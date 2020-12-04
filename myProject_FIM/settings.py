@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     # own Apps
     'myLoginApp',  # 'myLoginApp' should also work
-    'myRegistrationApp',
     'myProfileApp',
     'myStartpageApp',
     'myRecipeApp',

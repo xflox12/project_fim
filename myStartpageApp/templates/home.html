@@ -4,16 +4,35 @@
     <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
     <h2 class="text-center"> Take a look on the delicious recipes</h2>
     <hr>  <!-- just a section line to seperate-->
-{% if user.is_authenticated %}
-            <p>You're logged in</p>
-        {% else %}
-            <p><a href="/login">Login here!</a></p>
-        {% endif %}
+    {% if user.is_authenticated %}
+        <p>You're logged in</p>
+    {% else %}
+        <p><a href="/login">Login here!</a></p>
+    {% endif %}
 {% endblock %}
 
 {% block mainContent %}
 
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
+    <div class="row">
+        <div class="col-sm-4">
+            <h3> Recipe of the Day:</h3>
+            <h3> {{ title }}</h3>
+            <!--Picture/Bild height="300" width="500"-->
+            <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
+            {% load static %}
+            <img class="img-responsive img-circle" src="{% static "images/tacos.jfif" %}"
+                 alt="Picture from recipe of the day"/>
+            Some content
+        </div>
+    <div class="col-sm-4">
+        <h4
+        <p> </p>
+    </div>
+
+    </div>
+
+
     <div class="row">
         <div class="col-sm-8">
             <h3> Suggestions</h3>
@@ -34,60 +53,51 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <h3> Recipe of the Day:</h3>
-            <h3> {{ title }}</h3>
-            <!--Picture/Bild height="300" width="500"-->
-            <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
-            {% load static %}
-            <img class="img-responsive img-circle" src="{% static "images/tacos.jfif" %}"
-                 alt="Picture from recipe of the day"/>
-            Some content
-        </div>
+
     </div>
 
     <br>
-<!--
-   def gridSize = 3;
-   def counter = 1
+    <!--
+       def gridSize = 3;
+       def counter = 1
 
-    { % for recipe in allRecipes %}
-
-
-   { % if counter % gridsize == 0 %}
-  <div class="row">
-  { % endif %}
-    <div class="col-sm">
-      One of three columns
-    </div>
+        { % for recipe in allRecipes %}
 
 
-  { % if counter % gridsize == 0 %}
-  </div>
-  { % endif %}
-  counter++
-
-  { % endfor %}
-
-<div class="col-sm-4">
+       { % if counter % gridsize == 0 %}
+      <div class="row">
+      { % endif %}
+        <div class="col-sm">
+          One of three columns
+        </div>
 
 
-        <a href="/recipe/{ % recipe.RecipeId %}"> { % recipe.RecipeName %}
-             <img class="img-responsive img-circle" src="{ % recipe.Picture %}"
-                 alt="Picture from recipe of the day"/>
-        </a>
+      { % if counter % gridsize == 0 %}
+      </div>
+      { % endif %}
+      counter++
+
+      { % endfor %}
+
+    <div class="col-sm-4">
 
 
-                </div>
-    { % endfor %}
+            <a href="/recipe/{ % recipe.RecipeId %}"> { % recipe.RecipeName %}
+                 <img class="img-responsive img-circle" src="{ % recipe.Picture %}"
+                     alt="Picture from recipe of the day"/>
+            </a>
 
-    -->
+
+                    </div>
+        { % endfor %}
+
+        -->
 
     <p> Type p>lorem and press TAB to insert Lorem ipsum Text</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid consectetur earum enim est et fuga, fugiat
         ipsam officiis optio placeat quasi repellendus rerum sit tempora unde veritatis vitae.
         <mark>jedem Campus</mark>
-         <br> <b>some bold text</b> and now som normal text
+        <br> <b>some bold text</b> and now som normal text
         <br>Text after linebreak
     </p>
 

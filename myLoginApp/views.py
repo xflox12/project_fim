@@ -16,18 +16,22 @@ def user_registration(httprequest, *args, **kwargs):  # define the function for 
     if httprequest.method == "POST":
         form = create_user_form(httprequest.POST)
 
+
         if form.is_valid():
             form.save()
             Nickname = form.cleaned_data['Nickname']
             Password = form.cleaned_data['Password']
             user = authenticate(Nickname=Nickname, Password=Password)
             login(httprequest, user)
+            context = {
+                "somestuff": "allOK"
+            }
             return redirect('/home')  # redirect page needs to be added
 
-    else:
-        form = create_user_form()
-        context = {
-            "form": form
-        }
+        else:
+            form = create_user_form()
+            context = {
+                "form": form
+            }
 
     return render(httprequest, "registration.html", context)
