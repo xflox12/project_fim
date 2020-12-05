@@ -24,7 +24,7 @@ def add_recipe(request):
         print("Your recipe has been added!")
         add_new_recipe.save()
     template="dev_add_recipe.html"
-    return render(request, template, {"create_recipe_form": add_new_recipe})
+    return render(request, template, {"create_recipe_form": add_new_recipe, "create_recipe_form2": add_new_recipe_part2, "create_recipe_form3": add_new_recipe_part3})
 
 
 # Create your views here.
