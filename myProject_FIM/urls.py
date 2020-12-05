@@ -22,7 +22,7 @@ from myStartpageApp.views import home_view_temp, test_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
-from myRecipeApp.views import list_recipe
+from myRecipeApp.views import list_recipe, list_category
 from django.contrib.auth import views
 
 
@@ -38,6 +38,7 @@ urlpatterns = [
     path('unit/<str:pk>/', show_unit),
     path('unit/<str:pk>/delete', delete_unit),
     path('recipe/', list_recipe),
+    path('category/', list_category),
     path('', include("django.contrib.auth.urls")),
 
     # path('login/', views.LoginView.as_view(), name="login")

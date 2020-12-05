@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+    {% block mainContent %}
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories %}
+        <a href="/recipe/?category={{ category.CategoryId }}"><li>{{ category.Name }}</li></a>
+        {% endfor %}
+    </ul>
+
+    {% endblock %}

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 # from .forms import UnitForm
 from .models import Recipe
+from .models import Category
 
 #import Models
 #from .models import PlaceholderModel
@@ -36,19 +37,32 @@ def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):             #
 
 
 def list_recipe(httprequest):
-    recipe = Recipe.objects.all
+    recipes = Recipe.objects.all
 
     if "query" in httprequest.GET:
         if "filter" in httprequest.GET:
             if httprequest.GET["filter"] == "favourites":
-                recipe = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
                                                Q(Energy__icontains=httprequest.GET["query"]) |
                                                Q(NumberPeople__icontains=httprequest.GET["query"]))
         else:
-            recipe = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+            recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
                                            Q(Energy__icontains=httprequest.GET["query"]) |
                                            Q(NumberPeople__icontains=httprequest.GET["query"]))
-    context = {"recipe": recipe}
+
+        if "category" in httprequest.GET:
+            recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["category"]))
+
+    context = {"recipe": recipes}
     return render(httprequest, "dev_recipe_list.html", context)
 
 
+def list_category(httprequest):
+    categories = Category.objects.all
+
+#    if "query" in httprequest.GET:
+#        if "filter" in httprequest.GET:
+#            if httprequest.GET["filter"] == "favourites":
+
+    context = {"categories": categories}
+    return render(httprequest, "dev_category_list.html", context)

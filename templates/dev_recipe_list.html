@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
-    {% block mainContent %}
-    <a href="/recipe/create">Create</a>
-    <h2>Recipes</h2>
+    {% block titleContent %}
     <form method="GET">
         <select name="filter">
             <option value="all">Alle</option>
@@ -10,6 +8,11 @@
         </select>
         <input type="submit" value="Filtern">
     </form>
+    {% endblock %}
+
+    {% block mainContent %}
+    <a href="/recipe/create">Create</a>
+    <h2>Recipes</h2>
     <form method="GET">
         <input type="search" name="query" placeholder="Search">
         <input type="submit" value="Search">

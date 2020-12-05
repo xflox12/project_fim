@@ -41,7 +41,8 @@ class Recipe(models.Model):
                                   )
 
     # only one picture per recipe
-    Picture = models.ImageField(verbose_name="Recipe Picture"
+    Picture = models.ImageField(verbose_name="Recipe Picture",
+                                blank=True
                                 )
 
     # Author is the user who created the recipe (UserID)
