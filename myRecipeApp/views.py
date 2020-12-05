@@ -7,6 +7,7 @@ from django.db.models import Q
 # from .forms import UnitForm
 from .models import Recipe
 from .models import Category
+from .models import RecipeCategory
 
 #import Models
 #from .models import PlaceholderModel
@@ -38,22 +39,28 @@ def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):             #
 
 def list_recipe(httprequest):
     recipes = Recipe.objects.all
+    categories = Category.objects.all
 
-    if "query" in httprequest.GET:
-        if "filter" in httprequest.GET:
-            if httprequest.GET["filter"] == "favourites":
-                recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
-                                               Q(Energy__icontains=httprequest.GET["query"]) |
-                                               Q(NumberPeople__icontains=httprequest.GET["query"]))
-        else:
-            recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
-                                           Q(Energy__icontains=httprequest.GET["query"]) |
-                                           Q(NumberPeople__icontains=httprequest.GET["query"]))
+    if "query" in httprequest.GET and \
+       "filter" in httprequest.GET:
+        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                                        Q(Energy__icontains=httprequest.GET["query"]) |
+                                        Q(NumberPeople__icontains=httprequest.GET["query"])|
+                                        Q(favourite__FavouriteId__isnotnull=True))
 
-        if "category" in httprequest.GET:
-            recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["category"]))
+    elif "query" in httprequest.GET:
+        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                                        Q(Energy__icontains=httprequest.GET["query"]) |
+                                        Q(NumberPeople__icontains=httprequest.GET["query"]))
 
-    context = {"recipe": recipes}
+    elif "filter" in httprequest.GET:
+        if httprequest.GET["filter"] == "favourites":
+            recipes = Recipe.objects.filter(favourite__FavouriteId__isnull=False)
+
+    if "category" in httprequest.GET:
+        recipes = Recipe.objects.filter(recipecategory__CategoryId=httprequest.GET["category"])
+
+    context = {"recipe": recipes, "categories": categories}
     return render(httprequest, "dev_recipe_list.html", context)
 
 

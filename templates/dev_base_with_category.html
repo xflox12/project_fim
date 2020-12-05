@@ -28,6 +28,8 @@
     <!--Include Libaries for custom CSS: myStyles.css-->
     <link rel="stylesheet" href="{% static "css/myStyles.css" %}">
 
+
+
 </head>
 <body>
 {% csrf_token %}
@@ -41,6 +43,11 @@
 
 <!-- In this block the main content will be inserted-->
 <div id="side-body" class="container">
+    <div id="leftContent" class="card border-0 shadow my-5">
+        {% block leftContent %}
+                will be replaced
+        {% endblock %}
+    </div>
     <div id='mainContent' class="card border-0 shadow my-5">
         <div class="card-body p-5">
 
@@ -74,7 +81,6 @@
         {% include 'footer.html' %}
     </div>
 </div>
-
 
 </body>
 </html>

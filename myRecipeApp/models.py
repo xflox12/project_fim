@@ -16,6 +16,9 @@ class FoodItem(models.Model):
                             max_length=200
                             )
 
+    def __str__(self):
+        return self.Name
+
 
 class Category(models.Model):
     # primary key
@@ -27,6 +30,9 @@ class Category(models.Model):
     Name = models.CharField(verbose_name="Name",
                             max_length=200
                             )
+
+    def __str__(self):
+        return self.Name
 
 
 class Recipe(models.Model):
@@ -63,6 +69,9 @@ class Recipe(models.Model):
 
     # number of people suitable for the quantities in the recipe
     NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People")
+
+    def __str__(self):
+        return self.RecipeName
 
 
 class Rating(models.Model):

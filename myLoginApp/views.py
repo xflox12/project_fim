@@ -16,7 +16,6 @@ def user_registration(httprequest, *args, **kwargs):  # define the function for 
     if httprequest.method == "POST":
         form = create_user_form(httprequest.POST)
 
-
         if form.is_valid():
             form.save()
             Nickname = form.cleaned_data['Nickname']
