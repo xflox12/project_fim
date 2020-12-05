@@ -1,7 +1,23 @@
-<form method="post" action="">
-{% csrf_token %}
-<table>
-{{RecipeForm}}
-</table>
-<input type="submit" value="Add recipe"/>
-</form>
+{% extends 'base.html' %}
+
+{% block titleContent %}
+     <h1 class="title text-center h1">To add a new recipe, please fill out the following information:</h1>
+{% endblock %}
+
+{% block mainContent %}
+    <form method="post" action="">
+    {% csrf_token %}
+    <table>
+    {{create_recipe_form}}
+    </table>
+    <input type="submit" value="Add recipe"/>
+    </form>
+
+
+{% endblock %}
+
+
+{% block sideContent %}
+
+
+{% endblock %}
