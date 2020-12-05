@@ -1,14 +1,13 @@
-from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse  # For Function-Based-Views
 from django.views.generic import View, TemplateView, ListView
-
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 # from .forms import UnitForm
-from .models import Recipe
+from .models import Recipe, RecipeSteps, Ingredient
 from .models import Category
 from .models import RecipeCategory
-from .forms import create_recipe_form, create_recipe_form2
+from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
 
 #import Models
 #from .models import PlaceholderModel
@@ -19,7 +18,9 @@ def add_recipe(request):
         print("To add a recipe, please log in first")
         return redirect ('/home')
     add_new_recipe = create_recipe_form(request.POST or None)
-    if add_new_recipe.is_valid():
+    add_new_recipe_part2 = create_recipe_form2(request.POST or None)
+    add_new_recipe_part3 = create_recipe_form3(request.POST or None)
+    if add_new_recipe.is_valid() and add_new_recipe_part2.is_valid() and add_new_recipe_part3.is_valid():
         print("Your recipe has been added!")
         add_new_recipe.save()
     template="dev_add_recipe.html"
