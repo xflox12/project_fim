@@ -8,11 +8,22 @@ from django.db.models import Q
 from .models import Recipe
 from .models import Category
 from .models import RecipeCategory
+from .forms import create_recipe_form
 
 #import Models
 #from .models import PlaceholderModel
 
 # Create your views here.
+def add_recipe(request):
+    if not request.user.is_authenticated:
+        print("To add a recipe, please log in first")
+        return redirect ('/home')
+    add_new_recipe = create_recipe_form(request.POST or None)
+    if add_new_recipe.is_valid():
+        print("Your recipe has been added!")
+        add_new_recipe.save()
+    template="dev_add_recipe.html"
+    return render(request, template, {"create_recipe_form": add_new_recipe})
 
 
 # Create your views here.

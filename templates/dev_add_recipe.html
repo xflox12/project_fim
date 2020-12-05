@@ -1,0 +1,7 @@
+<form method="post" action="{% url 'add_recipe' %}">
+{% csrf_token %}
+<table>
+{{RecipeForm}}
+</table>
+<input type="submit" value="Add recipe"/>
+</form>
