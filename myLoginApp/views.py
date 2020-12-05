@@ -34,4 +34,6 @@ def user_registration(httprequest, *args, **kwargs):  # define the function for 
                 "form": form
             }
 
-    return render(httprequest, "registration.html", context)
+        return render(httprequest, "registration.html", context)
+
+    return render(httprequest, "registration.html")
