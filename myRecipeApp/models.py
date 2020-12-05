@@ -1,7 +1,6 @@
 from django.db import models
+from django.conf import settings
 
-# Create your models here.
-from myLoginApp.models import User
 from myUnitApp.models import Unit
 
 
@@ -53,7 +52,7 @@ class Recipe(models.Model):
 
     # Author is the user who created the recipe (UserID)
     # open: should it be possible to set user Null after deleting or default user (better?)?; hint: DSGVO
-    UserId = models.ForeignKey(User,
+    UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.PROTECT
                                )
@@ -81,7 +80,7 @@ class Rating(models.Model):
                                    )
 
     # Author is the user who created the comment and rating (UserID)
-    UserId = models.ForeignKey(User,
+    UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.CASCADE
                                )
@@ -144,7 +143,7 @@ class RecipeCategory(models.Model):
 
     # Author is the user who created Relationship (UserID)
     # open: check "protect2 -> what do we want to happen?
-    UserId = models.ForeignKey(User,
+    UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.PROTECT
                                )

@@ -1,6 +1,6 @@
 from django.db import models
+from django.conf import settings
 
-from myLoginApp.models import User
 from myRecipeApp.models import Recipe
 
 
@@ -13,7 +13,7 @@ class Favourite(models.Model):
                                       )
 
     # Owner of the Favourite (UserID)
-    UserId = models.ForeignKey(User,
+    UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Owner",
                                on_delete=models.PROTECT
                                )

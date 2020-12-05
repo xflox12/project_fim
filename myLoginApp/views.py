@@ -1,38 +1,36 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-from .models import User
-from .forms import create_user_form
 
 
 # Create your views here.
 
 
-def user_registration(httprequest, *args, **kwargs):  # define the function for the registration form
-
-    """this function consists of the creation of a user registration form and,
-    after the user is successfully registered, it automatically logs him/her into their profile"""
-    
+def user_registration(httprequest):
     if httprequest.method == "POST":
-        form = create_user_form(httprequest.POST)
+        form = UserCreationForm(httprequest.POST)
 
         if form.is_valid():
             form.save()
-            Nickname = form.cleaned_data['Nickname']
-            Password = form.cleaned_data['Password']
-            user = authenticate(Nickname=Nickname, Password=Password)
+            username = form.cleaned_data['username']
+            raw_password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=raw_password)
             login(httprequest, user)
-            context = {
-                "somestuff": "allOK"
-            }
+#            context = {
+#                "somestuff": "allOK"
+#            }
             return redirect('/home')  # redirect page needs to be added
 
-        else:
-            form = create_user_form()
-            context = {
-                "form": form
-            }
+    else:
+        form = UserCreationForm()
+#       context = {
+#           "form": form
+#           }
 
-        return render(httprequest, "registration.html", context)
+    return render(httprequest, "registration.html", {'form': form})
 
-    return render(httprequest, "registration.html")
+#    return render(httprequest, "registration.html")
+
+
+
