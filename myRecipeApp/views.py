@@ -8,7 +8,7 @@ from django.db.models import Q
 from .models import Recipe
 from .models import Category
 from .models import RecipeCategory
-from .forms import create_recipe_form
+from .forms import create_recipe_form, create_recipe_form2
 
 #import Models
 #from .models import PlaceholderModel
