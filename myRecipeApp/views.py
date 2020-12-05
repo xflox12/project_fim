@@ -4,9 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 # from .forms import UnitForm
-from .models import Recipe, RecipeSteps, Ingredient
-from .models import Category
-from .models import RecipeCategory
+from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
 
 #import Models
@@ -14,13 +12,15 @@ from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
 
 # Create your views here.
 def add_recipe(request):
+    """ this form adds new recipes to the platform. It is only possible to add new recipes if the user is registered
+    and, therefore, logged into his/her profile"""
     if not request.user.is_authenticated:
         print("To add a recipe, please log in first")
-        return redirect ('/home')
+        return redirect ('/home') # if the user is not logged in, it automatically returns him/her to the home page.
     add_new_recipe = create_recipe_form(request.POST or None)
     add_new_recipe_part2 = create_recipe_form2(request.POST or None)
     add_new_recipe_part3 = create_recipe_form3(request.POST or None)
-    if add_new_recipe.is_valid() and add_new_recipe_part2.is_valid() and add_new_recipe_part3.is_valid():
+    if add_new_recipe.is_valid() and add_new_recipe_part2.is_valid() and add_new_recipe_part3.is_valid(): # checks if all the forms/boxes are valid (valid inputs have been introduced)
         print("Your recipe has been added!")
         add_new_recipe.save()
     template="dev_add_recipe.html"
