@@ -70,7 +70,10 @@ def list_recipe(httprequest):
             recipes = Recipe.objects.filter(favourite__FavouriteId__isnull=False)
 
     if "category" in httprequest.GET:
-        recipes = Recipe.objects.filter(recipecategory__CategoryId=httprequest.GET["category"])
+        if httprequest.user.is_authenticated():
+            username = httprequest.user.username
+            recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]) |
+                                            Q(recipecategory__UserId=username))
 
     context = {"recipe": recipes, "categories": categories}
     return render(httprequest, "dev_recipe_list.html", context)
