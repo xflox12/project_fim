@@ -17,7 +17,7 @@
     {% endblock %}
 
     {% block mainContent %}
-    <a href="/recipe/create">Create</a>
+    <a href="{% url 'add-recipe' %}">Create</a>
     <h2>Recipes</h2>
     <form method="GET">
         <input type="search" name="query" placeholder="Search">

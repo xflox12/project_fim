@@ -4,15 +4,14 @@ from .models import Recipe, RecipeSteps, Ingredient
 class create_recipe_form(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ["RecipeName", "Picture", "Energy", "NumberPeople"] #errors obtained with UserID
+        fields = ["RecipeName", "Picture", "Energy", "UnitId", "NumberPeople"]
 
 class create_recipe_form2(forms.ModelForm):
     class Meta:
         model = Ingredient
-        fields = ["Quantity"] #errors obtained with IngredientID and FoodItemID
+        fields = ["IngredientId", "Quantity", "UnitId", "FoodItemId", "Note"]
 
 class create_recipe_form3(forms.ModelForm):
     class Meta:
         model = RecipeSteps
         fields = ["Duration", "StepNo", "Description", "Tips"]
-
