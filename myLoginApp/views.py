@@ -1,21 +1,27 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpRequest
+
+from .forms import user_registration_form
 
 
 # Create your views here.
 
 
 def user_registration(httprequest):
+
+    print("test")
+
     if httprequest.method == "POST":
-        form = UserCreationForm(httprequest.POST)
+        form = user_registration_form(httprequest.POST)
 
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            raw_password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=raw_password)
+            user = form.save()
+         #   user.refresh_from_db()
+         #   user.Profile.Picture = form.cleaned_data('Picture')
+         #   user.save()
+         #   username = form.cleaned_data['username']
+            raw_password = form.cleaned_data.get['password1']
+            user = authenticate(username=user.username, password=raw_password)
             login(httprequest, user)
 #            context = {
 #                "somestuff": "allOK"
@@ -23,7 +29,7 @@ def user_registration(httprequest):
             return redirect('/home')  # redirect page needs to be added
 
     else:
-        form = UserCreationForm()
+        form = user_registration_form()
 #       context = {
 #           "form": form
 #           }

@@ -29,17 +29,23 @@
             <a class="dropdown-item" href="#">Logout</a>
         </div>
       </li>
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>-->
+        <li class="nav-item">
+        <a class="nav-link" href="/recipes">Recipes</a>
       </li>
     </ul>
-      <form action="/login">
-        <input type="submit" class="btn btn-secondary" value="Login" />
-    </form>
 
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="e.g. Tacos, Germknödel, Maultschen" aria-label="Search">
       <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
     </form>
+      <div class="col-xs-3 px-2">
+        <form action="/login">
+            <input type="submit" class="btn btn-secondary btn-block" value="Login" />
+        </form>
+      </div>
+
   </div>
 </nav>
