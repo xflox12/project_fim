@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-
 from .forms import user_registration_form
+from django.http import HttpResponse, HttpRequest
 
 
 # Create your views here.
@@ -9,18 +9,18 @@ from .forms import user_registration_form
 
 def user_registration(httprequest):
 
-    print("test")
-
     if httprequest.method == "POST":
-        form = user_registration_form(httprequest.POST)
+
+        # ATTENTION: httprequest.FILES is necessary for uploading the picture of the user!!!
+        form = user_registration_form(httprequest.POST, httprequest.FILES)
 
         if form.is_valid():
             user = form.save()
-         #   user.refresh_from_db()
-         #   user.Profile.Picture = form.cleaned_data('Picture')
-         #   user.save()
-         #   username = form.cleaned_data['username']
-            raw_password = form.cleaned_data.get['password1']
+            user.refresh_from_db()
+            user.profile.Picture = form.cleaned_data.get('Picture')
+
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(httprequest, user)
 #            context = {

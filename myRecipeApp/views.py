@@ -12,19 +12,26 @@ from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
 
 # Create your views here.
 def add_recipe(request):
-    """ this form adds new recipes to the platform. It is only possible to add new recipes if the user is registered
-    and, therefore, logged into his/her profile"""
-    if not request.user.is_authenticated:
-        print("To add a recipe, please log in first")
-        return redirect ('/home') # if the user is not logged in, it automatically returns him/her to the home page.
-    add_new_recipe = create_recipe_form(request.POST or None)
-    add_new_recipe_part2 = create_recipe_form2(request.POST or None)
-    add_new_recipe_part3 = create_recipe_form3(request.POST or None)
-    if add_new_recipe.is_valid() and add_new_recipe_part2.is_valid() and add_new_recipe_part3.is_valid(): # checks if all the forms/boxes are valid (valid inputs have been introduced)
-        print("Your recipe has been added!")
-        add_new_recipe.save()
-    template="dev_add_recipe.html"
-    return render(request, template, {"create_recipe_form": add_new_recipe, "create_recipe_form2": add_new_recipe_part2, "create_recipe_form3": add_new_recipe_part3})
+        if request.method == "POST":
+            form1 = create_recipe_form()
+            form2 = create_recipe_form2()
+            form3 = create_recipe_form3()
+            if form1.is_valid() and form2.is_valid() and form3.is_valid():
+                form1.save()
+                form2.save()
+                form3.save()
+                return redirect("dev_recipe_list.html")
+        else:
+            form1 = create_recipe_form
+            form2 = create_recipe_form2
+            form3 = create_recipe_form3
+            context = {
+                "form1": form1,
+                "form2": form2,
+                "form3": form3
+            }
+
+            return render(request, "dev_add_recipe.html", context)
 
 
 # Create your views here.
@@ -70,7 +77,10 @@ def list_recipe(httprequest):
             recipes = Recipe.objects.filter(favourite__FavouriteId__isnull=False)
 
     if "category" in httprequest.GET:
-        recipes = Recipe.objects.filter(recipecategory__CategoryId=httprequest.GET["category"])
+#        if httprequest.user.is_authenticated():
+#            username = httprequest.user.username
+            recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
+#                                            Q(recipecategory__UserId=username))
 
     context = {"recipe": recipes, "categories": categories}
     return render(httprequest, "dev_recipe_list.html", context)
