@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
 
 {% block content %}
 <div class="container">
@@ -7,7 +10,7 @@
             <h3 class="text-center">Unsubscribe from the FIM's community newsletter here. It's a pitty to see you leaving</h3>
             <form method="POST">{% csrf_token %}
                 <div class="input-group">
-                    {{ form }}
+                    {% crispy form %}
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="submit">Unsubscribe</button>
                     </span>
