@@ -23,6 +23,7 @@ from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
 from myRecipeApp.views import list_recipe, list_category, add_recipe
+from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from django.contrib.auth import views
 
 
@@ -42,6 +43,8 @@ urlpatterns = [
     path('', include("django.contrib.auth.urls")),
     path('addrecipe/', add_recipe, name='add-recipe'),
     path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
+    path('signup_newsletter/', newsletter_signup, name='newsletter_signup'),
+    path('unsubscribe_newsletter/', newsletter_unsubscribe, name='newsletter_unsubscribe'),
 
     # path('login/', views.LoginView.as_view(), name="login")
 

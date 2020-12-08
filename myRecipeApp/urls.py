@@ -25,7 +25,7 @@ from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, 
 urlpatterns = [
     path('recipes/', recipes_list_view_temp, name='recipe-list'),
     path('recipes/create', recipes_create_view_temp, name='recipe-list'),
-    path('addrecipe/(?P<id_recipe>\w+)', add_recipe, name='add-recipe'),
+      path('addrecipe/(?P<id_recipe>\w+)', add_recipe, name='add-recipe'),
     path('addrecipe/', add_recipe, name='add-recipe'),
 
 
