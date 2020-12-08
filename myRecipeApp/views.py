@@ -6,32 +6,45 @@ from django.db.models import Q
 # from .forms import UnitForm
 from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
+from django import forms
 
 #import Models
 #from .models import PlaceholderModel
 
 # Create your views here.
-def add_recipe(request):
+def add_recipe(request,recipe_id=None):
+        recipe = None
+        if not recipe_id is None:
+            recipe = Recipe.objects.get(RecipeId=recipe_id)
+
         if request.method == "POST":
-            form1 = create_recipe_form()
+            form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
+            if form1.is_valid() :
+                newrecipe = form1.save(commit=False)
+                newrecipe.UserId = request.user
+                newrecipe.save()
+                recipe = newrecipe
+
             form2 = create_recipe_form2()
             form3 = create_recipe_form3()
-            if form1.is_valid() and form2.is_valid() and form3.is_valid():
-                form1.save()
-                form2.save()
-                form3.save()
-                return redirect("dev_recipe_list.html")
+            #if form1.is_valid() and form2.is_valid() and form3.is_valid():
+            #    form1.save()
+            #    form2.save()
+            #    form3.save()
+            #return redirect("dev_recipe_list.html")
         else:
             form1 = create_recipe_form
             form2 = create_recipe_form2
             form3 = create_recipe_form3
-            context = {
-                "form1": form1,
-                "form2": form2,
-                "form3": form3
-            }
 
-            return render(request, "dev_add_recipe.html", context)
+        context = {
+            "form1": form1,
+            "form2": form2,
+            "form3": form3,
+            "recipe":recipe
+        }
+
+        return render(request, "dev_add_recipe.html", context)
 
 
 # Create your views here.

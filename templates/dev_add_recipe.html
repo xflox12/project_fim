@@ -1,19 +1,41 @@
 {% extends 'base.html' %}
 
 {% block titleContent %}
-     <h1 class="title text-center h1">To add a new recipe, please fill out the following information:</h1>
+     <h1 class="title text-center h1">New Recipe {{ recipe.RecipeName }}</h1>
+    {%if not recipe.RecipeName  %}
+    <h2 class="title text-center h3">To add a new recipe, please fill out the following information:</h2>
+    {% else %}
+    <h2 class="title text-center h3">Add ingredients and Recipe steps:</h2>
+    {% endif %}
 {% endblock %}
 
 {% block mainContent %}
-    <form method="post" action="">
-    {% csrf_token %}
-    <table>
-    {{form1}}
-        {{form2}}
-        {{form3}}
-    </table>
-    <input type="submit" value="Add recipe"/>
+    <form method="post" action="{{ recipe.RecipeId }}">
+        {% csrf_token %}
+        <table style="background-color: bisque">
+            {{form1}}
+        </table>
+        <br>
+        <input type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
     </form>
+    {%if recipe.RecipeName  %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <table le style="background-color: aquamarine;">
+        {{form2}}
+        </table>
+    </form>
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <table style="background-color: antiquewhite;">
+        {{form3}}
+        </table>
+    </form>
+    {% endif %}
+
+
+
 
 
 {% endblock %}

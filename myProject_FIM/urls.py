@@ -40,7 +40,8 @@ urlpatterns = [
     path('recipe/', list_recipe),
     path('category/', list_category),
     path('', include("django.contrib.auth.urls")),
-    path('addrecipe/', add_recipe, name='add-recipe')
+    path('addrecipe/', add_recipe, name='add-recipe'),
+    path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
 
     # path('login/', views.LoginView.as_view(), name="login")
 

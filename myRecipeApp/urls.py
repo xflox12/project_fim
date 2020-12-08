@@ -25,7 +25,10 @@ from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, 
 urlpatterns = [
     path('recipes/', recipes_list_view_temp, name='recipe-list'),
     path('recipes/create', recipes_create_view_temp, name='recipe-list'),
-    path('addrecipe/', add_recipe, name='add-recipe')
+    path('addrecipe/(?P<id_recipe>\w+)', add_recipe, name='add-recipe'),
+    path('addrecipe/', add_recipe, name='add-recipe'),
+
+
     #path('recipes/<int::my_id>', recipes_detail_view_temp, name="recipe-detail"),
     #path('recipes/<int::my_id>/update', recipes_update_view_temp, name="recipe-update"),
     #path('recipes/<int::my_id>/delete', recipes_delete_view_temp, name="recipe-delete"),
