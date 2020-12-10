@@ -12,27 +12,51 @@
 {% block mainContent %}
     <form method="post" action="{{ recipe.RecipeId }}">
         {% csrf_token %}
-        <table style="background-color: bisque">
+        <table style="background-color: white">
             {{form1}}
         </table>
         <br>
         <input type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
     </form>
-    {%if recipe.RecipeName  %}
-    <form method="post" action="">
-        {% csrf_token %}
-        <table le style="background-color: aquamarine;">
-        {{form2}}
-        </table>
-    </form>
 
-    <form method="post" action="">
-        {% csrf_token %}
-        <table style="background-color: antiquewhite;">
-        {{form3}}
-        </table>
-    </form>
+{%if recipe.RecipeName %}
+    <br><br>
+    <div style="font-size:18px;width:100px;display:inline-block">Ingredients</div>
+    <button style="margin-left:30px" onclick="window.location.href='addingredient/{{ recipe.RecipeId }}'">Add Ingredient</button>
+
+    {%if recipe.ingredient_set.all.count > 0 %}
+
+    <table style="width:90%">
+        <tr><th>Quantity</th><th>Units</th><th>Food</th><th>Notes</th></tr>
+     {% for field in recipe.ingredient_set.all %}
+          <tr id="{{field.IngredientId}}">
+              <td>{{field.Quantity}}</td>
+              <td>{{field.UnitId}}</td>
+              <td>{{field.FoodItemId}}</td>
+              <td>{{field.Note}}</td>
+          </tr>
+     {% endfor %}
+    </table>
+
     {% endif %}
+
+    <br><br>
+    <div style="font-size:18px;width:100px;display:inline-block">Steps</div>
+    <button style="margin-left:30px" onclick="window.location.href='addstep/{{ recipe.RecipeId }}'">Add Step</button>
+    {%if recipe.recipesteps_set.all.count > 0 %}
+    <table style="width:90%">
+        <tr><th>Duration</th><th>StepNo</th><th>Description</th><th>Tips</th>
+     {% for field in recipe.recipesteps_set.all %}
+          <tr id="{{field.RatingId}}">
+              <td>{{field.Duration}}</td>
+              <td>{{field.StepNo}}</td>
+              <td>{{field.Description}}</td>
+              <td>{{field.Tips}}</td>
+          </tr>
+     {% endfor %}
+    </table>
+    {% endif %}
+{% endif %}
 
 
 

@@ -33,7 +33,7 @@ def add_recipe(request,recipe_id=None):
             #    form3.save()
             #return redirect("dev_recipe_list.html")
         else:
-            form1 = create_recipe_form
+            form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
             form2 = create_recipe_form2
             form3 = create_recipe_form3
 
@@ -46,6 +46,57 @@ def add_recipe(request,recipe_id=None):
 
         return render(request, "dev_add_recipe.html", context)
 
+def add_ingredient(request,recipe_id) :
+    recipe = None
+    if not recipe_id is None:
+        recipe = Recipe.objects.get(RecipeId=recipe_id)
+
+    form1 = create_recipe_form(None, None, instance=recipe)
+    template = "dev_add_recipe_ingredient.html"
+    if request.method == "POST":
+        form2 = create_recipe_form2(request.POST or None, request.FILES or None)
+        if form2.is_valid():
+            newengredient = form2.save(commit=False)
+            newengredient.RecipeId = recipe
+            newengredient.save()
+            response = redirect('/addrecipe/'+str(recipe_id))
+            return response
+    else :
+        form2 = create_recipe_form2()
+
+    context = {
+        "form1": form1,
+        "form2": form2,
+        "recipe": recipe
+    }
+
+    return render(request, template, context)
+
+def add_step(request,recipe_id) :
+    recipe = None
+    if not recipe_id is None:
+        recipe = Recipe.objects.get(RecipeId=recipe_id)
+
+    form1 = create_recipe_form(None, None, instance=recipe)
+    template = "dev_add_recipe_step.html"
+    if request.method == "POST":
+        form3 = create_recipe_form3(request.POST or None, request.FILES or None)
+        if form3.is_valid():
+            newstep = form3.save(commit=False)
+            newstep.RecipeId = recipe
+            newstep.save()
+            response = redirect('/addrecipe/'+str(recipe_id))
+            return response
+    else :
+        form3 = create_recipe_form3()
+
+    context = {
+        "form1": form1,
+        "form3": form3,
+        "recipe": recipe
+    }
+
+    return render(request, template, context)
 
 # Create your views here.
 def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
