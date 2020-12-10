@@ -8,7 +8,6 @@ class create_recipe_form(forms.ModelForm):
         fields = ["RecipeName", "Picture","Energy", "UnitId", "NumberPeople"]
 
 class create_recipe_form2(forms.ModelForm):
-
     class Meta:
         model = Ingredient
         fields = ["IngredientId", "Quantity", "UnitId", "FoodItemId", "Note"]

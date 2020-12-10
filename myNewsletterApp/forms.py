@@ -5,7 +5,7 @@ from .models import NewsletterUser
 
 
 class NewsletterUserSignUpForm(forms.ModelForm):
-    helper = FormHelper()
+    helper = FormHelper() # from Crispy Forms library
     helper.form_show_labels = False
 
     class Meta:

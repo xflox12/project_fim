@@ -5,11 +5,13 @@ from .models import NewsletterUser
 from .forms import NewsletterUserSignUpForm
 
 def newsletter_signup(request):
+    """ This function signs the user up to receive the community
+    newsletter. The user is signed up using his/her email."""
     form = NewsletterUserSignUpForm(request.POST or None)
 
     if form.is_valid():
         instance = form.save(commit=False)
-        if NewsletterUser.objects.filter(email=instance.email).exists():
+        if NewsletterUser.objects.filter(email=instance.email).exists(): # checks if the email provided already exists in our database
             messages.warning(request, "Your email already exists in our database, please use another email", "alert alert-warning alert-dismissible")
         else:
             instance.save()
@@ -23,6 +25,8 @@ def newsletter_signup(request):
 
 
 def newsletter_unsubscribe(request):
+    """This function unsubscribes the user of receiving the newsletter.
+    Thus, it deletes the user's email from our database."""
     form = NewsletterUserSignUpForm(request.POST or None)
 
     if form.is_valid():
