@@ -1,0 +1,125 @@
+<nav class="collapse bd-links" id="bd-docs-nav">
+    <div class="bd-toc-item">
+        <a class="bd-toc-link" href="/docs/4.0/getting-started/introduction/">
+            Getting started
+        </a>
+
+        <ul class="nav bd-sidenav">
+            <li>
+                <a href="/docs/4.0/getting-started/introduction/">
+                    Introduction
+                </a></li>
+            <li>
+                <a href="/docs/4.0/getting-started/download/">
+                    Download
+                </a></li>
+            <li>
+                <a href="/docs/4.0/getting-started/contents/">
+                    Contents
+                </a></li>
+            <li>
+                <a href="/docs/4.0/getting-started/browsers-devices/">
+                    Browsers & devices
+                </a></li>
+            <li>
+                <a href="/docs/4.0/getting-started/javascript/">
+                    JavaScript
+                </a></li>
+            <li>
+                <a href="/docs/4.0/getting-started/theming/">
+                    Theming
+                </a></li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-nav">
+    <div class="bd-toc-item">
+        <a class="bd-toc-link" href="/docs/4.0/getting-started/introduction/">Getting started</a>
+
+        <ul class="nav bd-sidenav">
+            <li>
+                <a href="/docs/4.0/getting-started/introduction/">Introduction</a>
+            </li>
+            <li>
+                <a href="/docs/4.0/getting-started/download/">Download</a>
+            </li>
+            <li>
+                <a href="/docs/4.0/getting-started/contents/">Contents</a>
+            </li>
+            <li>
+                <a href="/docs/4.0/getting-started/browsers-devices/">Browsers & devices</a>
+            </li>
+            <li>
+                <a href="/docs/4.0/getting-started/javascript/">JavaScript</a>
+            </li>
+            <li>
+                <a href="/docs/4.0/getting-started/theming/">Theming</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="sidebar">
+    <div class="sidebar-header">
+        <h3>Choose Recipe</h3>
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+            </button>
+        </div>
+
+    </div>
+
+    <ul class="list-unstyled components">
+        <p>Dummy Heading</p>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Starters</a>
+        </li>
+        <li>
+            <a href="#">Main Course</a>
+        </li>
+        <li>
+
+        <li>
+            <a href="#">Desert</a>
+        </li>
+    </ul>
+</nav>
+
+
+
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">Start Bootstrap </div>
+      <div class="list-group list-group-flush">
+        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+ <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>

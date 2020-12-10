@@ -1,153 +1,138 @@
 {% extends 'base.html' %}
 
 {% block titleContent %}
-
     <hr>  <!-- just a section line to seperate-->
     {% if user.is_authenticated %}
         <h1 class="title text-center h1"> Hello, {{ users.name }}! Welcome back to FIM's cookbook!</h1>
         <h2 class="text-center"> What are you going to cook today?</h2>
     {% else %}
         <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
-    <h2 class="text-center"> Take a look on the delicious recipes</h2>
+        <h2 class="text-center"> Take a look on the delicious recipes</h2>
         <p><a href="/login">Login here!</a></p>
     {% endif %}
 {% endblock %}
 
+
 {% block mainContent %}
-
-    <nav class="collapse bd-links" id="bd-docs-nav"><div class="bd-toc-item">
-      <a class="bd-toc-link" href="/docs/4.0/getting-started/introduction/">
-        Getting started
-      </a>
-
-      <ul class="nav bd-sidenav"><li>
-            <a href="/docs/4.0/getting-started/introduction/">
-              Introduction
-            </a></li><li>
-            <a href="/docs/4.0/getting-started/download/">
-              Download
-            </a></li><li>
-            <a href="/docs/4.0/getting-started/contents/">
-              Contents
-            </a></li><li>
-            <a href="/docs/4.0/getting-started/browsers-devices/">
-              Browsers & devices
-            </a></li><li>
-            <a href="/docs/4.0/getting-started/javascript/">
-              JavaScript
-            </a></li><li>
-            <a href="/docs/4.0/getting-started/theming/">
-              Theming
-            </a></li>
-      </ul>
-</div>
-    </nav>
-
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
-    <div class="row">
-        <div class="col-sm-4">
-            <h3> Recipe of the Day:</h3>
-            <h3> {{ title }}</h3>
-            <!--Picture/Bild height="300" width="500"-->
-            <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
-            {% load static %}
-            <img class="img-responsive img-circle" src="{% static "images/tacos.jfif" %}"
-                 alt="Picture from recipe of the day"/>
-            Some content
-        </div>
-    <div class="col-sm-4">
-        <h4></h4>
-        <p> </p>
-    </div>
-
-    </div>
 
 
-    <div class="row">
-        <div class="col-sm-8">
-            <h3> Suggestions</h3>
-            <div class="row" id="suggestions-row-1">
-                <div class="col-sm-4">
-                    Some other Content
-                </div>
-                <div class="col-sm-4">
-                    Some Content
-                </div>
-            </div>
-            <div class="row" id="suggestions-row-2">
-                <div class="col-sm-4">
-                    Some Content
-                </div>
-                <div class="col-sm-4">
-                    Some Content for testing
-                </div>
-            </div>
-        </div>
 
-    </div>
-
-    <br>
-    <!--
-       def gridSize = 3;
-       def counter = 1
-
-        { % for recipe in allRecipes %}
-
-
-       { % if counter % gridsize == 0 %}
-      <div class="row">
-      { % endif %}
-        <div class="col-sm">
-          One of three columns
-        </div>
-
-
-      { % if counter % gridsize == 0 %}
-      </div>
-      { % endif %}
-      counter++
-
-      { % endfor %}
-
-    <div class="col-sm-4">
-
-
-            <a href="/recipe/{ % recipe.RecipeId %}"> { % recipe.RecipeName %}
-                 <img class="img-responsive img-circle" src="{ % recipe.Picture %}"
+    <div id="main">
+        <div class="row">
+            <div class="col-sm-5">
+                <h3> Recipe of the Day:</h3>
+                <h3> {{ title }}</h3>
+                <!--Picture/Bild height="300" width="500"-->
+                <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
+                {% load static %}
+                <img class="img-responsive img-circle" src="{% static "images/tacos.jfif" %}"
                      alt="Picture from recipe of the day"/>
-            </a>
+                Some content
+            </div>
+            <div class="col-sm-4">
+                <h4></h4>
+                <p></p>
+            </div>
+
+        </div>
 
 
+        <div class="row">
+            <div class="col-sm-9">
+                <h3> Suggestions</h3>
+                 <div class="col-sm-3">
+                {% include 'side_nav_bar.html' %}
+                 </div>
+                <div id="suggestions">
+                    <div class="row" id="suggestions-row-1">
+                        <div class="col-sm-4">
+                            Some other Content
+                        </div>
+                        <div class="col-sm-5">
+                            Some Content
+                        </div>
                     </div>
-        { % endfor %}
+                    <div class="row" id="suggestions-row-2">
+                        <div class="col-sm-4">
+                            Some Content
+                        </div>
+                        <div class="col-sm-5">
+                            Some Content for testing
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        -->
+        </div>
 
-    <p> Type p>lorem and press TAB to insert Lorem ipsum Text</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid consectetur earum enim est et fuga, fugiat
-        ipsam officiis optio placeat quasi repellendus rerum sit tempora unde veritatis vitae.
-        <mark>jedem Campus</mark>
-        <br> <b>some bold text</b> and now som normal text
-        <br>Text after linebreak
-    </p>
+        <br>
+        <!--
+           def gridSize = 3;
+           def counter = 1
 
-    <ul>
-        <li>bullet point 1</li>
-        <li>bullet point 2</li>
+            { % for recipe in allRecipes %}
+
+
+           { % if counter % gridsize == 0 %}
+          <div class="row">
+          { % endif %}
+            <div class="col-sm">
+              One of three columns
+            </div>
+
+
+          { % if counter % gridsize == 0 %}
+          </div>
+          { % endif %}
+          counter++
+
+          { % endfor %}
+
+        <div class="col-sm-4">
+
+
+                <a href="/recipe/{ % recipe.RecipeId %}"> { % recipe.RecipeName %}
+                     <img class="img-responsive img-circle" src="{ % recipe.Picture %}"
+                         alt="Picture from recipe of the day"/>
+                </a>
+
+
+                        </div>
+            { % endfor %}
+
+            -->
+
+        <p> Type p>lorem and press TAB to insert Lorem ipsum Text</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aliquid consectetur earum enim est et
+            fuga,
+            fugiat
+            ipsam officiis optio placeat quasi repellendus rerum sit tempora unde veritatis vitae.
+            <mark>jedem Campus</mark>
+            <br> <b>some bold text</b> and now som normal text
+            <br>Text after linebreak
+        </p>
+
         <ul>
-            <li>bla</li>
-            <li>bla</li>
-            <li>bla</li>
+            <li>bullet point 1</li>
+            <li>bullet point 2</li>
+            <ul>
+                <li>bla</li>
+                <li>bla</li>
+                <li>bla</li>
+                <li>bla</li>
+            </ul>
             <li>bla</li>
         </ul>
-        <li>bla</li>
-    </ul>
+    </div>
 {% endblock %}
 
 
 {% block sideContent %}
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda cupiditate dicta doloribus enim
-        illum impedit libero minus nobis, nostrum numquam perferendis, sequi similique soluta suscipit, veritatis
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci assumenda cupiditate dicta doloribus
+        enim
+        illum impedit libero minus nobis, nostrum numquam perferendis, sequi similique soluta suscipit,
+        veritatis
         voluptatibus! Neque, vero.</p>
     <p>Ordered List following::</p>
 
