@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'myStartpageApp',
     'myRecipeApp',
     'myUnitApp',
+    'myNewsletterApp',
 ]
 
 MIDDLEWARE = [

@@ -1,12 +1,29 @@
 {% extends 'dev_base_with_category.html' %}
 
-    {% block leftContent %}
-        {% for category in categories %}
-        <a href="?category={{ category.CategoryId }}"><li>{{ category.Name }}</li></a>
-        {% endfor %}
-    {% endblock %}
+{% block leftContent %}
+    <nav class="collapse bd-links" id="bd-docs-nav">
+        <div class="bd-toc-item">
+            <a class="bd-toc-link" href="/docs/4.0/getting-started/introduction/">
+                Categories
+            </a>
 
-    {% block titleContent %}
+            <ul class="nav bd-sidenav">
+                <li>
+                    <a href="/docs/4.0/getting-started/introduction/">
+                        Introduction
+                    </a></li>
+                {% for category in categories %}
+                    <li><a href="?category={{ category.CategoryId }}">
+                    <li>{{ category.Name }}</li></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </nav>
+
+{% endblock %}
+
+{% block titleContent %}
     <form method="GET">
         <select name="filter">
             <option value="all">Alle</option>
@@ -14,7 +31,7 @@
         </select>
         <input type="submit" value="Filtern">
     </form>
-    {% endblock %}
+{% endblock %}
 
     {% block mainContent %}
     <a href="{% url 'add-recipe' %}">Create</a>
@@ -25,8 +42,10 @@
     </form>
     <ul>
         {% for recipe in recipe %}
-        <a href="/recipe/{{ recipe.RecipeId }}"><li>{{ recipe.RecipeName }} ({{ recipe.UserId.Nickname }})</li></a>
+            <a href="/recipe/{{ recipe.RecipeId }}">
+                <li>{{ recipe.RecipeName }} ({{ recipe.UserId.Nickname }})</li>
+            </a>
         {% endfor %}
     </ul>
 
-    {% endblock %}
+{% endblock %}

@@ -1,17 +1,47 @@
 {% extends 'base.html' %}
 
 {% block titleContent %}
-    <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
-    <h2 class="text-center"> Take a look on the delicious recipes</h2>
+
     <hr>  <!-- just a section line to seperate-->
     {% if user.is_authenticated %}
-        <p>You're logged in</p>
+        <h1 class="title text-center h1"> Hello, {{ users.name }}! Welcome back to FIM's cookbook!</h1>
+        <h2 class="text-center"> What are you going to cook today?</h2>
     {% else %}
+        <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
+    <h2 class="text-center"> Take a look on the delicious recipes</h2>
         <p><a href="/login">Login here!</a></p>
     {% endif %}
 {% endblock %}
 
 {% block mainContent %}
+
+    <nav class="collapse bd-links" id="bd-docs-nav"><div class="bd-toc-item">
+      <a class="bd-toc-link" href="/docs/4.0/getting-started/introduction/">
+        Getting started
+      </a>
+
+      <ul class="nav bd-sidenav"><li>
+            <a href="/docs/4.0/getting-started/introduction/">
+              Introduction
+            </a></li><li>
+            <a href="/docs/4.0/getting-started/download/">
+              Download
+            </a></li><li>
+            <a href="/docs/4.0/getting-started/contents/">
+              Contents
+            </a></li><li>
+            <a href="/docs/4.0/getting-started/browsers-devices/">
+              Browsers & devices
+            </a></li><li>
+            <a href="/docs/4.0/getting-started/javascript/">
+              JavaScript
+            </a></li><li>
+            <a href="/docs/4.0/getting-started/theming/">
+              Theming
+            </a></li>
+      </ul>
+</div>
+    </nav>
 
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
     <div class="row">
@@ -26,7 +56,7 @@
             Some content
         </div>
     <div class="col-sm-4">
-        <h4
+        <h4></h4>
         <p> </p>
     </div>
 
