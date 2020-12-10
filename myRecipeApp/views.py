@@ -56,9 +56,9 @@ def add_ingredient(request,recipe_id) :
     if request.method == "POST":
         form2 = create_recipe_form2(request.POST or None, request.FILES or None)
         if form2.is_valid():
-            newengredient = form2.save(commit=False)
-            newengredient.RecipeId = recipe
-            newengredient.save()
+            newingredient = form2.save(commit=False)
+            newingredient.RecipeId = recipe
+            newingredient.save()
             response = redirect('/addrecipe/'+str(recipe_id))
             return response
     else :
