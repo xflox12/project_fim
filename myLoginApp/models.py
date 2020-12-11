@@ -15,8 +15,12 @@ class Profile(models.Model):
 
     # picture is shown on recipes and comments/ratings (maybe it is necessary to add a very small size of the picture)
     Picture = models.ImageField(verbose_name="Profile Picture",
-                                blank=True
+                                blank=True,
+                                upload_to="upload/"
                                 )
+
+    def __str__(self):
+        return self.UserId.username
 
 @receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):

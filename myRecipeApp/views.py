@@ -11,6 +11,9 @@ from django import forms
 #import Models
 #from .models import PlaceholderModel
 
+from myProfileApp.models import Favourite
+from .forms import favourite_form
+
 # Create your views here.
 def add_recipe(request,recipe_id=None):
         recipe = None
@@ -145,8 +148,7 @@ def list_recipe(httprequest):
 #            username = httprequest.user.username
             recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
 #                                            Q(recipecategory__UserId=username))
-
-    context = {"recipe": recipes, "categories": categories}
+    context = {"recipe": recipes, "categories": categories, "User": httprequest.user}
     return render(httprequest, "dev_recipe_list.html", context)
 
 
@@ -159,3 +161,10 @@ def list_category(httprequest):
 
     context = {"categories": categories}
     return render(httprequest, "dev_category_list.html", context)
+
+def add_recipe_to_favourites(httprequest):
+    if httprequest.method == "POST":
+        recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
+        f = Favourite(UserId=httprequest.user, RecipeId=recipe)
+        f.save()
+        return redirect("/recipe")

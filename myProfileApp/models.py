@@ -24,12 +24,3 @@ class Favourite(models.Model):
                                  on_delete=models.CASCADE
                                  )
 
-    # Note can be added if wanted
-    Note = models.TextField(verbose_name="Note",
-                            blank=True)
-
-    # number of people wanted
-    # conversion to the required number of people
-    NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People",
-                                                    blank=True,
-                                                    null=True)

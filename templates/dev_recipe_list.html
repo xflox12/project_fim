@@ -43,7 +43,12 @@
     <ul>
         {% for recipe in recipe %}
             <a href="/recipe/{{ recipe.RecipeId }}">
-                <li>{{ recipe.RecipeName }} ({{ recipe.UserId.Nickname }})</li>
+                <li>{{ recipe.RecipeName }} ({{ recipe.UserId.username }})</li>
+                <form method="POST" action="/add_recipe_to_favourites/">
+                    {% csrf_token %}
+                    <input type="hidden" name="RecipeId" value="{{ recipe.RecipeId }}">
+                    <input type="submit" value="Add to favourites">
+                </form>
             </a>
         {% endfor %}
     </ul>
