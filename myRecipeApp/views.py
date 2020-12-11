@@ -14,6 +14,11 @@ from django import forms
 from myProfileApp.models import Favourite
 from .forms import favourite_form
 
+def view_recipe(request,recipe_id=None):
+    context = {    }
+
+    return render(request, "dev_view_recipe.html", context)
+
 # Create your views here.
 def add_recipe(request,recipe_id=None):
         recipe = None
@@ -21,29 +26,17 @@ def add_recipe(request,recipe_id=None):
             recipe = Recipe.objects.get(RecipeId=recipe_id)
 
         if request.method == "POST":
-            form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
+            form1 = create_recipe_form(request.POST, request.FILES or None, instance=recipe)
             if form1.is_valid() :
                 newrecipe = form1.save(commit=False)
                 newrecipe.UserId = request.user
                 newrecipe.save()
                 recipe = newrecipe
-
-            form2 = create_recipe_form2()
-            form3 = create_recipe_form3()
-            #if form1.is_valid() and form2.is_valid() and form3.is_valid():
-            #    form1.save()
-            #    form2.save()
-            #    form3.save()
-            #return redirect("dev_recipe_list.html")
         else:
             form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
-            form2 = create_recipe_form2
-            form3 = create_recipe_form3
 
         context = {
             "form1": form1,
-            "form2": form2,
-            "form3": form3,
             "recipe":recipe
         }
 
@@ -80,7 +73,6 @@ def add_step(request,recipe_id) :
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
-    form1 = create_recipe_form(None, None, instance=recipe)
     template = "dev_add_recipe_step.html"
     if request.method == "POST":
         form3 = create_recipe_form3(request.POST or None, request.FILES or None)
@@ -94,7 +86,6 @@ def add_step(request,recipe_id) :
         form3 = create_recipe_form3()
 
     context = {
-        "form1": form1,
         "form3": form3,
         "recipe": recipe
     }
