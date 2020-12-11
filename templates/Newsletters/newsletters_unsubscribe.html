@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form form.helper %}
+
+{% block titleContent %}
+     <h1 class="title text-center h1">Unsubsribe from the FIM's community newsletter below</h1>
+{% endblock %}
+
+{% block mainContent %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <h6 class="text-left">It's a pitty to see you leaving...</h6>
+            <form method="POST">{% csrf_token %}
+                <div class="input-group">
+                    {% crispy form %}
+                    <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="submit">Unsubscribe</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

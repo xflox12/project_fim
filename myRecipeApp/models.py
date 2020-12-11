@@ -167,6 +167,12 @@ class Ingredient(models.Model):
                                        verbose_name="Unique UnitId"
                                        )
 
+    RecipeId = models.ForeignKey(Recipe,
+                                 verbose_name="Recipe",
+                                 on_delete=models.CASCADE,
+                                 default=0
+                                 )
+
     Quantity = models.DecimalField(verbose_name="Quantity",
                                    max_digits=8,  # before none
                                    decimal_places=2
