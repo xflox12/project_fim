@@ -3,7 +3,7 @@
 {% block titleContent %}
     <hr>  <!-- just a section line to seperate-->
     {% if user.is_authenticated %}
-        <h1 class="title text-center h1"> Hello, {{ users.name }}! Welcome back to FIM's cookbook!</h1>
+        <h1 class="title text-center h1"> Hello, {{ user.get_username }}! Welcome back to FIM's cookbook!</h1>
         <h2 class="text-center"> What are you going to cook today?</h2>
     {% else %}
         <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
@@ -36,14 +36,13 @@
             </div>
 
         </div>
-
-
+        <hr>
         <div class="row">
             <div class="col-sm-9">
                 <h3> Suggestions</h3>
-                 <div class="col-sm-3">
-                {% include 'side_nav_bar.html' %}
-                 </div>
+                <div class="col-sm-3">
+                    {% include 'side_nav_bar.html' %}
+                </div>
                 <div id="suggestions">
                     <div class="row" id="suggestions-row-1">
                         <div class="col-sm-4">
@@ -67,6 +66,14 @@
         </div>
 
         <br>
+
+        {% block recipeTopContent %}
+            will be replaced
+        {% endblock %}
+
+        {% block recipeContent %}
+            will be replaced
+        {% endblock %}
         <!--
            def gridSize = 3;
            def counter = 1

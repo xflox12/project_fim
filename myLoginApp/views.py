@@ -3,12 +3,12 @@ from django.shortcuts import render, redirect
 from .forms import user_registration_form
 from django.http import HttpResponse, HttpRequest
 
-
 # Create your views here.
 
 
 def user_registration(httprequest):
 
+    username=request.user.username
     if httprequest.method == "POST":
 
         print ('XX1')
@@ -34,7 +34,13 @@ def user_registration(httprequest):
 #                "somestuff": "allOK"
 #            }
             print('XX6')
-            return redirect('/home')  # redirect page needs to be added
+
+            context = {
+                "username" : username
+            }
+
+
+            return redirect('/home', context)  # redirect page needs to be added
 
     else:
         form = user_registration_form()
