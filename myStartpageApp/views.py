@@ -29,6 +29,21 @@ def home_view_temp(httprequest, *args, **kwargs):             # view with templa
     return render(httprequest, 'home.html', my_dict)
 
 
+def condition_view_temp(httprequest, *args, **kwargs):
+    return render(httprequest, 'conditions_agb.html')
+
+def imprint_view_temp(httprequest, *args, **kwargs):
+    return render(httprequest, 'imprint_impressum.html')
+
+def dataprotection_view_temp(httprequest, *args, **kwargs):
+    return render(httprequest, 'dataprotection.html')
+
+def faq_view_temp(httprequest, *args, **kwargs):
+    return render(httprequest, 'faq.html')
+
+
+
+
 def test_view_temp(httprequest, *args, **kwargs):
     my_dict = {
         "recipeOfDay": "TestRecipe",

@@ -18,14 +18,14 @@ from django.urls import path, include
 
 # Import of the view functions/classes from the view.py file
 
-from myStartpageApp.views import home_view_temp, test_view_temp
+from myStartpageApp.views import home_view_temp, test_view_temp, condition_view_temp, imprint_view_temp, \
+    dataprotection_view_temp, faq_view_temp
 from myProfileApp.views import profile_view_temp
 from myLoginApp.views import user_registration
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
-from myRecipeApp.views import list_recipe, list_category, add_recipe,add_ingredient,add_step
+from myRecipeApp.views import list_recipe, list_category, add_recipe, add_ingredient, add_step
 from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from django.contrib.auth import views
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -47,6 +47,11 @@ urlpatterns = [
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
     path('signup_newsletter/', newsletter_signup, name='newsletter_signup'),
     path('unsubscribe_newsletter/', newsletter_unsubscribe, name='newsletter_unsubscribe'),
+
+    path('terms/', condition_view_temp),
+    path('imprint/', imprint_view_temp),
+    path('dataprotection/', dataprotection_view_temp),
+    path('faq/', faq_view_temp),
 
     # path('login/', views.LoginView.as_view(), name="login")
 
