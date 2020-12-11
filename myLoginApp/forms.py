@@ -12,13 +12,3 @@ class user_registration_form(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'Picture')
-
-
-
-# class create_user_form(forms.ModelForm):  # form the people will see when registering for the first time
-#    Password = forms.CharField(widget=forms.PasswordInput)
-
-#    class Meta:  # defining the data
-#        model = User
-#        fields = ["Firstname", "Surname", "Nickname", "Email", "Password"]
-#        # inputs users will need to fill out while registering
