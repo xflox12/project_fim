@@ -58,7 +58,8 @@ class Recipe(models.Model):
                                )
 
     # total energy of given quantities
-    Energy = models.PositiveIntegerField(verbose_name="Calories")
+    Energy = models.PositiveIntegerField(verbose_name="Calories",
+                                         blank=True)
 
     # Unit for energy e.g. calories
     UnitId = models.ForeignKey(Unit,
@@ -67,7 +68,8 @@ class Recipe(models.Model):
                                )
 
     # number of people suitable for the quantities in the recipe
-    NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People")
+    NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People",
+                                                    blank=True)
 
     def __str__(self):
         return self.RecipeName
@@ -189,4 +191,5 @@ class Ingredient(models.Model):
                                    )
 
     # Note can be added if wanted
-    Note = models.TextField(verbose_name="Note")
+    Note = models.TextField(verbose_name="Note",
+                            blank=True)
