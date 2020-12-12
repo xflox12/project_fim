@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block titleContent %}
+     <h1 class="title text-center h1">{{ recipe.RecipeName }}</h1>
+{% endblock %}
+
+{% block mainContent %}
+    <h4>About the recipe</h4>
+        <table style="background-color: white">
+            <h8><b>Amount of energy</b></h8>
+            <br>
+            {{recipe.Energy}} {{recipe.UnitId.Name}}
+            <br>
+            <h8><b>Number of people</b></h8>
+            <br>
+            {{recipe.NumberPeople}}
+        </table>
+
+    <h4>Ingredients</h4>
+          {{ recipe.Quantity }} {{ recipe.UnitId }} {{ recipe.FoodItemId }} {{ recipe.Note }}
+    <h4>Steps</h4>
+
+ <a href="/home">Return to the homepage</a>
+
+
+
+{% endblock %}
+
+{% block sideContent %}
+
+{% endblock %}

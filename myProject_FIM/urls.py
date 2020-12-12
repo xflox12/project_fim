@@ -54,7 +54,6 @@ urlpatterns = [
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
     path('signup_newsletter/', newsletter_signup, name='newsletter_signup'),
     path('unsubscribe_newsletter/', newsletter_unsubscribe, name='newsletter_unsubscribe'),
-
     path('terms/', condition_view_temp),
     path('imprint/', imprint_view_temp),
     path('dataprotection/', dataprotection_view_temp),
