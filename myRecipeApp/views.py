@@ -3,6 +3,7 @@ from django.views.generic import View, TemplateView, ListView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.db import IntegrityError
 # from .forms import UnitForm
 from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
@@ -122,8 +123,9 @@ def list_recipe(httprequest):
        "filter" in httprequest.GET:
         recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
                                         Q(Energy__icontains=httprequest.GET["query"]) |
-                                        Q(NumberPeople__icontains=httprequest.GET["query"])|
-                                        Q(favourite__FavouriteId__isnotnull=True))
+                                        Q(NumberPeople__icontains=httprequest.GET["query"])
+                                        )
+        recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
 
     elif "query" in httprequest.GET:
         recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
@@ -132,7 +134,9 @@ def list_recipe(httprequest):
 
     elif "filter" in httprequest.GET:
         if httprequest.GET["filter"] == "favourites":
-            recipes = Recipe.objects.filter(favourite__FavouriteId__isnull=False)
+            recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
+
+            print(recipes)
 
     if "category" in httprequest.GET:
 #        if httprequest.user.is_authenticated():
@@ -157,5 +161,11 @@ def add_recipe_to_favourites(httprequest):
     if httprequest.method == "POST":
         recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
         f = Favourite(UserId=httprequest.user, RecipeId=recipe)
-        f.save()
+        try:
+            f.save()
+        except IntegrityError as e:
+            if 'UNIQUE constraint' in e.args[0]:
+                # accept unique constraint error without any message
+                pass
+
         return redirect("/recipe")

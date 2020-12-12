@@ -24,3 +24,8 @@ class Favourite(models.Model):
                                  on_delete=models.CASCADE
                                  )
 
+    def __str__(self):
+        return self.RecipeId.RecipeName
+
+    class Meta:
+        unique_together = ('UserId', 'RecipeId')
