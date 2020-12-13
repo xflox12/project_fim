@@ -20,12 +20,15 @@ from django.urls import path, include
 
 from myStartpageApp.views import home_view_temp, test_view_temp, condition_view_temp, imprint_view_temp, \
     dataprotection_view_temp, faq_view_temp
-from myProfileApp.views import profile_view_temp
-from myLoginApp.views import user_registration
+from myProfileApp.views import profile_view_temp, profile_change_password
+from myLoginApp.views import user_registration, edit_user_profile
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
-from myRecipeApp.views import list_recipe, list_category, add_recipe, add_ingredient, add_step
+from myRecipeApp.views import list_recipe, list_category, add_recipe, add_ingredient, add_step, add_recipe_to_favourites,view_recipe
 from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from django.contrib.auth import views
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,14 +37,18 @@ urlpatterns = [
     path('recipes/', include('myRecipeApp.urls')),
     path('profile/', profile_view_temp),
     path('reg/', user_registration, name="register"),
+    path('edit_profile/', edit_user_profile),
+    path('change_password/', profile_change_password),
     path('unit/', list_unit),
     path('unit/create', create_unit),
     path('unit/<str:pk>/', show_unit),
     path('unit/<str:pk>/delete', delete_unit),
     path('recipe/', list_recipe),
+    path('add_recipe_to_favourites/', add_recipe_to_favourites),
     path('category/', list_category),
     path('', include("django.contrib.auth.urls")),
     path('addrecipe/', add_recipe, name='add-recipe'),
+    path('viewrecipe/<int:recipe_id>', view_recipe, name='view-recipe'),
     path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
     path('addrecipe/addingredient/<int:recipe_id>', add_ingredient, name='add-ingredient'),
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
@@ -59,3 +66,6 @@ urlpatterns = [
     # path('reg/', reg_view_temp),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

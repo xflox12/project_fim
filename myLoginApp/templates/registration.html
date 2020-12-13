@@ -12,7 +12,11 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
+            {% if register %}
             <input type="submit" value="Register">
+            {% else %}
+            <input type="submit" value="Update Profile">
+            {% endif %}
         </form>
     </div>
 

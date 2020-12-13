@@ -4,39 +4,47 @@ from .forms import user_registration_form
 from django.http import HttpResponse, HttpRequest
 
 # Create your views here.
+def edit_user_profile(httprequest):
+    form = user_registration_form(instance=httprequest.user)
 
+    if httprequest.method == "POST":
+        form = user_registration_form(httprequest.POST, httprequest.FILES, instance=httprequest.user)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()
+            user.profile.Picture = form.cleaned_data.get('Picture')
+
+            user.save()
+
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=user.username, password=raw_password)
+            login(httprequest, user)
+            return redirect( "/profile")
+    return render(httprequest, "registration.html", {'form': form, 'register': False})
 
 def user_registration(httprequest):
 
-    username=request.user.username
     if httprequest.method == "POST":
 
-        print ('XX1')
 
         # ATTENTION: httprequest.FILES is necessary for uploading the picture of the user!!!
         form = user_registration_form(httprequest.POST, httprequest.FILES)
-        print ('XX2')
         print (form)
-        print ('XX2a')
         if form.is_valid():
-            print('XX3')
             user = form.save()
             user.refresh_from_db()
-            print('XX4')
             user.profile.Picture = form.cleaned_data.get('Picture')
 
             user.save()
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
-            print('XX5')
             login(httprequest, user)
 #            context = {
 #                "somestuff": "allOK"
 #            }
-            print('XX6')
 
             context = {
-                "username" : username
+                "username" : form.cleaned_data.get('username')
             }
 
 
@@ -48,7 +56,7 @@ def user_registration(httprequest):
 #           "form": form
 #           }
 
-    return render(httprequest, "registration.html", {'form': form})
+    return render(httprequest, "registration.html", {'form': form, 'register': True})
 
 #    return render(httprequest, "registration.html")
 

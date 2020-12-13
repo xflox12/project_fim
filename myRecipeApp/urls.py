@@ -20,6 +20,8 @@ from django.urls import path
 
 from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, add_recipe, recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
 
+
+
 #remove recipes at the beginning -> already written in the myProject_FIM\urls.py file
 # or leave it and the url must be localhost:8080/recipes/recipes/...
 urlpatterns = [
@@ -33,3 +35,5 @@ urlpatterns = [
     #path('recipes/<int::my_id>/update', recipes_update_view_temp, name="recipe-update"),
     #path('recipes/<int::my_id>/delete', recipes_delete_view_temp, name="recipe-delete"),
 ]
+
+

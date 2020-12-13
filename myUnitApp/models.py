@@ -23,3 +23,6 @@ class Unit(models.Model):
 
     #
     # Conversion =
+
+    def __str__(self):
+        return self.Name

@@ -17,6 +17,9 @@
         </table>
         <br>
         <input type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
+        {%if recipe.RecipeName %}
+            <a href="/viewrecipe/{{ recipe.RecipeId }}" style="margin-left:30px">View</a>
+        {% endif %}
     </form>
 
 {%if recipe.RecipeName %}
@@ -26,7 +29,7 @@
 
     {%if recipe.ingredient_set.all.count > 0 %}
 
-    <table style="width:90%">
+    <table class="styled-table" style="width:90%">
         <tr><th>Quantity</th><th>Units</th><th>Food</th><th>Notes</th></tr>
      {% for field in recipe.ingredient_set.all %}
           <tr id="{{field.IngredientId}}">
@@ -44,7 +47,7 @@
     <div style="font-size:18px;width:100px;display:inline-block">Steps</div>
     <button style="margin-left:30px" onclick="window.location.href='addstep/{{ recipe.RecipeId }}'">Add Step</button>
     {%if recipe.recipesteps_set.all.count > 0 %}
-    <table style="width:90%">
+    <table class="styled-table" style="width:90%">
         <tr><th>Duration</th><th>StepNo</th><th>Description</th><th>Tips</th>
      {% for field in recipe.recipesteps_set.all %}
           <tr id="{{field.RatingId}}">
