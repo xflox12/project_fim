@@ -1,10 +1,7 @@
 from django.db import models
 from django.conf import settings
-
 from myRecipeApp.models import Recipe
 
-
-# Create your models here.
 
 class Favourite(models.Model):
     # primary key

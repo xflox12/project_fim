@@ -25,6 +25,12 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 
+    <style>
+    .errorlist{
+        color: red;
+    }
+</style>
+
     <!--Include Libaries for custom CSS: -->
     <link rel="stylesheet" href="{% static "css/myStyles.css" %}">
     <link rel="stylesheet" href="{% static "css/custom_sidebar.css" %}">
@@ -38,9 +44,6 @@
         {% include 'nav_bar.html' %}
     </div>
 
-    <hr>  <!-- just a section line to seperate-->
-
-
     <!-- In this block the main content will be inserted-->
     <div id="side-body" class="container">
         <div id='mainContent' class="card border-0 shadow my-5">
@@ -49,8 +52,6 @@
                 {% block titleContent %}
                     will be replaced
                 {% endblock %}
-
-                <hr>  <!-- just a section line to seperate-->
 
                 {% block mainContent %}
                     will be replaced
@@ -69,7 +70,7 @@
         </div>
 
 
-        <hr>  <!-- just a section line to seperate-->
+
 
         <!--  Here is our Footer -->
         <div id="side-footer">

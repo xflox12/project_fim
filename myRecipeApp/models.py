@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-
 from myUnitApp.models import Unit
 
 
@@ -51,7 +50,6 @@ class Recipe(models.Model):
                                 )
 
     # Author is the user who created the recipe (UserID)
-    # open: should it be possible to set user Null after deleting or default user (better?)?; hint: DSGVO
     UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.PROTECT
@@ -93,7 +91,6 @@ class Rating(models.Model):
 
     # 5-Stars rating (10 steps in total)
     # blank is no rating, 0 = 0 Stars rating, 1 = 0.5 Stars rating
-    # open: Do we have to set a max value? How can we do that?
     Scale = models.PositiveSmallIntegerField(verbose_name="Star Rating",
                                              blank=True
                                              )
@@ -120,7 +117,6 @@ class RecipeSteps(models.Model):
                                  )
 
     # total amount of time required to cook recipe (not broken down to single steps)
-    # how can we show it in minutes?
     Duration = models.PositiveSmallIntegerField(verbose_name="Duration in Minutes",
                                                 default=0
                                                 )
@@ -144,7 +140,6 @@ class RecipeCategory(models.Model):
                                            )
 
     # Author is the user who created Relationship (UserID)
-    # open: check "protect2 -> what do we want to happen?
     UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.PROTECT
@@ -195,8 +190,9 @@ class Ingredient(models.Model):
                             blank = True
                             )
 
+
 class RecipeComment(models.Model):
-    post = models.ForeignKey(Recipe,on_delete=models.CASCADE,related_name='comments')
+    post = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

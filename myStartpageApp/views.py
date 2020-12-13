@@ -4,29 +4,22 @@ from django.views.generic import View, TemplateView, ListView   #import for clas
 
 #import Models
 from .models import Testmodel
+from myRecipeApp.models import Recipe, Category
 
 # Create your views here.
 def home_view_temp(httprequest, *args, **kwargs):             # view with template
     # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
-    obj = Testmodel.objects.all()
-    my_dict = {
-        "recipeOfDay": "TestRecipe",
+    recipes = Recipe.objects.all()
+    recipeOfDay=Recipe.objects.order_by('?').first()
+    categories = Category.objects.all
+    context = {
         "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
-        "name": "Flo",
-        "lastname": "Schietinger",
-        "myList": ['this', 'is', 'my', 'list'],
-        "obj": obj,
+        "allRecipes": recipes,
+        "recipeOfDay": recipeOfDay,
+        "categories": categories
     }
 
-    #import all Users from the Model User2
-    #allUsers = User2.objects.all()
-    # obj = User.objects.get(id=my_id)   -->add my_id as parameter to the function
-    # obj = get_object_or_404(User, id=my_id)
-    #context = {
-        #"allUsers": allUsers,
-        #"title": "Our User List"
-    #}
-    return render(httprequest, 'home.html', my_dict)
+    return render(httprequest, 'home.html', context)
 
 
 def condition_view_temp(httprequest, *args, **kwargs):
