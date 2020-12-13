@@ -59,7 +59,7 @@
                 {% if user.is_authenticated %}
                     <p>
                         Create a new recipe!
-                    <form action="/add-recipe">
+                    <form action="{% url 'add-recipe' %}">
                         <input type="submit" class="btn btn-info" value="Create here!"/>
                     </form></p>
 
