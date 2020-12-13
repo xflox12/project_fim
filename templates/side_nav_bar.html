@@ -13,18 +13,21 @@
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">Favourites</a>
+                    <!--   <form method="GET">
+           <select name="filter">
+               <option value="all">Alle</option>
+               <option value="favourites">Favoriten</option>
+           </select>
+           <input type="submit" value="Filtern">
+       </form>-->
                 </li>
             {% endif %}
 
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe">Starters</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe">Main Courses</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe">Desserts</a>
-            </li>
+            {% for category in categories %}
+                <li class="nav-item">
+                    <a class="nav-link" href="?category={{ category.CategoryId }}">{{ category.Name }}</a>
+                </li>
+            {% endfor %}
             <li class="nav-item">
                 <a class="nav-link" href="/recipe">Others</a>
             </li>

@@ -8,7 +8,6 @@
     {% else %}
         <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
         <h2 class="text-center"> Take a look on the delicious recipes</h2>
-        <p><a href="/login">Login here!</a></p>
     {% endif %}
 {% endblock %}
 
@@ -19,74 +18,98 @@
 
     <div id="main">
 
-    <p><h3> Recipe of the Day:</h3></p>
-    <div class="row" id="recipeofday">
-    <div class="col-sm-5">
+        <p>
+        <h3> Recipe of the Day:</h3></p>
+        <div class="row" id="recipeofday">
+            <div class="col-sm-4">
 
-        <br>
-        <!--Picture/Bild height="300" width="500"-->
-        <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
-        {% load static %}
-        <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
-             alt="Picture from recipe of the day"/>
-
-    </div>
-    <div class="col-sm-4">
-        <h4> {{ recipeOfDay.RecipeName }}</h4>
-        <p>Some Text over here</p>
-
-
-    </div>
-    <div class="col-sm-3">
-        <h5>Ingredients</h5>
-        <img class="img-responsive img-circle rounded" src="{{ recipeOfDay.Picture }}"
-             alt="Picture from recipe of the day"/>
-
-    </div>
-    </div>
-    <hr>
-    <h3> Suggestions</h3>
-    <br>
-    <!-- Include Side-Nav-Bar for switching between: All, Favourites, Starters, Main Courses, Desserts-->
-    {% include 'side_nav_bar.html' %}
-
-    <!-- Create Grid with all recipes-->
-    <div class="allRecipes">
-        <div class="row">
-            {% for recipe in allRecipes %}
-                {% if forloop.counter|divisibleby:3 %}
-                    <!-- last item of row: forloop.counter(e.g. 3,6,9):3=divisble without rest-->
-                    <div class="col-sm-4">
-                        {{ recipe.RecipeName }}
-                        <br>
-                        <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
-                             alt="Picture from recipe of the day"/>
-                    </div>
-                    </div> <!--end of row-->
-
-                    {% if not forloop.last %}
-                        <div class="row">
-                    {% endif %}
-                {% else %} <!--item isn't divisible (1,2 item of a row) -->
-                    <div class="col-md-4">
-                        {{ recipe.RecipeName }} <br>
-                        <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
-                             alt="Picture from recipe of the day"/>
-                    </div>
-                {% endif %}
-            {% endfor %}
+                <br>
+                <!--Picture/Bild height="300" width="500"-->
+                <!-- <img   width= 350vw alt="Bild_Lernmittel" src="Lernmittel.png"> -->
+                {% load static %}
+                <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
+                     alt="Picture from recipe of the day"/>
 
             </div>
-    </div>
+            <div class="col-sm-3">
+                <h4> {{ recipeOfDay.RecipeName }}</h4>
+                <p>Some Text over here</p>
 
 
-    {% block recipeTopContent %}
-        will be replaced
-    {% endblock %}
+            </div>
+            <div class="col-sm-3">
+                <h5>Ingredients</h5>
+                <img class="img-responsive img-circle rounded" src="{{ recipeOfDay.Picture }}"
+                     alt="Picture from recipe of the day"/>
 
-    {% block recipeContent %}
-        will be replaced
-    {% endblock %}
+            </div>
+            <div class="col-sm-2">
+                {% if not user.is_authenticated %}
+                    <p>
+                    <form action="/login">
+                        <input type="submit" class="btn btn-info" value="Login here"/>
+                    </form>
+                    <br>
+                    <p>or</p>
+
+                    <form action="/reg">
+                        <input type="submit" class="btn btn-success" value="Register"/>
+                    </form></p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <p>
+                        Create a new recipe!
+                    <form action="/add-recipe">
+                        <input type="submit" class="btn btn-info" value="Create here!"/>
+                    </form></p>
+
+                {% endif %}
+            </div>
+
+        </div>
+        <hr>
+        <h3> Suggestions</h3>
+        <br>
+        <!-- Include Side-Nav-Bar for switching between: All, Favourites, Starters, Main Courses, Desserts-->
+        {% include 'side_nav_bar.html' %}
+
+        <!-- Create Grid with all recipes-->
+        <div class="allRecipes">
+            <div class="row">
+                {% for recipe in allRecipes %}
+                    {% if forloop.counter|divisibleby:3 %}
+                        <!-- last item of row: forloop.counter(e.g. 3,6,9):3=divisble without rest-->
+                        <div class="col-sm-4">
+                            {{ recipe.RecipeName }}
+                            <br>
+                            <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
+                                 alt="Picture from recipe of the day"/>
+                        </div>
+                        </div> <!--end of row-->
+
+                        {% if not forloop.last %}
+                            <div class="row">
+                        {% endif %}
+                    {% else %} <!--item isn't divisible (1,2 item of a row) -->
+                        <div class="col-md-4">
+                            {{ recipe.RecipeName }} <br>
+                            <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
+                                 alt="Picture from recipe of the day"/>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                </div>
+        </div>
+
+
+        {% block recipeTopContent %}
+            will be replaced
+        {% endblock %}
+
+        {% block recipeContent %}
+            will be replaced
+        {% endblock %}
 
     </div>
 
@@ -95,5 +118,4 @@
 
 {% block sideContent %}
     <p> You can use the filters above to select the recipes according to your wishes</p>
-
 {% endblock %}
