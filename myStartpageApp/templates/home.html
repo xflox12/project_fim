@@ -32,8 +32,10 @@
 
             </div>
             <div class="col-sm-3">
+                <a href="/viewrecipe/{{ recipeOfDay.RecipeId }}">
                 <h4> {{ recipeOfDay.RecipeName }}</h4>
                 <p>Some Text over here</p>
+                </a>
 
 
             </div>
@@ -80,10 +82,11 @@
                     {% if forloop.counter|divisibleby:3 %}
                         <!-- last item of row: forloop.counter(e.g. 3,6,9):3=divisble without rest-->
                         <div class="col-sm-4">
-                            {{ recipe.RecipeName }}
+                           <a href="/viewrecipe/{{ recipe.RecipeId }}"> {{ recipe.RecipeName }}
                             <br>
                             <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
                                  alt="Picture from recipe of the day"/>
+                               </a>
                         </div>
                         </div> <!--end of row-->
 
@@ -92,9 +95,16 @@
                         {% endif %}
                     {% else %} <!--item isn't divisible (1,2 item of a row) -->
                         <div class="col-md-4">
+                        <a href="/viewrecipe/{{ recipe.RecipeId }}">
                             {{ recipe.RecipeName }} <br>
-                            <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
-                                 alt="Picture from recipe of the day"/>
+                            {% if recipe.Picture %}
+                            <img class="img-responsive img-circle rounded" src="{{ recipe.Picture }}"
+                                 alt="Picture of the recipe"/>
+                                {% else %}
+                                <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
+                                 alt="No picture of the recipe existing"/>
+                                {% endif %}
+                            </a>
                         </div>
                     {% endif %}
                 {% endfor %}

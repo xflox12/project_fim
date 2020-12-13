@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block titleContent %}
      <h1 class="title text-center h1">New Recipe {{ recipe.RecipeName }}</h1>
     {%if not recipe.RecipeName  %}
@@ -12,8 +14,8 @@
 {% block mainContent %}
     <form method="post" action="{{ recipe.RecipeId }}">
         {% csrf_token %}
-        <table style="background-color: white">
-            {{form1}}
+        <table class="container col-sm-6" style="background-color: white">
+            {{form1 | crispy}}
         </table>
         <br>
         <input type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
