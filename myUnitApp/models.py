@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Unit(models.Model):
     # primary key
@@ -16,13 +14,9 @@ class Unit(models.Model):
                             )
 
     # Unit abbreviation e.g. kg
-    # open: has to be unique!
     Abbreviation = models.CharField(verbose_name="Abbreviation",
                                     max_length=3
                                     )
-
-    #
-    # Conversion =
 
     def __str__(self):
         return self.Name
