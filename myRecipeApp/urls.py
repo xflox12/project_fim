@@ -22,6 +22,8 @@ from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, 
 
 
 
+
+
 #remove recipes at the beginning -> already written in the myProject_FIM\urls.py file
 # or leave it and the url must be localhost:8080/recipes/recipes/...
 urlpatterns = [
