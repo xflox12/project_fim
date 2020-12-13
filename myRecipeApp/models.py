@@ -128,7 +128,7 @@ class RecipeSteps(models.Model):
     Description = models.TextField(verbose_name="Description")
 
     # If necessary, Tips can be added to the steps
-    Tipps = models.TextField(verbose_name="Tips",
+    Tips = models.TextField(verbose_name="Tips",
                             blank=True
                             )
 
