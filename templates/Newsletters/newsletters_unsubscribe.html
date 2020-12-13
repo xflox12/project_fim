@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <h6 class="text-left">Are you sure you want to unsubscribe from our newsletter?</h6>
-            <h9 class="text-left">It's a pitty to see you leaving...</h9>
+            <h9 class="text-left">If so, please write your <i>email</i> in the box below...</h9>
             <br>
             {% if messages %}
                 {% for message in messages %}
@@ -29,4 +29,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block sideContent %}
+
 {% endblock %}

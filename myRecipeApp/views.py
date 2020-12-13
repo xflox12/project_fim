@@ -11,9 +11,11 @@ from myProfileApp.models import Favourite
 from .forms import favourite_form
 
 
-
+# views to add and display recipes
 
 def add_recipe(request, recipe_id=None):
+    """This function is used to create and save the basic information of the recipes.
+    For example: title, image, number of people and amount of energy."""
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -37,6 +39,7 @@ def add_recipe(request, recipe_id=None):
 
 
 def add_ingredient(request,recipe_id) :
+    """This function is used by users to add all the ingredients of the recipes they create"""
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -64,6 +67,7 @@ def add_ingredient(request,recipe_id) :
 
 
 def add_step(request,recipe_id) :
+    """This function is used by users to add all the steps to cook the recipes they want to post"""
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -89,6 +93,7 @@ def add_step(request,recipe_id) :
 
 
 def view_recipe(request, recipe_id=None):
+    """This function is used to view the final versions of the recipes created by the users"""
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
