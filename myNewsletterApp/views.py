@@ -12,10 +12,10 @@ def newsletter_signup(request):
     if form.is_valid():
         instance = form.save(commit=False)
         if NewsletterUser.objects.filter(email=instance.email).exists(): # checks if the email provided already exists in our database
-            messages.warning(request, "Your email already exists in our database, please use another email", "alert alert-warning alert-dismissible")
+            messages.warning(request, "Your email already exists in our database, please use another email")
         else:
             instance.save()
-            messages.success(request, "Your email has been submitted to our database", "alert alert-success alert-dismissal")
+            messages.success(request, "Your email has been submitted to our database")
 
     context = {
         'form': form,
@@ -33,9 +33,9 @@ def newsletter_unsubscribe(request):
         instance = form.save(commit=False)
         if NewsletterUser.objects.filter(email=instance.email).exists():
             NewsletterUser.objects.filter(email=instance.email).delete()  # if the email is found in our database, it will be deleted
-            messages.success(request, "Your email has been removed", "alert alert-success alert-dismissible")
+            messages.success(request, "Your email has been removed")
         else:
-            messages.warning(request, "Your email is not in our database", "alert alert-warning alert-dismissible")
+            messages.warning(request, "Your email is not in our database")
 
     context = {
         "form": form,

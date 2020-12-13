@@ -18,7 +18,9 @@ from django.urls import path
 
 #Import of the view functions/classes from the view.py file
 
-from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, add_recipe, recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
+from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, add_recipe, add_comments, recipes_detail_view_temp,recipes_update_view_temp,recipes_delete_view_temp
+
+
 
 
 
@@ -27,8 +29,9 @@ from myRecipeApp.views import recipes_list_view_temp, recipes_create_view_temp, 
 urlpatterns = [
     path('recipes/', recipes_list_view_temp, name='recipe-list'),
     path('recipes/create', recipes_create_view_temp, name='recipe-list'),
-      path('addrecipe/(?P<id_recipe>\w+)', add_recipe, name='add-recipe'),
+    path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
     path('addrecipe/', add_recipe, name='add-recipe'),
+    path('addcomment/', add_comments, name='add-comments'),
 
 
     #path('recipes/<int::my_id>', recipes_detail_view_temp, name="recipe-detail"),
