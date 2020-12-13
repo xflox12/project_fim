@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load crispy_forms_tags %}
 
 {% block titleContent %}
      <h1 class="title text-center h1">Please fill out the following boxes to register</h1>
@@ -10,14 +10,15 @@
 
     <!-- ATTENTION: enctype="multipart/form-data" is needed for upload a file like the picture of the user -->
 
-    <div class="container" align="left">
+    <div class="container col-sm-6" align="left">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.as_p }}
+            <!--{ { form.as_p }}-->
+            {{ form | crispy }}
             {% if register %}
-            <input type="submit" value="Register">
+            <input type="submit" class="btn btn-success" value="Register">
             {% else %}
-            <input type="submit" value="Update Profile">
+            <input type="submit" class="btn btn-success" value="Update Profile">
             {% endif %}
         </form>
     </div>
