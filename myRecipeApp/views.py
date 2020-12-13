@@ -8,14 +8,11 @@ from django.db import IntegrityError
 from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3, CommentForm
 from django import forms
-
-#import Models
-#from .models import PlaceholderModel
-
 from myProfileApp.models import Favourite
 from .forms import favourite_form
 
-def view_recipe(request,recipe_id=None):
+
+def view_recipe(request, recipe_id=None):
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -26,15 +23,15 @@ def view_recipe(request,recipe_id=None):
 
     return render(request, "dev_view_recipe.html", context)
 
-# Create your views here.
-def add_recipe(request,recipe_id=None):
+
+def add_recipe(request, recipe_id=None):
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
     if request.method == "POST":
         form1 = create_recipe_form(request.POST, request.FILES or None, instance=recipe)
-        if form1.is_valid() :
+        if form1.is_valid():
             newrecipe = form1.save(commit=False)
             newrecipe.UserId = request.user
             newrecipe.save()
@@ -44,10 +41,11 @@ def add_recipe(request,recipe_id=None):
 
     context = {
         "form1": form1,
-        "recipe":recipe
+        "recipe": recipe
     }
 
     return render(request, "dev_add_recipe.html", context)
+
 
 def add_ingredient(request,recipe_id) :
     recipe = None
@@ -64,7 +62,7 @@ def add_ingredient(request,recipe_id) :
             newingredient.save()
             response = redirect('/addrecipe/'+str(recipe_id))
             return response
-    else :
+    else:
         form2 = create_recipe_form2()
 
     context = {
@@ -74,6 +72,7 @@ def add_ingredient(request,recipe_id) :
     }
 
     return render(request, template, context)
+
 
 def add_step(request,recipe_id) :
     recipe = None
@@ -89,7 +88,7 @@ def add_step(request,recipe_id) :
             newstep.save()
             response = redirect('/addrecipe/'+str(recipe_id))
             return response
-    else :
+    else:
         form3 = create_recipe_form3()
 
     context = {
@@ -98,6 +97,7 @@ def add_step(request,recipe_id) :
     }
 
     return render(request, template, context)
+
 
 def add_comments(request, slug):
     template_name = 'dev_add_comments.html'
@@ -123,22 +123,26 @@ def add_comments(request, slug):
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
 
-# Create your views here.
+
 def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
     return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+
 
 def recipes_create_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
     return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
 
+
 def recipes_detail_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
     return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
 
+
 def recipes_update_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
     return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+
 
 def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
@@ -169,10 +173,7 @@ def list_recipe(httprequest):
             print(recipes)
 
     if "category" in httprequest.GET:
-#        if httprequest.user.is_authenticated():
-#            username = httprequest.user.username
             recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
-#                                            Q(recipecategory__UserId=username))
     context = {"recipe": recipes, "categories": categories, "User": httprequest.user}
     return render(httprequest, "dev_recipe_list.html", context)
 
@@ -180,12 +181,9 @@ def list_recipe(httprequest):
 def list_category(httprequest):
     categories = Category.objects.all
 
-#    if "query" in httprequest.GET:
-#        if "filter" in httprequest.GET:
-#            if httprequest.GET["filter"] == "favourites":
-
     context = {"categories": categories}
     return render(httprequest, "dev_category_list.html", context)
+
 
 def add_recipe_to_favourites(httprequest):
     if httprequest.method == "POST":
