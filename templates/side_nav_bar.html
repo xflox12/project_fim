@@ -1,33 +1,33 @@
-<button onclick="toggleSideNav()">&#9776;</button>
-<div id="mySidebar" class="sidebar">
-    <button onclick="toggleSideNav()">&#9776;</button>
-    <a href="#">Starters</a>
-    <a href="#">Main Courses</a>
-    <a href="#">Desserts</a>
-    <a href="#">Others</a>
-</div>
+<!--Navigation Bar on all pages-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home">All <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Favourites</a>
+                </li>
+            {% endif %}
 
-<script>
-
-    function toggleSideNav() {
-        //alert("Hello! I am an alert box!!");
-        var x = document.getElementById("mySidebar");
-        var y = document.getElementById("suggestions");
-        /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-        if (x.style.width < "225px") {
-            x.style.width = "225px";
-            x.style.display = "block";
-            y.style.marginLeft = "225px";
-        }
-        /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-        else {
-            x.style.width = "0";
-            x.style.display = "none";
-            y.style.marginLeft = "0";
-        }
-    }
-</script>
-
-
-
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe">Starters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe">Main Courses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe">Desserts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/recipe">Others</a>
+            </li>
+        </ul>
+    </div>
+</nav>
