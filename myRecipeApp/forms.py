@@ -1,5 +1,5 @@
 from django import forms
-from .models import Recipe, RecipeSteps, Ingredient
+from .models import Recipe, RecipeSteps, Ingredient, RecipeComment
 from myProfileApp.models import  Favourite
 
 class create_recipe_form(forms.ModelForm):
@@ -22,3 +22,8 @@ class favourite_form(forms.ModelForm):
     class Meta:
         model = Favourite
         fields = ["UserId", "RecipeId"]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = RecipeComment
+        fields = ("name", "email", "body")

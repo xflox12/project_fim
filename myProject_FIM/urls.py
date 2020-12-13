@@ -23,7 +23,7 @@ from myStartpageApp.views import home_view_temp, test_view_temp, condition_view_
 from myProfileApp.views import profile_view_temp, profile_change_password
 from myLoginApp.views import user_registration, edit_user_profile
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
-from myRecipeApp.views import list_recipe, list_category, add_recipe, add_ingredient, add_step, add_recipe_to_favourites,view_recipe
+from myRecipeApp.views import list_recipe, list_category, add_recipe, add_ingredient, add_comments, add_step, add_recipe_to_favourites,view_recipe
 from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from django.contrib.auth import views
 
@@ -54,11 +54,11 @@ urlpatterns = [
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
     path('signup_newsletter/', newsletter_signup, name='newsletter_signup'),
     path('unsubscribe_newsletter/', newsletter_unsubscribe, name='newsletter_unsubscribe'),
-
     path('terms/', condition_view_temp),
     path('imprint/', imprint_view_temp),
     path('dataprotection/', dataprotection_view_temp),
     path('faq/', faq_view_temp),
+    path('addcomment/', add_comments, name='add-comments'),
 
     # path('login/', views.LoginView.as_view(), name="login")
 
