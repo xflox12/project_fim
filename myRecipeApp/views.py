@@ -99,6 +99,8 @@ def view_recipe(request, recipe_id=None):
 
     return render(request, "dev_view_recipe.html", context)
 
+
+
 def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
 
     return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
