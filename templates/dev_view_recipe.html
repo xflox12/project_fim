@@ -7,6 +7,8 @@
 {% block mainContent %}
     <h4>About the recipe</h4>
         <table class="styled-table" style="width:90%">
+            {{recipe.Picture}}
+            <br>
             <h8><b>Amount of energy:</b></h8> {{recipe.Energy}} {{recipe.UnitId.Name}}
             <br>
             <h8><b>Number of people:</b></h8> {{recipe.NumberPeople}}
