@@ -4,18 +4,20 @@ from django.views.generic import View, TemplateView, ListView   #import for clas
 
 #import Models
 from .models import Testmodel
+from myRecipeApp.models import Recipe
 
 # Create your views here.
 def home_view_temp(httprequest, *args, **kwargs):             # view with template
     # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
-    obj = Testmodel.objects.all()
+    recipes = Recipe.objects.all()
+    recipeOfDay=Recipe.objects.order_by('?').first()
     my_dict = {
-        "recipeOfDay": "TestRecipe",
         "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
         "name": "Flo",
         "lastname": "Schietinger",
         "myList": ['this', 'is', 'my', 'list'],
-        "obj": obj,
+        "allRecipes": recipes,
+        "recipeOfDay": recipeOfDay,
     }
 
     #import all Users from the Model User2
