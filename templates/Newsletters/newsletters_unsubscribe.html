@@ -3,14 +3,21 @@
 {% crispy form form.helper %}
 
 {% block titleContent %}
-     <h1 class="title text-center h1">Unsubsribe from the FIM's community newsletter below</h1>
+     <h1 class="title text-center h1">Unsubscribe from the FIM's community newsletter...</h1>
 {% endblock %}
 
 {% block mainContent %}
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-            <h6 class="text-left">It's a pitty to see you leaving...</h6>
+            <h6 class="text-left">Are you sure you want to unsubscribe from our newsletter?</h6>
+            <h9 class="text-left">It's a pitty to see you leaving...</h9>
+            <br>
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
             <form method="POST">{% csrf_token %}
                 <div class="input-group">
                     {% crispy form %}

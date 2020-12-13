@@ -13,8 +13,6 @@
         <div class="col-lg-6 col-lg-offset-3">
             {% if messages %}
                 {% for message in messages %}
-                    <div {% if message.warning %} class="{{message.tags}}" {% endif %} role="alert">{{message.text}}</div>
-                    <div class="alert alert-warning" role="alert">...</div>
                     {{ message }}
                 {% endfor %}
             {% endif %}
@@ -29,4 +27,7 @@
         </div>
     </div>
 </div>
+    <br>
+    <br>
+    <a href="{% url 'newsletter_unsubscribe' %}">To unsubscribe...</a>
 {% endblock %}
