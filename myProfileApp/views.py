@@ -4,7 +4,9 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 
 
-def profile_view_temp(httprequest, *args, **kwargs):  # view to
+def profile_view_temp(httprequest, *args, **kwargs):
+    """view to display the user profile including the picture if exists"""
+
     profile = Profile.objects.get(UserId=httprequest.user.id)
     context = {
         "User": httprequest.user
@@ -15,6 +17,8 @@ def profile_view_temp(httprequest, *args, **kwargs):  # view to
 
 
 def profile_change_password(httprequest):
+    """django generated form to change the user password"""
+
     if httprequest.method == "POST":
         form = PasswordChangeForm(httprequest.user, httprequest.POST)
         if form.is_valid():

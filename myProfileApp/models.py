@@ -21,7 +21,7 @@ class Favourite(models.Model):
                                  on_delete=models.CASCADE
                                  )
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.RecipeId.RecipeName
 
     class Meta:
