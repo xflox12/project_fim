@@ -1,7 +1,4 @@
 from django.urls import path
-
-from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
-
 from .views import newsletter_signup, newsletter_unsubscribe
 
 urlpatterns = [
