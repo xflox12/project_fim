@@ -2,32 +2,37 @@
 
 /* Settings for whole html */
 html {
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
 }
+
 /* Set a background image by replacing the URL below */
 body {
-  background: url('https://c.pxhere.com/photos/28/59/background_food_tasty_olives_wooden_background_cooking_plate_kitchen-1369805.jpg!d') no-repeat center center fixed;
+    background: url('https://c.pxhere.com/photos/28/59/background_food_tasty_olives_wooden_background_cooking_plate_kitchen-1369805.jpg!d') no-repeat center center fixed;
     /*https://source.unsplash.com/twukN12EN7c/1920x1080*/
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+    /*background: url('/static_general/images/background_food_tasty_olives_wooden_background_cooking_plate_kitchen-1369805.jpg') no-repeat center center fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
     /*background: -webkit-linear-gradient(left, #3931af, #00c6ff);*/
+    font-family: 'Montserrat', sans-serif;
 }
 
 
-#mainContent{
-  background-color: rgba(255,255,255,0.8);
+#mainContent {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 /*Seettings for Footer*/
 .blue {
     /*background-color: #2196f3 !important;*/
-    background-color: rgba(33,150,243,1.0) !important;
+    background-color: rgba(33, 150, 243, 1.0) !important;
 }
+
 footer.page-footer {
     bottom: 0;
     color: #ffffff;
@@ -39,7 +44,7 @@ footer.page-footer {
 }
 
 .pt-4, .py-4 {
-    padding-top: 1.5rem!important;
+    padding-top: 1.5rem !important;
 }
 
 /*Links in Footer*/
@@ -56,20 +61,23 @@ footer.page-footer .footer-copyright {
 
 
 /*Profile*/
-.emp-profile{
+.emp-profile {
     padding: 3%;
     margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 0.5rem;
-    background: #fff;
+    /*background: #fff;*/
 }
-.profile-img{
+
+.profile-img {
     text-align: center;
 }
-.profile-img img{
+
+.profile-img img {
     width: 70%;
     height: 100%;
 }
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -80,19 +88,23 @@ footer.page-footer .footer-copyright {
     font-size: 15px;
     background: #212529b8;
 }
+
 .profile-img .file input {
     position: absolute;
     opacity: 0;
     right: 0;
     top: 0;
 }
-.profile-head h5{
+
+.profile-head h5 {
     color: #333;
 }
-.profile-head h6{
+
+.profile-head h6 {
     color: #0062cc;
 }
-.profile-edit-btn{
+
+.profile-edit-btn {
     border: none;
     border-radius: 1.5rem;
     width: 70%;
@@ -101,50 +113,61 @@ footer.page-footer .footer-copyright {
     color: #6c757d;
     cursor: pointer;
 }
-.proile-rating{
+
+.proile-rating {
     font-size: 12px;
     color: #818182;
     margin-top: 5%;
 }
-.proile-rating span{
+
+.proile-rating span {
     color: #495057;
     font-size: 15px;
     font-weight: 600;
 }
-.profile-head .nav-tabs{
-    margin-bottom:5%;
+
+.profile-head .nav-tabs {
+    margin-bottom: 5%;
 }
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
+
+.profile-head .nav-tabs .nav-link {
+    font-weight: 600;
     border: none;
 }
-.profile-head .nav-tabs .nav-link.active{
+
+.profile-head .nav-tabs .nav-link.active {
     border: none;
-    border-bottom:2px solid #0062cc;
+    border-bottom: 2px solid #0062cc;
 }
-.profile-work{
+
+.profile-work {
     padding: 14%;
     margin-top: -15%;
 }
-.profile-work p{
+
+.profile-work p {
     font-size: 12px;
     color: #818182;
     font-weight: 600;
     margin-top: 10%;
 }
-.profile-work a{
+
+.profile-work a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;
     font-size: 14px;
 }
-.profile-work ul{
+
+.profile-work ul {
     list-style: none;
 }
-.profile-tab label{
+
+.profile-tab label {
     font-weight: 600;
 }
-.profile-tab p{
+
+.profile-tab p {
     font-weight: 600;
     color: #0062cc;
 }
@@ -157,6 +180,7 @@ footer.page-footer .footer-copyright {
     min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
+
 .styled-table thead tr {
     background-color: #009879;
     color: #ffffff;
@@ -183,4 +207,24 @@ footer.page-footer .footer-copyright {
 .styled-table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
+}
+
+.recipe-link {
+    color: rgba(0, 0, 0, 1.0);
+    text-decoration: none;
+    background-color: transparent;
+    font-weight: bold;
+
+}
+
+.recipe-link:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgba(5, 5, 5, .5);
+}
+
+#profile-image {
+    height: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

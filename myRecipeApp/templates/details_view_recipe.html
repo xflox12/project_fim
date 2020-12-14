@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block titleContent %}
+    <h1 class="title text-center h1">{{ recipe.RecipeName }}</h1>
+{% endblock %}
+
+{% block mainContent %}
+    <div class="row">
+
+        <div class="col-sm-6">
+            <h4>About the recipe</h4>
+            <br>
+            <table class="styled-table " style="width:90%">
+                {% if recipe.Picture == True %}
+                <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}"
+                     alt="Picture from recipe" style="max-width: 230px;"/>
+                {% else %}
+                    {% load static %}
+                    <img class="img-responsive img-circle rounded" src="{% static "images/dinner_icon.jpg" %}"
+                     alt="Icon no image existing" style="max-width: 230px;" />
+                {% endif %}
+                <br>
+                <h8><b>Amount of energy:</b></h8>
+                {{ recipe.Energy }} {{ recipe.UnitId.Name }}
+                <br>
+                <h8><b>Number of people:</b></h8>
+                {{ recipe.NumberPeople }}
+                <br>
+                <h8><b>Author:</b></h8>
+                {{ recipe.UserId.username }}
+                <br>
+                <h8><b>Ranking:</b></h8>
+                {{ recipe.ranking }}
+            </table>
+        </div>
+
+        <div class="col-sm-6">
+            <h4>Ingredients</h4>
+            {% if recipe.ingredient_set.all.count > 0 %}
+
+                <table class="styled-table" style="width:90%">
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Ingredient</th>
+                        <th>Notes</th>
+                    </tr>
+                    {% for field in recipe.ingredient_set.all %}
+                        <tr id="{{ field.IngredientId }}">
+                            <td>{{ field.Quantity }}</td>
+                            <td>{{ field.UnitId }}</td>
+                            <td>{{ field.FoodItemId }}</td>
+                            <td>{{ field.Note }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <h4>Preparation</h4>
+    {% if recipe.recipesteps_set.all.count > 0 %}
+        <table class="styled-table" style="width:90%">
+            <tr>
+                <th>Step</th>
+                <th>Duration (in minutes)</th>
+                <th>Description</th>
+                <th>Tips</th>
+                {% for field in recipe.recipesteps_set.all %}
+                    <tr id="{{ field.RatingId }}">
+                        <td>{{ field.StepNo }}</td>
+                        <td>{{ field.Duration }}</td>
+                        <td>{{ field.Description }}</td>
+                        <td>{{ field.Tips }}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+    {% endif %}
+
+    <hr>
+    <form action="/home">
+        <input class="btn btn-info" type="submit" class="btn btn-info" value="Back to home"/>
+    </form>
+
+
+{% endblock %}
+
+{% block sideContent %}
+    <!-- leave empty-->
+{% endblock %}

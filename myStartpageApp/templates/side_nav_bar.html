@@ -12,8 +12,12 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">Favourites</a>
+                <form method="GET">
+                    <input class="nav-link" type="submit" value="Favourites">
+
+                    </form>
                     <!--   <form method="GET">
+                    <a class="nav-link" href="/profile">Favourites</a>
            <select name="filter">
                <option value="all">Alle</option>
                <option value="favourites">Favoriten</option>

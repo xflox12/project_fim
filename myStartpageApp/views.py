@@ -7,7 +7,7 @@ from .models import Testmodel
 from myRecipeApp.models import Recipe, Category
 
 # Create your views here.
-def home_view_temp(httprequest, *args, **kwargs):             # view with template
+"""def home_view_temp(httprequest, *args, **kwargs):             # view with template
     # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
     recipes = Recipe.objects.all()
     recipeOfDay=Recipe.objects.order_by('?').first()
@@ -20,6 +20,54 @@ def home_view_temp(httprequest, *args, **kwargs):             # view with templa
     }
 
     return render(httprequest, 'home.html', context)
+"""
+
+def home_view_temp(httprequest, *args, **kwargs):             # view with template
+    recipes = Recipe.objects.all
+    recipeOfDay = Recipe.objects.order_by('?').first()
+    categories = Category.objects.all
+
+    if "query" in httprequest.GET and \
+            "filter" in httprequest.GET:
+        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                                        Q(Energy__icontains=httprequest.GET["query"]) |
+                                        Q(NumberPeople__icontains=httprequest.GET["query"])
+                                        )
+        recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
+
+    elif "query" in httprequest.GET:
+        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
+                                        Q(Energy__icontains=httprequest.GET["query"]) |
+                                        Q(NumberPeople__icontains=httprequest.GET["query"]))
+
+    elif "filter" in httprequest.GET:
+        if httprequest.GET["filter"] == "favourites":
+            recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
+
+            print(recipes)
+
+    if "category" in httprequest.GET:
+        recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
+
+
+   # context = {"recipe": recipes, "categories": categories, "User": httprequest.user}
+    context = {
+        "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
+        "allRecipes": recipes,
+        "recipeOfDay": recipeOfDay,
+        "categories": categories,
+        "User": httprequest.user
+    }
+    return render(httprequest, "home.html", context)
+
+
+
+
+
+
+
+
+
 
 
 def condition_view_temp(httprequest, *args, **kwargs):
@@ -37,13 +85,16 @@ def faq_view_temp(httprequest, *args, **kwargs):
 
 
 
+
+
+
 def test_view_temp(httprequest, *args, **kwargs):
     my_dict = {
         "recipeOfDay": "TestRecipe",
         "lastname": "Schietinger",
         "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
     }
-    return render(httprequest, 'index.html', my_dict)
+    return render(httprequest, 'old/index.html', my_dict)
 
 
 #alternative Methodes to generate a view -> just for Information

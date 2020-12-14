@@ -1,33 +1,36 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
 {% crispy form form.helper %}
 
 {% block titleContent %}
-     <h1 class="title text-center h1">Sign up for the FIM's community newsletter!</h1>
+     <h1 class="title text-center h1">Unsubscribe from the FIM's community newsletter...</h1>
 {% endblock %}
 
 {% block mainContent %}
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
+            <h6 class="text-left">Are you sure you want to unsubscribe from our newsletter?</h6>
+            <h9 class="text-left">If so, please write your <i>email</i> in the box below...</h9>
+            <br>
             {% if messages %}
                 {% for message in messages %}
                     {{ message }}
                 {% endfor %}
             {% endif %}
             <form method="POST">{% csrf_token %}
-                <div class="input-group">
+                <div class="input-group ml-1">
                     {% crispy form %}
                     <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="submit">Subscribe</button>
+                        <button class="btn btn-secondary ml-2" type="submit">Unsubscribe</button>
                     </span>
                 </div>
             </form>
         </div>
     </div>
 </div>
-    <br>
-    <br>
-    <a href="{% url 'newsletter_unsubscribe' %}">To unsubscribe...</a>
+{% endblock %}
+
+{% block sideContent %}
+
 {% endblock %}

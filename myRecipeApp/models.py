@@ -46,7 +46,8 @@ class Recipe(models.Model):
 
     # only one picture per recipe
     Picture = models.ImageField(verbose_name="Recipe Picture",
-                                blank=True
+                                blank=True,
+                                upload_to="upload/"
                                 )
 
     # Author is the user who created the recipe (UserID)
@@ -187,7 +188,7 @@ class Ingredient(models.Model):
 
     # Note can be added if wanted
     Note = models.TextField(verbose_name="Note",
-                            blank = True
+                            blank=True
                             )
 
 

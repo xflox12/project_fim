@@ -20,7 +20,7 @@ def newsletter_signup(request):
     context = {
         'form': form,
     }
-    template = "Newsletters/newsletters_sign_up.html"
+    template = "newsletters_sign_up.html"
     return render (request, template, context)
 
 
@@ -41,5 +41,5 @@ def newsletter_unsubscribe(request):
         "form": form,
     }
 
-    template = "Newsletters/newsletters_unsubscribe.html"
+    template = "newsletters_unsubscribe.html"
     return render(request, template, context)

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block titleContent %}
+    {% if user.is_authenticated %}
+        <h1 class="title text-center h1"> Recipes created by {{ user.get_username }}
+            {% if  Profile.Picture  == True %}
+                <img id="profile-image" class="profile-image img-circle rounded-circle" src="{{ Profile.Picture.url }}" alt="Profil_Picture"/>
+            {% else %}
+                <!-- If there is no ProfilPicture show this:-->
+                {% load static %}
+                <img id="profile-image" class="profile-image img-circle rounded-circle"
+                     src="{% static "images/no-profil.svg" %}"
+                     alt="Icon no image existing"/>
+            {% endif %}
+        </h1>
+
+    {% endif %}
+
+{% endblock %}
+
+
+{% block mainContent %}
+    <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
+    <form action="{% url 'add-recipe' %}">
+        <span> New recipe? </span>
+        <input type="submit" class="btn btn-info" value="Create here!"/>
+    </form>
+
+
+    <hr>
+    <!-- Include Side-Nav-Bar for switching between: All, Favourites, Starters, Main Courses, Desserts-->
+    {% include 'side_nav_bar.html' %}
+    <br>
+    <!-- Create Grid with all recipes-->
+    <div class="allRecipes">
+        <div class="row">
+            {% for recipe in allRecipes %}
+                {% if forloop.counter|divisibleby:3 %}
+                    <!-- last item of row: forloop.counter(e.g. 3,6,9):3=divisble without rest-->
+
+                    {% include 'recipe_for_grid.html' %}
+
+                    </div> <!--end of row-->
+
+                    {% if not forloop.last %}
+                        <br>
+                        <div class="row">
+                    {% endif %}
+                {% else %} <!--item isn't divisible (1,2 item of a row) -->
+                    {% include 'recipe_for_grid.html' %}
+                {% endif %}
+            {% endfor %}
+
+            </div>
+    </div>
+{% endblock %}
+
+
+{% block sideContent %}
+    <p> You can use the filters above to select the recipes according to your wishes.</p>
+{% endblock %}
