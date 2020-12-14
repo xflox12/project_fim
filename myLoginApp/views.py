@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .forms import user_registration_form
 
 
-
 def user_registration(httprequest):
 
     if httprequest.method == "POST":
@@ -35,8 +34,10 @@ def user_registration(httprequest):
     return render(httprequest, "registration.html", {'form': form, 'register': True})
 
 
-
 def edit_user_profile(httprequest):
+    """view to update the user profile information (except password)"""
+    """the view is implemented in the myLoginApp because it refers back to the user registration form"""
+
     form = user_registration_form(instance=httprequest.user)
 
     if httprequest.method == "POST":

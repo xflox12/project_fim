@@ -14,7 +14,7 @@ class FoodItem(models.Model):
                             max_length=200
                             )
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.Name
 
 
@@ -29,7 +29,7 @@ class Category(models.Model):
                             max_length=200
                             )
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.Name
 
 
@@ -44,19 +44,19 @@ class Recipe(models.Model):
                                   max_length=300
                                   )
 
-    # only one picture per recipe
+    # only one picture per recipe, otherwise a separate table for pictures would be necessary
     Picture = models.ImageField(verbose_name="Recipe Picture",
                                 blank=True,
                                 upload_to="upload/"
                                 )
 
-    # Author is the user who created the recipe (UserID)
+    # Author is the user who created the recipe (id)
     UserId = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name="Author",
                                on_delete=models.PROTECT
                                )
 
-    # total energy of given quantities
+    # total energy (calories) of the given quantities
     Energy = models.PositiveIntegerField(verbose_name="Calories",
                                          blank=True)
 
@@ -70,7 +70,7 @@ class Recipe(models.Model):
     NumberPeople = models.PositiveSmallIntegerField(verbose_name="Number of People",
                                                     blank=True)
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.RecipeName
 
 
@@ -190,6 +190,9 @@ class Ingredient(models.Model):
     Note = models.TextField(verbose_name="Note",
                             blank=True
                             )
+
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
+        return self.FoodItemName
 
 
 class RecipeComment(models.Model):

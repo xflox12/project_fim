@@ -13,7 +13,7 @@ class Profile(models.Model):
                                 upload_to="upload/"
                                 )
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.UserId.username
 
 

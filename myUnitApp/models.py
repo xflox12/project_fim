@@ -18,5 +18,5 @@ class Unit(models.Model):
                                     max_length=3
                                     )
 
-    def __str__(self):
+    def __str__(self):  # to make it more readable in the admin panel (shows name instead of PK)
         return self.Name
