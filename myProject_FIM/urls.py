@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 from myLoginApp.views import user_registration, edit_user_profile
 from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from myProfileApp.views import profile_view_temp, profile_change_password
-from myRecipeApp.views import list_recipe,  add_recipe, add_ingredient, add_comments, add_step, \
+from myRecipeApp.views import list_recipe,  add_recipe, add_ingredient, add_step, \
     add_recipe_to_favourites, recipe_details_view, created_recipes_user_temp
 """list_category,"""
 from myStartpageApp.views import home_view_temp, test_view_temp, condition_view_temp, imprint_view_temp, \
@@ -64,7 +64,6 @@ urlpatterns = [
     path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
     path('addrecipe/addingredient/<int:recipe_id>', add_ingredient, name='add-ingredient'),
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
-    path('addcomment/', add_comments, name='add-comments'),
 
 
 
