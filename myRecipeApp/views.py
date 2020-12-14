@@ -12,16 +12,16 @@ from myProfileApp.models import Favourite
 from .forms import favourite_form
 
 
-def view_recipe(request, recipe_id=None):
+def recipe_details_view(request, recipe_id=None):
+    """Shows detail informations of recipe"""
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
-
+        # recipe = get_object_or_404(RecipeId=recipe_id)  # ->einzelnes Object wird übergeben
     context = {
         "recipe": recipe
     }
-
-    return render(request, "dev_view_recipe.html", context)
+    return render(request, "details_view_recipe.html", context)
 
 
 def add_recipe(request, recipe_id=None):
@@ -43,11 +43,10 @@ def add_recipe(request, recipe_id=None):
         "form1": form1,
         "recipe": recipe
     }
-
     return render(request, "dev_add_recipe.html", context)
 
 
-def add_ingredient(request,recipe_id) :
+def add_ingredient(request, recipe_id):
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -60,7 +59,7 @@ def add_ingredient(request,recipe_id) :
             newingredient = form2.save(commit=False)
             newingredient.RecipeId = recipe
             newingredient.save()
-            response = redirect('/addrecipe/'+str(recipe_id))
+            response = redirect('/addrecipe/' + str(recipe_id))
             return response
     else:
         form2 = create_recipe_form2()
@@ -70,11 +69,10 @@ def add_ingredient(request,recipe_id) :
         "form2": form2,
         "recipe": recipe
     }
-
     return render(request, template, context)
 
 
-def add_step(request,recipe_id) :
+def add_step(request, recipe_id):
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
@@ -86,7 +84,7 @@ def add_step(request,recipe_id) :
             newstep = form3.save(commit=False)
             newstep.RecipeId = recipe
             newstep.save()
-            response = redirect('/addrecipe/'+str(recipe_id))
+            response = redirect('/addrecipe/' + str(recipe_id))
             return response
     else:
         form3 = create_recipe_form3()
@@ -95,7 +93,6 @@ def add_step(request,recipe_id) :
         "form3": form3,
         "recipe": recipe
     }
-
     return render(request, template, context)
 
 
@@ -108,7 +105,6 @@ def add_comments(request, slug):
     if request.method == 'POST':
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
-
             # Create Comment object but don't save to database yet
             new_comment = comment_form.save(commit=False)
             # Assign the current post to the comment
@@ -124,29 +120,31 @@ def add_comments(request, slug):
                                            'comment_form': comment_form})
 
 
-def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
+def add_recipe_to_favourites(httprequest):
+    if httprequest.method == "POST":
+        recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
+        f = Favourite(UserId=httprequest.user, RecipeId=recipe)
+        try:
+            f.save()
+        except IntegrityError as e:
+            if 'UNIQUE constraint' in e.args[0]:
+                # accept unique constraint error without any message
+                pass
 
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-
-def recipes_create_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-
-def recipes_detail_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-
-def recipes_update_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+        return redirect("/recipe")
 
 
-def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):             #view with template
+def created_recipes_user_temp(httprequest, *args, **kwargs):             # view with template
+    # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
+    recipes = Recipe.objects.all()
+    categories = Category.objects.all
+    context = {
+        "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
+        "allRecipes": recipes,
+        "categories": categories
+    }
 
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+    return render(httprequest, 'myCreatedRecipes.html', context)
 
 
 def list_recipe(httprequest):
@@ -154,7 +152,7 @@ def list_recipe(httprequest):
     categories = Category.objects.all
 
     if "query" in httprequest.GET and \
-       "filter" in httprequest.GET:
+            "filter" in httprequest.GET:
         recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
                                         Q(Energy__icontains=httprequest.GET["query"]) |
                                         Q(NumberPeople__icontains=httprequest.GET["query"])
@@ -173,27 +171,39 @@ def list_recipe(httprequest):
             print(recipes)
 
     if "category" in httprequest.GET:
-            recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
+        recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
     context = {"recipe": recipes, "categories": categories, "User": httprequest.user}
     return render(httprequest, "dev_recipe_list.html", context)
 
 
+
+
+
+
+"""
+
 def list_category(httprequest):
     categories = Category.objects.all
-
     context = {"categories": categories}
-    return render(httprequest, "dev_category_list.html", context)
+    return render(httprequest, "old/dev_category_list.html", context)
 
+def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
 
-def add_recipe_to_favourites(httprequest):
-    if httprequest.method == "POST":
-        recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
-        f = Favourite(UserId=httprequest.user, RecipeId=recipe)
-        try:
-            f.save()
-        except IntegrityError as e:
-            if 'UNIQUE constraint' in e.args[0]:
-                # accept unique constraint error without any message
-                pass
+    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
 
-        return redirect("/recipe")
+def recipes_create_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
+
+    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+
+def recipes_detail_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
+
+    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+
+def recipes_update_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
+
+    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+
+def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
+
+    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
+"""

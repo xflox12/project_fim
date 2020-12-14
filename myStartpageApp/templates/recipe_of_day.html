@@ -1,0 +1,49 @@
+<div class="col-sm-4">  <!-- Picture of recipe-->
+    <a class="recipe-link" href="/viewrecipe/{{ recipeOfDay.RecipeId }}">
+        {% if  recipeOfDay.Picture  == True %}
+            <img class="img-responsive img-circle rounded"
+                 src="{{ recipeOfDay.Picture.url }}" alt="Picture from recipe of the day"/>
+        {% else %}
+            <!-- If there is no Picture show this:-->
+            {% load static %}
+            <img class="img-responsive img-circle rounded" src="{% static "images/tacos.jfif" %}"
+                 alt="Picture from recipe of the day"/>
+        {% endif %}
+    </a>
+</div>
+
+<div class="col-sm-3">
+    <h8><b>Amount of energy:</b></h8>
+    {{ recipeOfDay.Energy }} {{ recipeOfDay.UnitId.Name }}
+    <br>
+    <h8><b>Number of people:</b></h8>
+    {{ recipeOfDay.NumberPeople }}
+    <br>
+    <h8><b>Author:</b></h8>
+    {{ recipeOfDay.UserId.username }}
+    <br>
+    <h8><b>Ranking:</b></h8>
+    {{ recipeOfDay.ranking }}
+</div>
+
+<div class="col-sm-3">
+    <h5>Ingredients</h5>
+    {% if recipe.ingredient_set.all.count > 0 %}
+        <table class="styled-table" style="width:90%">
+            <tr>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Ingredient</th>
+                <th>Notes</th>
+            </tr>
+            {% for field in recipe.ingredient_set.all %}
+                <tr id="{{ field.IngredientId }}">
+                    <td>{{ field.Quantity }}</td>
+                    <td>{{ field.UnitId }}</td>
+                    <td>{{ field.FoodItemId }}</td>
+                    <td>{{ field.Note }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</div>

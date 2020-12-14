@@ -12,13 +12,13 @@
 {% endblock %}
 
 {% block mainContent %}
-    <form method="post" action="{{ recipe.RecipeId }}">
+    <form class="col-sm-6" method="post" action="{{ recipe.RecipeId }}">
         {% csrf_token %}
-        <table class="container col-sm-6" style="background-color: white">
+        <table class="container" style="background-color: white">
             {{form1 | crispy}}
         </table>
         <br>
-        <input type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
+        <input class="btn btn-success" type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
         {%if recipe.RecipeName %}
             <a href="/viewrecipe/{{ recipe.RecipeId }}" style="margin-left:30px">Finish and view recipe</a>
         {% endif %}
@@ -27,7 +27,7 @@
 {%if recipe.RecipeName %}
     <br><br>
     <div style="font-size:18px;width:100px;display:inline-block">Ingredients</div>
-    <button style="margin-left:30px" onclick="window.location.href='addingredient/{{ recipe.RecipeId }}'">Add Ingredient</button>
+    <button class="btn btn-secondary" style="margin-left:30px" onclick="window.location.href='addingredient/{{ recipe.RecipeId }}'">Add Ingredient</button>
 
     {%if recipe.ingredient_set.all.count > 0 %}
 
@@ -47,7 +47,7 @@
 
     <br><br>
     <div style="font-size:18px;width:100px;display:inline-block">Steps</div>
-    <button style="margin-left:30px" onclick="window.location.href='addstep/{{ recipe.RecipeId }}'">Add Step</button>
+    <button class="btn btn-secondary" style="margin-left:30px" onclick="window.location.href='addstep/{{ recipe.RecipeId }}'">Add Step</button>
     {%if recipe.recipesteps_set.all.count > 0 %}
     <table class="styled-table" style="width:90%">
         <tr><th>Duration</th><th>StepNo</th><th>Description</th><th>Tips</th>
@@ -71,6 +71,5 @@
 
 
 {% block sideContent %}
-
-
+    <!-- leave empty-->
 {% endblock %}

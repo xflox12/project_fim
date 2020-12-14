@@ -12,7 +12,7 @@ def create_unit(httprequest):
             form.save()
             return redirect("/unit")
     context = {"form": form}
-    return render(httprequest, "unit_detail.html", context)
+    return render(httprequest, "old/unit_detail.html", context)
 
 
 def list_unit(httprequest):
@@ -25,7 +25,7 @@ def list_unit(httprequest):
     except KeyError:
         pass
     context = {"unit": units}
-    return render(httprequest, "unit_list.html", context)
+    return render(httprequest, "old/unit_list.html", context)
 
 
 def delete_unit(httprequest, pk):
@@ -49,4 +49,4 @@ def show_unit(httprequest, pk):
        'unit': unit
     }
 
-    return render(httprequest, "unit_detail.html", context)
+    return render(httprequest, "old/unit_detail.html", context)
