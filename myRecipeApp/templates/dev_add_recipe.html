@@ -12,11 +12,15 @@
 {% endblock %}
 
 {% block mainContent %}
-    <form class="col-sm-6" method="post" action="{{ recipe.RecipeId }}">
+    <form class="col-sm-6" method="post" action="{{ recipe.RecipeId }}" enctype="multipart/form-data">
         {% csrf_token %}
+        {%if recipe.Picture %}
+            <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}">
+        {% endif %}
         <table class="container" style="background-color: white">
             {{form1 | crispy}}
         </table>
+
         <br>
         <input class="btn btn-success" type="submit" value="{%if recipe.RecipeName %}Save{% else %}Create{% endif %} recipe"/>
         {%if recipe.RecipeName %}

@@ -32,19 +32,23 @@ def add_recipe(request, recipe_id=None):
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
+    url = ""
     if request.method == "POST":
         form1 = create_recipe_form(request.POST, request.FILES or None, instance=recipe)
         if form1.is_valid():
             newrecipe = form1.save(commit=False)
             newrecipe.UserId = request.user
             newrecipe.save()
+            url = newrecipe.Picture.url
             recipe = newrecipe
     else:
         form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
+        url = recipe.Picture.url
 
     context = {
         "form1": form1,
-        "recipe": recipe
+        "recipe": recipe,
+        "url":url
     }
     return render(request, "dev_add_recipe.html", context)
 
