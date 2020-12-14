@@ -3,10 +3,10 @@
 {% block titleContent %}
     {% if user.is_authenticated %}
         <h1 class="title text-center h1"> Hello, {{ user.get_username }}! Welcome back to FIM's cookbook!</h1>
-        <h2 class="text-center"> What are you going to cook today?</h2>
+        <h2 class="text-center" style="font-family: 'Great Vibes', cursive;"> What are you going to cook today?</h2>
     {% else %}
         <h1 class="title text-center h1"> Welcome to FIM's cookbook!</h1>
-        <h2 class="text-center"> Take a look on the delicious recipes</h2>
+        <h2 class="text-center" style="font-family: 'Great Vibes', cursive;"> Take a look on the delicious recipes</h2>
     {% endif %}
 {% endblock %}
 
@@ -14,7 +14,7 @@
 {% block mainContent %}
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
 
-    <h3> Recipe of the Day:</h3>
+    <h3>Recipe of the Day</h3>
     <a class="recipe-link" href="/viewrecipe/{{ recipeOfDay.RecipeId }}">
         <h4 class="recipe-link"> {{ recipeOfDay.RecipeName }}</h4>
     </a>
@@ -25,7 +25,7 @@
         <div class="col-sm-2">
             {% if user.is_authenticated %}
                 <p>
-                    Create a new recipe!
+                    New recipe?
                 <form action="{% url 'add-recipe' %}">
                     <input type="submit" class="btn btn-info" value="Create here!"/>
                 </form>
@@ -76,10 +76,8 @@
                 {% endif %}
             {% endfor %}
 
-            </div>
+
     </div>
-
-
     {% block recipeTopContent %}
         will be replaced
     {% endblock %}
@@ -87,8 +85,6 @@
     {% block recipeContent %}
         will be replaced
     {% endblock %}
-
-
 {% endblock %}
 
 

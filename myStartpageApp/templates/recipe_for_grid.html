@@ -2,14 +2,15 @@
     <a class="recipe-link" href="/viewrecipe/{{ recipe.RecipeId }}">
 
         {% if  recipe.Picture  == True %}
-            <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}"
+            <img class="img-responsive img-circle rounded" style="max-width: 230px;" src="{{ recipe.Picture.url }}"
                  alt="Picture from recipe"> <input class="btn btn-secondary" type="submit" value="&#9825 &#9829"></img>
         {% else %}
             <!-- If there is no Picture show this:-->
             {% load static %}
-            <img class="img-responsive img-circle rounded"
-                 src="{% static "images/tacos.jfif" %}"
-                 alt="No Picture from recipe existing"/>
+            <img class="img-responsive img-circle rounded" style="max-width: 230px;"
+                 src="{% static "images/no-image-icon-8.jpg" %}"
+                 alt="Icon no image existing"/>
+
         {% endif %}
         <br>
         <p><span class="center-block">{{ recipe.RecipeName }}</span>

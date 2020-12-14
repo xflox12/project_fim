@@ -11,8 +11,14 @@
             <h4>About the recipe</h4>
             <br>
             <table class="styled-table " style="width:90%">
+                {% if recipe.Picture == True %}
                 <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}"
-                     alt="Picture from recipe"/>
+                     alt="Picture from recipe" style="max-width: 230px;"/>
+                {% else %}
+                    {% load static %}
+                    <img class="img-responsive img-circle rounded" src="{% static "images/dinner_icon.jpg" %}"
+                     alt="Icon no image existing" style="max-width: 230px;" />
+                {% endif %}
                 <br>
                 <h8><b>Amount of energy:</b></h8>
                 {{ recipe.Energy }} {{ recipe.UnitId.Name }}

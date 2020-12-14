@@ -3,7 +3,15 @@
 {% block titleContent %}
     {% if user.is_authenticated %}
         <h1 class="title text-center h1"> Recipes created by {{ user.get_username }}
-            <img class="img-responsive img-circle rounded" src="{{ Profile.Picture.url }}" alt="Profil_Picture"/>
+            {% if  Profile.Picture  == True %}
+                <img id="profile-image" class="profile-image img-circle rounded-circle" src="{{ Profile.Picture.url }}" alt="Profil_Picture"/>
+            {% else %}
+                <!-- If there is no ProfilPicture show this:-->
+                {% load static %}
+                <img id="profile-image" class="profile-image img-circle rounded-circle"
+                     src="{% static "images/no-profil.svg" %}"
+                     alt="Icon no image existing"/>
+            {% endif %}
         </h1>
 
     {% endif %}
@@ -14,8 +22,8 @@
 {% block mainContent %}
     <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
     <form action="{% url 'add-recipe' %}">
-        <span> Want to add a new recipe? </span>
-        <input type="submit" class="btn btn-info" value="Create here"/>
+        <span> New recipe? </span>
+        <input type="submit" class="btn btn-info" value="Create here!"/>
     </form>
 
 
