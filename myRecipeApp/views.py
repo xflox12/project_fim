@@ -1,18 +1,13 @@
-from django.http import HttpResponse  # For Function-Based-Views
-from django.views.generic import View, TemplateView, ListView
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.db import IntegrityError
 from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
-from django import forms
 from myProfileApp.models import Favourite
-from .forms import favourite_form
 
 
 def recipe_details_view(request, recipe_id=None):
-    """Shows detail informations of recipe"""
+    """Shows detail information of recipe"""
     """This function is used to view the final versions of the recipes created by the users"""
     recipe = None
     if not recipe_id is None:
@@ -23,7 +18,6 @@ def recipe_details_view(request, recipe_id=None):
     }
     return render(request, "details_view_recipe.html", context)
 
-# views to add and display recipes
 
 def add_recipe(request, recipe_id=None):
     """This function is used to create and save the basic information of the recipes.
@@ -32,19 +26,23 @@ def add_recipe(request, recipe_id=None):
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
+    url = ""
     if request.method == "POST":
         form1 = create_recipe_form(request.POST, request.FILES or None, instance=recipe)
         if form1.is_valid():
             newrecipe = form1.save(commit=False)
             newrecipe.UserId = request.user
             newrecipe.save()
+            url = newrecipe.Picture.url
             recipe = newrecipe
     else:
         form1 = create_recipe_form(request.POST or None, request.FILES or None, instance=recipe)
+        url = recipe.Picture.url
 
     context = {
         "form1": form1,
-        "recipe": recipe
+        "recipe": recipe,
+        "url":url
     }
     return render(request, "dev_add_recipe.html", context)
 
@@ -102,6 +100,8 @@ def add_step(request,recipe_id) :
 
 
 def add_recipe_to_favourites(httprequest):
+    """view to mark recipe as favourite and display it under the favourites filter"""
+
     if httprequest.method == "POST":
         recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
         f = Favourite(UserId=httprequest.user, RecipeId=recipe)
@@ -110,12 +110,13 @@ def add_recipe_to_favourites(httprequest):
         except IntegrityError as e:
             if 'UNIQUE constraint' in e.args[0]:
                 # accept unique constraint error without any message
+                # -> user is not notified when recipes was already marked as favourite
                 pass
 
         return redirect("/recipe")
 
 
-def created_recipes_user_temp(httprequest, *args, **kwargs):             # view with template
+def created_recipes_user_temp(httprequest, *args, **kwargs):
     # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
     recipes = Recipe.objects.all()
     categories = Category.objects.all
@@ -129,6 +130,8 @@ def created_recipes_user_temp(httprequest, *args, **kwargs):             # view 
 
 
 def list_recipe(httprequest):
+    """view to list all recipes and filter for favourites and categories"""
+
     recipes = Recipe.objects.all
     categories = Category.objects.all
 

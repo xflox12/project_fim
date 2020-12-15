@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <a class="recipe-link" href="/viewrecipe/{{ recipe.RecipeId }}">
 
-        {% if  recipe.Picture  == True %}
+        {% if  recipe.Picture %}
             <img class="img-responsive img-circle rounded" style="max-width: 230px;" src="{{ recipe.Picture.url }}"
                  alt="Picture from recipe"> <input class="btn btn-secondary" type="submit" value="&#9825 &#9829"></img>
         {% else %}
