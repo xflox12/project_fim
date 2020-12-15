@@ -14,7 +14,7 @@
 {% block mainContent %}
     <form class="col-sm-6" method="post" action="{{ recipe.RecipeId }}" enctype="multipart/form-data">
         {% csrf_token %}
-        {%if recipe.Picture %}
+        {% if recipe.Picture %}
             <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}">
         {% endif %}
         <table class="container" style="background-color: white">
