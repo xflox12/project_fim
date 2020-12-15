@@ -6,7 +6,7 @@
             {% if  Profile.Picture  == True %}
                 <img id="profile-image" class="profile-image img-circle rounded-circle" src="{{ Profile.Picture.url }}" alt="Profil_Picture"/>
             {% else %}
-                <!-- If there is no ProfilPicture show this:-->
+                <!-- If there is no ProfilePicture show this:-->
                 {% load static %}
                 <img id="profile-image" class="profile-image img-circle rounded-circle"
                      src="{% static "images/no-profil.svg" %}"
@@ -28,9 +28,6 @@
 
 
     <hr>
-    <!-- Include Side-Nav-Bar for switching between: All, Favourites, Starters, Main Courses, Desserts-->
-    {% include 'side_nav_bar.html' %}
-    <br>
     <!-- Create Grid with all recipes-->
     <div class="allRecipes">
         <div class="row">

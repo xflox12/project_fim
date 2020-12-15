@@ -12,18 +12,7 @@
             </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                <form method="GET">
-                    <input class="nav-link" type="submit" value="Favourites">
-
-                    </form>
-                    <!--   <form method="GET">
-                    <a class="nav-link" href="/profile">Favourites</a>
-           <select name="filter">
-               <option value="all">Alle</option>
-               <option value="favourites">Favoriten</option>
-           </select>
-           <input type="submit" value="Filtern">
-       </form>-->
+                    <a class="nav-link" href="?favourites">Favourites</a>
                 </li>
             {% endif %}
 
@@ -32,9 +21,6 @@
                     <a class="nav-link" href="?category={{ category.CategoryId }}">{{ category.Name }}</a>
                 </li>
             {% endfor %}
-            <li class="nav-item">
-                <a class="nav-link" href="/recipe">Others</a>
-            </li>
         </ul>
     </div>
 </nav>

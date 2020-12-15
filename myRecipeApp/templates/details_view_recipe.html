@@ -20,16 +20,14 @@
                 {% endif %}
                 <br>
                 <h8><b>Amount of energy:</b></h8>
-                {{ recipe.Energy }} {{ recipe.UnitId.Name }}
+                {{ recipe.Energy }} {{ recipe.UnitId.Abbreviation }}
                 <br>
                 <h8><b>Number of people:</b></h8>
                 {{ recipe.NumberPeople }}
                 <br>
                 <h8><b>Author:</b></h8>
                 {{ recipe.UserId.username }}
-                <br>
-                <h8><b>Ranking:</b></h8>
-                {{ recipe.ranking }}
+
             </table>
         </div>
 

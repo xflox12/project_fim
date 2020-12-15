@@ -12,7 +12,7 @@ def recipe_details_view(request, recipe_id=None):
     recipe = None
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
-        # recipe = get_object_or_404(RecipeId=recipe_id)  # ->einzelnes Object wird übergeben
+        # recipe = get_object_or_404(RecipeId=recipe_id)  # -> single object will be transferred
     context = {
         "recipe": recipe
     }
@@ -113,8 +113,8 @@ def add_recipe_to_favourites(httprequest):
 
 
 def created_recipes_user_temp(httprequest, *args, **kwargs):
-    # obj = get_object_or_404(Testmodel, id=my_id)  ->einzelnes Object wird übergeben
-    recipes = Recipe.objects.all()
+    # obj = get_object_or_404(Testmodel, id=my_id)  -> single object will be transferred
+    recipes = Recipe.objects.filter(UserId=httprequest.user.id)
     categories = Category.objects.all
     context = {
         "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
@@ -124,66 +124,3 @@ def created_recipes_user_temp(httprequest, *args, **kwargs):
 
     return render(httprequest, 'myCreatedRecipes.html', context)
 
-
-def list_recipe(httprequest):
-    """view to list all recipes and filter for favourites and categories"""
-
-    recipes = Recipe.objects.all
-    categories = Category.objects.all
-
-    if "query" in httprequest.GET and \
-            "filter" in httprequest.GET:
-        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
-                                        Q(Energy__icontains=httprequest.GET["query"]) |
-                                        Q(NumberPeople__icontains=httprequest.GET["query"])
-                                        )
-        recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
-
-    elif "query" in httprequest.GET:
-        recipes = Recipe.objects.filter(Q(RecipeName__icontains=httprequest.GET["query"]) |
-                                        Q(Energy__icontains=httprequest.GET["query"]) |
-                                        Q(NumberPeople__icontains=httprequest.GET["query"]))
-
-    elif "filter" in httprequest.GET:
-        if httprequest.GET["filter"] == "favourites":
-            recipes = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
-
-            print(recipes)
-
-    if "category" in httprequest.GET:
-        recipes = Recipe.objects.filter(Q(recipecategory__CategoryId=httprequest.GET["category"]))
-    context = {"recipe": recipes, "categories": categories, "User": httprequest.user}
-    return render(httprequest, "dev_recipe_list.html", context)
-
-
-
-
-
-
-"""
-
-def list_category(httprequest):
-    categories = Category.objects.all
-    context = {"categories": categories}
-    return render(httprequest, "old/dev_category_list.html", context)
-
-def recipes_list_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-def recipes_create_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-def recipes_detail_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-def recipes_update_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-
-def recipes_delete_view_temp(httprequest, my_id, *args, **kwargs):  # view with template
-
-    return render(httprequest, '../myRecipeApp/templates/recipes.html', {})
-"""

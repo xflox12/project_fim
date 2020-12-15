@@ -12,7 +12,7 @@
 
 
 {% block mainContent %}
-    <!--Define the Columns (Bootstrap has always 12 Columns which can be devided-->
+    <!--Define the Columns (Bootstrap has always 12 Columns which can be divided-->
 
     <h3>Recipe of the Day</h3>
     <a class="recipe-link" href="/viewrecipe/{{ recipeOfDay.RecipeId }}">
@@ -55,6 +55,10 @@
     <br>
     <!-- Include Side-Nav-Bar for switching between: All, Favourites, Starters, Main Courses, Desserts-->
     {% include 'side_nav_bar.html' %}
+    {%if Message%}
+    <br>
+    <p>{{Message}}</p>
+    {%endif%}
     <br>
     <!-- Create Grid with all recipes-->
     <div class="allRecipes">
@@ -78,15 +82,7 @@
 
 
     </div>
-    {% block recipeTopContent %}
-        will be replaced
-    {% endblock %}
-
-    {% block recipeContent %}
-        will be replaced
-    {% endblock %}
 {% endblock %}
-
 
 {% block sideContent %}
     <p> You can use the filters above to select the recipes according to your wishes.</p>

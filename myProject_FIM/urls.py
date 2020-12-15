@@ -23,16 +23,14 @@ from django.conf.urls.static import static
 from myLoginApp.views import user_registration, edit_user_profile
 from myNewsletterApp.views import newsletter_signup, newsletter_unsubscribe
 from myProfileApp.views import profile_view_temp, profile_change_password
-from myRecipeApp.views import list_recipe,  add_recipe, add_ingredient, add_step, \
+from myRecipeApp.views import add_recipe, add_ingredient, add_step, \
     add_recipe_to_favourites, recipe_details_view, created_recipes_user_temp
-"""list_category,"""
-from myStartpageApp.views import home_view_temp, test_view_temp, condition_view_temp, imprint_view_temp, \
+from myStartpageApp.views import home_view_temp, condition_view_temp, imprint_view_temp, \
     dataprotection_view_temp, faq_view_temp
 from myUnitApp.views import list_unit, show_unit, delete_unit, create_unit
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', test_view_temp),  # old
     path('home/', home_view_temp),
     path('terms/', condition_view_temp),
     path('imprint/', imprint_view_temp),
@@ -54,22 +52,14 @@ urlpatterns = [
     path('signup_newsletter/', newsletter_signup, name='newsletter_signup'),
     path('unsubscribe_newsletter/', newsletter_unsubscribe, name='newsletter_unsubscribe'),
 
-    #path('recipes/', include('myRecipeApp.urls')),
-    path('recipe/', list_recipe),
     path('myrecipes/', created_recipes_user_temp),
     path('add_recipe_to_favourites/', add_recipe_to_favourites),
-    #path('category/', list_category),
+
     path('addrecipe/', add_recipe, name='add-recipe'),
     path('viewrecipe/<int:recipe_id>', recipe_details_view, name='view-recipe'),
     path('addrecipe/<int:recipe_id>', add_recipe, name='add-recipe'),
     path('addrecipe/addingredient/<int:recipe_id>', add_ingredient, name='add-ingredient'),
     path('addrecipe/addstep/<int:recipe_id>', add_step, name='add-step'),
-
-
-
-    # path('login/', views.LoginView.as_view(), name="login")
-    # path('home/<int::my_id>', home_view_temp, name="link-to-home-model"),
-    # path('reg/', reg_view_temp),
 
 ]
 

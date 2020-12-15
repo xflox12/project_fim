@@ -32,15 +32,11 @@
                         <li>
                             <a href="/signup_newsletter">Join our newsletter</a>
                         </li>
+                        {% for category in categories %}
                         <li>
-                            <a href="#!">Starters</a>
+                            <a href="?category={{ category.CategoryId }}">{{ category.Name }}</a>
                         </li>
-                        <li>
-                            <a href="#!">Main Courses</a>
-                        </li>
-                        <li>
-                            <a href="#!">Desserts</a>
-                        </li>
+                        {% endfor %}
                     </ul>
 
                 </div>
