@@ -22,12 +22,12 @@
 
                         {% if  Profile.Picture  == True %}
                             <img class="img-responsive img-circle rounded"
-                                 src="{{ Profile.Picture.url }}" alt="Profil_Picture"/>
+                                 src="{{ Profile.Picture.url }}" alt="Profile_Picture"/>
                         {% else %}
-                            <!-- If there is no ProfilPicture show this:-->
+                            <!-- If there is no ProfilePicture show this:-->
                             {% load static %}
                             <img class="img-responsive img-circle rounded"
-                                 src="{% static "images/no-profil.svg" %}"
+                                 src="{% static "images/no-profile.svg" %}"
                                  alt="Icon no image existing"/>
                         {% endif %}
                         <div class="file btn btn-lg btn-primary">
@@ -47,7 +47,7 @@
                     <a class="btn btn-secondary btn-block m-2" href="/edit_profile">Edit Profile</a>
                     <a class="btn btn-secondary btn-block m-2" href="/change_password">Change Password</a>
                     <br>
-                    <a class="btn btn-danger btn-block m-2" href="/change_password">Delete Profil</a>
+                    <a class="btn btn-danger btn-block m-2" href="/change_password">Delete Profile</a>
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
     </div>
     </form>
     </div>
-    <!-- end Profil widget-->
+    <!-- end Profile widget-->
 
     <!-- </div>-->
     <!--</div>-->
