@@ -80,6 +80,13 @@
         <input class="btn btn-info" type="submit" class="btn btn-info" value="Back to home"/>
     </form>
 
+    {% if recipe.UserId.username == user.get_username %}
+        <br>
+        <form action="/addrecipe/{{ recipe.RecipeId }}">
+            <input class="btn btn-info" type="submit" class="btn btn-info" value="Edit Recipe"/>
+        </form>
+    {% endif %}
+
 
 {% endblock %}
 
