@@ -12,7 +12,9 @@ def profile_view_temp(httprequest, *args, **kwargs):
         "User": httprequest.user
     }
     if profile.Picture:
-        context["Profile"] = profile
+        context={
+            "Profile": profile
+        }
     return render(httprequest, "myprofile.html", context)
 
 

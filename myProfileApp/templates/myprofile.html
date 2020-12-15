@@ -20,7 +20,7 @@
                 <div class="col-md-4">
                     <div class="profile-img">
 
-                        {% if  Profile.Picture  == True %}
+                        {% if  Profile.Picture %}
                             <img class="img-responsive img-circle rounded"
                                  src="{{ Profile.Picture.url }}" alt="Profile_Picture"/>
                         {% else %}
@@ -90,9 +90,9 @@
                     <br>
                     <a class="btn btn-info" href="/myrecipes">Show my recipes</a>
                 </div>
+            
             </div>
-    </div>
-    </form>
+        </form>
     </div>
     <!-- end Profile widget-->
 
