@@ -1,12 +1,24 @@
 ---
 FIM's cookbook - a community for all foodies
 ---
+This project was done within the framework of the "Information Systems Development" module at the University of Liechtenstein during the Winter Semester 2020/2021. This module is part of the study programme of the master's degree in Information Systems. 
+
+ 
+
+This project has been created by: 
+
+- Iris Hämmerle - University of Liechtenstein 
+- Florian Schietinger – University of Liechtenstein 
+- Mariona Seró Vilaseca – University of Liechtenstein 
 
 ## Overview
-This Webpage is developed by three students of the University of Liechtenstein during a project in Information Systems development in winter term 2020. On the webpage you can see shared recipes from all the users and filter them by categories.
-After the registration and login you are also able to create ne recipes and at them to your favourites.
+This project consist of an online platform where users can share their most liked food recipes. Particularly, this project caters towards both food and cooking lovers and unexperienced newbies. These recipes are of public access. Hence, they can be seen by both registered and unregistered platform users. However, only registered users are able to upload recipes on the website. 
 
-You can edit your profile to update your personal data and you can also edit recipes created by you.
+ 
+
+Registered users can create their own cookbooks in their profiles, by selecting their most like recipes among all the ones published. Thus, being able to access them easily and faster. Additionally, when a user is logged-in can also rate and comment on recipes. 
+On the webpage you can see shared recipes from all the users and filter them by categories.
+After the registration and login you are also able to create ne recipes and at them to your favourites.
 
 ## Project status
 Currently the main functionalities are working. So you can add recipes, register, login and filter or search the recipes.
