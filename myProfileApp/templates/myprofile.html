@@ -22,18 +22,18 @@
 
                         {% if  Profile.Picture %}
                             <img class="img-responsive img-circle rounded"
-                                 src="{{ Profile.Picture.url }}" alt="Profile_Picture"/>
+                                 src="{{ Profile.Picture.url }}" alt="Profile_Picture" style="max-width: 230px;"/>
                         {% else %}
                             <!-- If there is no ProfilePicture show this:-->
                             {% load static %}
                             <img class="img-responsive img-circle rounded"
                                  src="{% static "images/no-profile.svg" %}"
-                                 alt="Icon no image existing"/>
+                                 alt="Icon no image existing" style="max-width: 230px;"/>
                         {% endif %}
-                        <div class="file btn btn-lg btn-primary">
+                        <!--<div class="file btn btn-lg btn-primary">
                             Change Photo
                             <input type="file" name="file"/>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -47,10 +47,20 @@
                     <a class="btn btn-secondary btn-block m-2" href="/edit_profile">Edit Profile</a>
                     <a class="btn btn-secondary btn-block m-2" href="/change_password">Change Password</a>
                     <br>
-                    <a class="btn btn-danger btn-block m-2" href="/change_password">Delete Profile</a>
+                    <a class="btn btn-danger btn-block m-2" href="javascript:AlertIt();">Delete Profile</a>
+
+                    <script type="text/javascript">
+                        function AlertIt() {
+                            var answer = confirm("Do you really want to delete your profile? This step can not be undone!")
+                            if (answer)
+                                window.location = "/delete_profile";
+                        }
+                    </script>
+
                 </div>
             </div>
 
+            <br>
             <div class="col-md-8">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -90,7 +100,7 @@
                     <br>
                     <a class="btn btn-info" href="/myrecipes">Show my recipes</a>
                 </div>
-            
+
             </div>
         </form>
     </div>

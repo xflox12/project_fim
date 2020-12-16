@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from .forms import user_registration_form
+from django.contrib.auth.models import User
 
 
 def user_registration(httprequest):
@@ -58,6 +59,13 @@ def edit_user_profile(httprequest):
             return render(httprequest, "registration.html", {'form': form, 'register': False})
     return render(httprequest, "registration.html", {'form': form, 'register': False})
 
+
+def delete_user_profile(httprequest):
+    """This function deletes an user-profil"""
+    profile = User.objects.get(id=httprequest.user.id)
+    if httprequest.POST:
+        profile.delete()
+    return redirect("/logout")
 
 
 

@@ -2,31 +2,69 @@
     <a class="recipe-link" href="/viewrecipe/{{ recipe.RecipeId }}">
 
         {% if recipe.Picture %}
-        <img class="img-responsive img-circle rounded" style="max-width: 230px;" src="{{ recipe.Picture.url }}"
-             alt="Picture from recipe">
+            <img class="img-responsive img-circle rounded" style="max-width: 230px;" src="{{ recipe.Picture.url }}"
+                 alt="Picture from recipe">
         {% else %}
-        <!-- If there is no Picture show this:-->
-        {% load static %}
-        <img class="img-responsive img-circle rounded" style="max-width: 230px;"
-             src="{% static "images/no-image-icon-8.jpg" %}"
-        alt="Icon no image existing">
-
+            <!-- If there is no Picture show this:-->
+            {% load static %}
+            <img class="img-responsive img-circle rounded" style="max-width: 230px;"
+                 src="{% static "images/no-image-icon-8.jpg" %}"
+                 alt="Icon no image existing">
         {% endif %}
-        <form method="POST" action="/add_recipe_to_favourites/">
-            {% csrf_token %}
-            <input type="hidden" name="RecipeId" value="{{ recipe.RecipeId }}">
-            <input class="btn btn-secondary" type="submit" value="&#9825">
 
-        </form>
-        </img>
         <br>
         <p><span class="center-block">{{ recipe.RecipeName }}</span>
             <span style="font-weight: normal; font-style: italic ">by {{ recipe.UserId.username }}</span>
         </p>
     </a>
+<!--
     <form method="POST" action="/add_recipe_to_favourites/">
         {% csrf_token %}
         <input type="hidden" name="RecipeId" value="{{ recipe.RecipeId }}">
-        <!--<input class="btn btn-secondary" type="submit" value="&#9825 &#9829">-->
+
+        <input type="submit" ><i class="heart fa fa-heart-o"></i></input>
+        < !--<input class="btn btn-secondary" type="submit" value="&#9825">
+
+
     </form>
+<button class="btn btn-link" type="submit" ></button>
+
+-->
+<i class="heart fa fa-heart-o"></i>
+
+
 </div>
+
+<script>
+    $(".heart.fa").click(function () {
+        $(this).toggleClass("fa-heart fa-heart-o");
+        console.log('Toggeln: ');
+        var userID = {{ user.id }};
+        var recipeID = {{ recipe.RecipeId }};
+
+        GetFavouriteStatus(userID,recipeID);
+
+    });
+
+     function GetFavouriteStatus(userID, recipeID){
+            $.ajax({
+                url: "{% url 'ajax_is_favorite'%}",
+                data: {
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                    'ProjectProfileID': userID,
+                    'RecipeId': recipeID,
+                    'isFavorite': true //or false
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (json) {
+                    if (json.success === true) {
+                        // do somthing
+                        console.log('Ajax erfolgreich: ');
+                    } else {
+                        // do somthing
+                    }
+                }
+            });
+        }
+</script>

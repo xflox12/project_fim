@@ -4,6 +4,12 @@ from django.db import IntegrityError
 from .models import Recipe, RecipeSteps, Ingredient, Category, RecipeCategory
 from .forms import create_recipe_form, create_recipe_form2, create_recipe_form3
 from myProfileApp.models import Favourite
+import logging
+
+from django.http import HttpResponse
+
+# This retrieves a Python logging instance (or creates it)
+logger = logging.getLogger(__name__)
 
 
 def recipe_details_view(request, recipe_id=None):
@@ -43,7 +49,7 @@ def add_recipe(request, recipe_id=None):
     return render(request, "dev_add_recipe.html", context)
 
 
-def add_ingredient(request,recipe_id) :
+def add_ingredient(request, recipe_id):
     """This function is used by users to add all the ingredients of the recipes they create"""
     recipe = None
     if not recipe_id is None:
@@ -70,7 +76,7 @@ def add_ingredient(request,recipe_id) :
     return render(request, template, context)
 
 
-def add_step(request,recipe_id) :
+def add_step(request, recipe_id):
     """This function is used by users to add all the steps to cook the recipes they want to post"""
     recipe = None
     if not recipe_id is None:
@@ -113,14 +119,32 @@ def add_recipe_to_favourites(httprequest):
 
 
 def created_recipes_user_temp(httprequest, *args, **kwargs):
+    """This function returns all recipes referring to the currently logged in user and renders a template with
+    an overview above all user-recipes. """
     # obj = get_object_or_404(Testmodel, id=my_id)  -> single object will be transferred
     recipes = Recipe.objects.filter(UserId=httprequest.user.id)
     categories = Category.objects.all
     context = {
-        "suggestions": ['recipe1', 'recipe2', 'recipe3', 'recipe4'],
         "allRecipes": recipes,
         "categories": categories
     }
 
     return render(httprequest, 'myCreatedRecipes.html', context)
 
+
+def ajax_is_favorite(request):
+    if not request.is_ajax() or not request.method == 'POST':
+        return HttpResponseNotAllowed(['POST'])
+    else:
+        logger.error("Test Ajax!!")
+        # Here you have to get the data and update the object
+        recipe = Recipe.objects.get(RecipeId=httprequest.POST["RecipeId"])
+        f = Favourite(UserId=httprequest.user, RecipeId=recipe)
+        try:
+            f.save()
+        except IntegrityError as e:
+            if 'UNIQUE constraint' in e.args[0]:
+                # accept unique constraint error without any message
+                # -> user is not notified when recipes was already marked as favourite
+                pass
+        return HttpResponse({"success": True})

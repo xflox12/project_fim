@@ -228,3 +228,9 @@ footer.page-footer .footer-copyright {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+
+.heart {
+  font-size: 25px;
+	color:red;
+}

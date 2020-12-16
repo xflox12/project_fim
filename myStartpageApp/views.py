@@ -3,9 +3,17 @@ from django.db.models import Q
 from myRecipeApp.models import Recipe, Category
 
 # Create your views here.
+def index_temp(httprequest):
+    """Function redirects to /home (landing page) after running server"""
+    return redirect("/home")
 
 
 def home_view_temp(httprequest, *args, **kwargs):             # view with template
+    """The home_view_temp is the main function which will be called when you are going to the landing page (/home).
+    Before rendering the HTML-Template there will be some SQL-Querys to get the desired data from the database
+    as all recipes, the recipe of the day (a random recipe which will be generated new each time page is loading) and the categories.
+    Also here is the filtering algorithm for the recipes implemented.
+    """
     recipes = Recipe.objects.all
     recipeOfDay = Recipe.objects.order_by('?').first()
     categories = Category.objects.all
