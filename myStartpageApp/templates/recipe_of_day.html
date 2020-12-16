@@ -1,6 +1,6 @@
 <div class="col-sm-4" >  <!-- Picture of recipe-->
     <a class="recipe-link" href="/viewrecipe/{{ recipeOfDay.RecipeId }}">
-        {% if  recipeOfDay.Picture  == True %}
+        {% if  recipeOfDay.Picture %}
             <img class="img-responsive img-circle rounded" style="max-width: 230px;"
                  src="{{ recipeOfDay.Picture.url }}" alt="Picture from recipe of the day"/>
         {% else %}
