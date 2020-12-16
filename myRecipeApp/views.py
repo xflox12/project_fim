@@ -46,7 +46,7 @@ def add_recipe(request, recipe_id=None):
         "form1": form1,
         "recipe": recipe
     }
-    return render(request, "dev_add_recipe.html", context)
+    return render(request, "add_recipe.html", context)
 
 
 def add_ingredient(request, recipe_id):
@@ -56,7 +56,7 @@ def add_ingredient(request, recipe_id):
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
     form1 = create_recipe_form(None, None, instance=recipe)
-    template = "dev_add_recipe_ingredient.html"
+    template = "add_recipe_ingredient.html"
     if request.method == "POST":
         form2 = create_recipe_form2(request.POST or None, request.FILES or None)
         if form2.is_valid():
@@ -82,7 +82,7 @@ def add_step(request, recipe_id):
     if not recipe_id is None:
         recipe = Recipe.objects.get(RecipeId=recipe_id)
 
-    template = "dev_add_recipe_step.html"
+    template = "add_recipe_step.html"
     if request.method == "POST":
         form3 = create_recipe_form3(request.POST or None, request.FILES or None)
         if form3.is_valid():
