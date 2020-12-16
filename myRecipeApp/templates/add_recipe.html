@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block mainContent %}
-    <form class="col-sm-6" method="post" action="{{ recipe.RecipeId }}" enctype="multipart/form-data">
+    <form class="content container col-sm-6" method="post" action="{{ recipe.RecipeId }}" enctype="multipart/form-data">
         {% csrf_token %}
         {% if recipe.Picture %}
             <img class="img-responsive img-circle rounded" src="{{ recipe.Picture.url }}">

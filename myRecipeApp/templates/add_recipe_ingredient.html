@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block mainContent %}
-    <form class="col-sm-6" method="post" action="/addrecipe/addingredient/{{ recipe.RecipeId }}">
+    <form class="content container col-sm-6" method="post" action="/addrecipe/addingredient/{{ recipe.RecipeId }}">
         {% csrf_token %}
         <table>
         {{form2 | crispy}}
