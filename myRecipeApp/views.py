@@ -109,7 +109,7 @@ def add_recipe_to_favourites(httprequest):
                 # -> user is not notified when recipes was already marked as favourite
                 pass
 
-        return redirect("/recipe")
+        return redirect("/home")
 
 
 def created_recipes_user_temp(httprequest, *args, **kwargs):

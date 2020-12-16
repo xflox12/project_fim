@@ -10,6 +10,11 @@ def home_view_temp(httprequest, *args, **kwargs):             # view with templa
     recipeOfDay = Recipe.objects.order_by('?').first()
     categories = Category.objects.all
     message = ""
+    isFavourite = True
+    favouritesList = Recipe.objects.filter(favourite__UserId=httprequest.user.id)
+
+    if not favouritesList:
+        isFavourite = False
 
     if "query" in httprequest.GET and \
             "filter" in httprequest.GET:
@@ -42,6 +47,9 @@ def home_view_temp(httprequest, *args, **kwargs):             # view with templa
         "categories": categories,
         "User": httprequest.user,
         "Message": message,
+        "OnHome": True,
+        "favouritesList": favouritesList,
+        "isFavourite": isFavourite
     }
     return render(httprequest, "home.html", context)
 
